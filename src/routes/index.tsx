@@ -20,7 +20,7 @@ import banner22 from "@/assets/herosection/banner_img22.png";
 import banner33 from "@/assets/herosection/banner_img33.png";
 import banner44 from "@/assets/herosection/banner_img44.png";
 import banner55 from "@/assets/herosection/banner_img55.png";
-import aboutGroup from "@/assets/about/about.png";
+import worshipBanner from "@/assets/about/R.K. Ministries Sunrise Worship Banner.png";
 import program1 from "@/assets/Our Programs/WomenEmpowermentProgram.png";
 import program2 from "@/assets/Our Programs/EducationSupportInitiative.png";
 import program3 from "@/assets/Our Programs/HealthSafetyCampaign.png";
@@ -306,8 +306,8 @@ export default function Index() {
 
               <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] ring-1 ring-black/5">
                 <img
-                  src={ld.aboutData && ld.aboutData.images.length > 0 ? getFullUrl(ld.aboutData.images[0]) : aboutGroup}
-                  alt="About Mahila Chetna Samiti"
+                  src={worshipBanner}
+                  alt="About RK MINISTRIES"
                   className="w-full h-[280px] sm:h-[360px] lg:h-[440px] object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />

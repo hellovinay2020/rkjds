@@ -7,7 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
 import { fetchHomeAbout } from "@/data/homepage";
-import aboutGroup from "@/assets/about-group.jpg";
+import worshipBanner from "@/assets/about/R.K. Ministries Sunrise Worship Banner.png";
 import heroBg from "@/assets/herosection/NariSashaktikaran.png";
 
 async function fetchArray(url: string) {
@@ -59,7 +59,7 @@ export default function AboutPage() {
   if (loading) return <Preloader />;
 
   const { team, about } = loaderData;
-  const mainImg = about?.images?.length > 0 ? getFullUrl(about.images[0]) : aboutGroup;
+  const mainImg = worshipBanner;
   const heading = about?.heading || "Driven by Faith, Committed to the Gospel";
   const paragraphs = about?.paragraphs?.length > 0 ? about.paragraphs : [
     "RK MINISTRIES (आरके मिनिस्ट्रीज) गाँव मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उत्तर प्रदेश) में स्थापित प्रभु यीशु मसीह की एक प्रार्थना एवं सुसमाचार कलीसियाई संगति है। हम विश्वास करते हैं कि जब लोग मसीह के प्रेम में आते हैं, तो उनका संपूर्ण जीवन बदल जाता है।",
@@ -87,7 +87,7 @@ export default function AboutPage() {
       <section className="py-16">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 items-center">
           <div className="rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-            <img src={mainImg} alt="" className="w-full h-[260px] sm:h-[340px] lg:h-[440px] object-cover" />
+            <img src={worshipBanner} alt="About RK MINISTRIES" className="w-full h-[260px] sm:h-[340px] lg:h-[440px] object-cover transition-transform duration-700 hover:scale-105" />
           </div>
           <div>
             <div className="eyebrow">Our Story</div>
