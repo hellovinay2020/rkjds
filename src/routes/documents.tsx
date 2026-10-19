@@ -171,22 +171,6 @@ export default function DocumentsPage() {
             })}
           </div>
 
-          {/* Due Diligence Support Box */}
-          <div className="mt-14 rounded-2xl bg-gradient-to-r from-navy to-[#153457] text-white p-7 sm:p-9 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-            <div>
-              <span className="inline-block text-xs font-bold tracking-widest text-amber-400 uppercase mb-1">Official Verification</span>
-              <h3 className="font-display font-extrabold text-[22px]">Need certified copies for compliance or CSR?</h3>
-              <p className="text-white/80 text-[14px] mt-1 max-w-xl">
-                For legal inquiries, banking due-diligence, or CSR audits, write directly to RK MINISTRIES leadership.
-              </p>
-            </div>
-            <a
-              href="mailto:azaramesh@gmail.com"
-              className="shrink-0 bg-gradient-to-r from-orange to-amber-500 hover:from-orange-2 hover:to-orange text-white font-bold rounded-xl px-7 py-3.5 shadow-lg transition duration-200"
-            >
-              Request Certified Copies
-            </a>
-          </div>
         </div>
       </section>
 
