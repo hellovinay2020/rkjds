@@ -5,7 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import media1 from "@/assets/Causes/GirlChildEducation.png";
 import media2 from "@/assets/Blogs/HealthAwareness.png";
 import media3 from "@/assets/herosection/NariSashaktikaran.png";

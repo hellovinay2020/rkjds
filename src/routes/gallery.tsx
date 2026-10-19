@@ -3,7 +3,7 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 
 import galleryImg1 from "@/assets/Gallery/img1.png";
 import galleryImg2 from "@/assets/Gallery/img2.png";

@@ -3,7 +3,7 @@ import { Award, BadgeCheck, Mail } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import dubeyImg from "@/assets/Teams/SHRIKRISHNA K DUBEY - president.jpeg";
 import sawantImg from "@/assets/Teams/JAYESH SAWANT-VICE PRESIDENT.png";
 import panchalImg from "@/assets/Teams/Vaibhav Panchal - Treasurer.jpeg";

@@ -6,7 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import { fetchContactSettings } from "@/data/contact";
 
 const googleMapEmbedUrl = "https://maps.google.com/maps?q=Mustafabad,+Mubarakpur,+Azamgarh,+Uttar+Pradesh+276404&hl=en&z=15&output=embed";

@@ -5,7 +5,7 @@ import { FaCross } from "react-icons/fa6";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import logoImage from "@/assets/logo/rk-logo.png";
 import { fetchHomeFounder } from "@/data/homepage";
 

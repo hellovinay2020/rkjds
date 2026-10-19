@@ -4,7 +4,7 @@ import { FileText, Mail, Phone, ShieldCheck, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
-import aboutGroup from "@/assets/about-group.jpg";
+import breadcrumbImg from "@/assets/breadcrume/breadcrume-logo.png";
 
 export type LegalSection = { title: string; body: ReactNode };
 
@@ -27,7 +27,7 @@ export default function LegalPage({
       <PageHero
         title={title}
         description={description}
-        image={aboutGroup}
+        image={breadcrumbImg}
         crumbs={[{ label: "Home", to: "/" }, { label: crumbLabel }]}
       />
 

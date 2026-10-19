@@ -5,7 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import { Heart, Target, Users, Clock, MapPin, Share2 } from "lucide-react";
 
 async function fetchCampaigns() {

@@ -6,7 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import { fetchHomeMission, fetchHomeVision } from "@/data/homepage";
 import { getFullUrl } from "@/lib/api";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import missionImg from "@/assets/Featured Projects/SakshamWomenProject.png";
 import visionImg from "@/assets/Featured Projects/ShikshaSetuProject.png";
 

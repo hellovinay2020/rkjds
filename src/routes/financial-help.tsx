@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import heroImg from "@/assets/herosection/NariSashaktikaran.png";
+import heroImg from "@/assets/breadcrume/breadcrume-logo.png";
 import aboutGroup from "@/assets/about-group.jpg";
 import ctaMember from "@/assets/cta-member.jpg";
 import ctaVolunteer from "@/assets/cta-volunteer.jpg";

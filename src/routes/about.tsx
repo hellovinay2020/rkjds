@@ -8,7 +8,7 @@ import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
 import { fetchHomeAbout } from "@/data/homepage";
 import worshipBanner from "@/assets/about/R.K. Ministries Sunrise Worship Banner.png";
-import heroBg from "@/assets/herosection/NariSashaktikaran.png";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 
 async function fetchArray(url: string) {
   try {
