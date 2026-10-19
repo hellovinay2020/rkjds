@@ -38,14 +38,6 @@ const docMeta: Record<string, { icon: LucideIcon; number: string; desc: string; 
   },
 };
 
-const complianceDetails = [
-  ["PAN No", "AANAR9870K"],
-  ["Registration Order", "AANAR9870K (12A/80G)"],
-  ["DARPAN ID", "UP/2019/0243662"],
-  ["Trust Name", "RK MINISTRIES TRUST"],
-  ["Jurisdiction", "Azamgarh, Uttar Pradesh"],
-  ["Status", "Active & Registered Trust"],
-];
 
 function getDocMeta(category: string) {
   for (const key of Object.keys(docMeta)) {
@@ -94,15 +86,6 @@ export default function DocumentsPage() {
             </p>
           </div>
 
-          {/* Compliance Quick Badges */}
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {complianceDetails.map(([label, value]) => (
-              <div key={label} className="rounded-xl border border-border bg-white p-3.5 shadow-sm text-center">
-                <div className="text-[11px] font-semibold uppercase tracking-wider text-text-2">{label}</div>
-                <div className="mt-1 break-all text-[12px] sm:text-[13px] font-mono font-bold text-navy">{value}</div>
-              </div>
-            ))}
-          </div>
 
           {/* Documents Grid */}
           <div className="mt-12 grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
