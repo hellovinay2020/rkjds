@@ -1,0 +1,32 @@
+export const MINISTRY_CONFIG = {
+  name: "RK MINISTRIES",
+  nameHindi: "आरके मिनिस्ट्रीज",
+  founder: "Pastor Ramesh Kumar",
+  title: "RK MINISTRIES — Church & Evangelical Fellowship",
+  tagline: "Spreading Faith, Hope, Love and the Gospel of Jesus Christ",
+  taglineHindi: "विश्वास, आशा, प्रेम और प्रभु यीशु मसीह के सुसमाचार का प्रचार",
+  phone: "+91 95980 59289",
+  phoneRaw: "+919598059289",
+  whatsapp: "+919598059289",
+  email: "azaramesh@gmail.com",
+  address: "Village - Mustafabad, Post- Gujarpar, Police station- Mubarakpur, District - Azamgarh, U.P. 276404",
+  addressHindi: "ग्राम - मुस्तफाबाद, पो. - गुजरपार, थाना - मुबारकपुर, जिला - आज़मगढ़, उ.प्र. 276404",
+  village: "Mustafabad",
+  post: "Gujarpar",
+  policeStation: "Mubarakpur",
+  district: "Azamgarh",
+  state: "Uttar Pradesh",
+  pincode: "276404",
+  socialLinks: {
+    youtube: "https://youtube.com/@rkministry-p9t?si=4qyVyJkr9Mv3YJPh",
+    facebook: "https://www.facebook.com/share/1FKM6aGUFq/",
+    instagram: "https://www.instagram.com/ramesh32086?mdxt=MTV0cGVrczZ6a3BjaQ==",
+  },
+  mapEmbedUrl: "https://maps.google.com/maps?q=Mustafabad,+Mubarakpur,+Azamgarh,+Uttar+Pradesh+276404&hl=en&z=14&output=embed",
+  googleMapsLink: "https://www.google.com/maps/search/?api=1&query=Mustafabad+Mubarakpur+Azamgarh+Uttar+Pradesh+276404",
+  serviceTimings: [
+    { day: "Sunday", dayHindi: "रविवार", time: "10:00 AM - 1:00 PM", name: "Sunday Worship Service", nameHindi: "रविवार आराधना सभा" },
+    { day: "Friday", dayHindi: "शुक्रवार", time: "6:00 PM - 8:30 PM", name: "Fasting & Healing Prayer", nameHindi: "उपवास व चंगाई प्रार्थना" },
+    { day: "Tuesday", dayHindi: "मंगलवार", time: "5:00 PM - 7:00 PM", name: "Cottage & Village Prayer", nameHindi: "ग्राम संगति व कुटीर प्रार्थना" },
+  ]
+};
