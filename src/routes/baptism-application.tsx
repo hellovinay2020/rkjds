@@ -300,7 +300,7 @@ export default function BaptismApplicationPage() {
                   setFormData({
                     name: "", mobile: "", email: "", fatherName: "", motherName: "", dob: "",
                     address: "", village: "Mustafabad", district: "Azamgarh", statementOfFaith: "",
-                    videoUrl: "", documentName: "", photoUrl: "", w1Name: "", w1Relation: "", w1Mobile: "",
+                    videoUrl: "", documentName: "", documentUrl: "", photoUrl: "", w1Name: "", w1Relation: "", w1Mobile: "",
                     w1Statement: "", w2Name: "", w2Relation: "", w2Mobile: "", w2Statement: "",
                   });
                 }}
