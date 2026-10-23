@@ -7,7 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
 import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
-import story1 from "@/assets/story-1.jpg";
+import story1 from "@/assets/Featured Projects/SakshamWomenProject.png";
 
 const iconMap: Record<string, LucideIcon> = {
   handheart: HandHeart, bookopen: BookOpen, heartpulse: HeartPulse,

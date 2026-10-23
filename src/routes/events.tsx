@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Calendar, Clock, MapPin, ArrowRight, Megaphone } from "lucide-react";
+import { Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
-import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
 import { fetchEvents } from "@/data/events";
 
 export default function EventsPage() {
@@ -13,7 +12,7 @@ export default function EventsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "Events — Mahila Chetna Samiti ";
+    document.title = "Service & Worship Timings — RK MINISTRIES";
   }, []);
 
   useEffect(() => {
@@ -34,7 +33,11 @@ export default function EventsPage() {
   return (
     <div className="bg-background text-text font-sans">
       <SiteHeader />
-      <PageHero title="Events" description="Take part in our events for education, assistance, and safety." image={heroBg} crumbs={[{ label: "Home", to: "/" }, { label: "Events" }]} />
+      <PageHero
+        title="Service & Worship Timings"
+        accent="प्रार्थना एवं आराधना सभाएं"
+        description="आरके मिनिस्ट्रीज की साप्ताहिक प्रार्थना, आराधना एवं संगति सभाओं में सम्मिलित हों।"
+      />
       {/* UPCOMING EVENTS SECTION */}
       {(() => {
         const cardAccents = ["#2E8B57", "#FF6B00", "#8B5CF6", "#2563EB"];
@@ -52,10 +55,10 @@ export default function EventsPage() {
                   <Calendar className="w-3.5 h-3.5 text-orange" /> Don't Miss Out
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy mt-3 tracking-tight">
-                  Events
+                  Events & Worship Services
                 </h2>
                 <p className="mt-3 text-text-2 text-[15px] max-w-xl mx-auto leading-relaxed">
-                  Participate in our events and be part of the change we are creating across communities.
+                  प्रभु यीशु मसीह की पवित्र संगति, स्तुति-आराधना, उपवास प्रार्थना व सुसमाचार सेवा महोत्सवों में सम्मिलित हों।
                 </p>
                 <div className="mt-4 flex items-center justify-center gap-2">
                   <div className="h-[3px] w-6 rounded-full bg-orange/30" />
@@ -166,16 +169,6 @@ export default function EventsPage() {
           </section>
         );
       })()}
-      <section className="py-14 bg-gradient-to-r from-[#0B1F3A] to-[#102E5A] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid md:grid-cols-[auto_1fr_auto] gap-6 items-center">
-          <div className="w-14 h-14 rounded-full bg-orange flex items-center justify-center"><Megaphone className="w-7 h-7" /></div>
-          <div><h3 className="font-display font-extrabold text-[24px]">Don't Miss Our Next Event!</h3><p className="text-white/75 mt-1 text-[14px]">Subscribe to our newsletter and get updates about our upcoming events and activities.</p></div>
-          <form className="flex flex-wrap gap-2" onSubmit={(e) => e.preventDefault()}>
-            <input type="email" placeholder="Enter Your Email Address" className="bg-white text-navy rounded-lg px-4 py-3 text-[13px] flex-1 min-w-0 focus:outline-none" />
-            <button type="submit" className="btn-orange whitespace-nowrap">Subscribe Now <ArrowRight className="w-4 h-4" /></button>
-          </form>
-        </div>
-      </section>
       <SiteFooter />
     </div>
   );

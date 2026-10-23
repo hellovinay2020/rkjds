@@ -13,7 +13,7 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "Our Campaigns — Mahila Chetna Samiti ";
+    document.title = "Our Campaigns — RK MINISTRIES";
     async function load() {
       try {
         const projects = await fetchProjects();
@@ -31,10 +31,10 @@ export default function ProjectsPage() {
   return (
     <div className="bg-background text-text font-sans">
       <SiteHeader />
-      <PageHero title="Our Campaigns" accent="That Make An Impact" description="Our campaigns in education, support, and safety are transforming communities and strengthening self-reliance." image={heroBg} crumbs={[{ label: "Home", to: "/" }, { label: "Campaigns" }]} />
+      <PageHero title="Our Ministries & Missions" accent="That Transform Lives" description="Our ministries in gospel outreach, healing prayer, and community support are transforming lives and spreading faith." image={heroBg} crumbs={[{ label: "Home", to: "/" }, { label: "Ministries & Missions" }]} />
       <section className="py-16">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-          <div className="text-center"><div className="eyebrow">All Initiatives</div><h2 className="section-title mt-2">Campaigns That Transform Lives</h2></div>
+          <div className="text-center"><div className="eyebrow">Our Calling</div><h2 className="section-title mt-2">Our Ministries & Missions</h2></div>
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((p) => (
               <div key={p.slug} className="card-soft card-soft-hover overflow-hidden group flex flex-col justify-between">
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
                       to={`/campaigns/${p.slug}`}
                       className="w-full inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-orange/5 hover:bg-orange text-orange hover:text-white font-semibold text-[13px] transition-all duration-300 group/btn"
                     >
-                      <span>Campaigns Details</span>
+                      <span>Learn More</span>
                       <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                     </Link>
                   </div>

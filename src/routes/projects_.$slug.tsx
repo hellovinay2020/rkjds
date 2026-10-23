@@ -5,7 +5,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
-import { fetchProjects, getProject } from "@/data/projects";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
+import { fetchProjects, fetchProjectBySlug, getProject } from "@/data/projects";
 
 export default function ProjectDetailPage() {
   const [loaderData, setLoaderData] = useState<any>(null);
@@ -18,11 +19,13 @@ export default function ProjectDetailPage() {
     async function load() {
       if (!slug) return;
       try {
-        const projects = await fetchProjects();
-        const project = getProject(slug, projects);
+        const [project, projects] = await Promise.all([
+          fetchProjectBySlug(slug),
+          fetchProjects()
+        ]);
         if (!project) { setNotFound(true); setLoading(false); return; }
         setLoaderData({ project, projects });
-        document.title = `${project.title} — Mahila Chetna Samiti `;
+        document.title = `${project.title} — RK MINISTRIES`;
       } catch (e) { console.error(e); }
       setLoading(false);
     }
@@ -40,7 +43,7 @@ export default function ProjectDetailPage() {
   return (
     <div className="bg-background text-text font-sans">
       <SiteHeader />
-      <PageHero title={project.title} image={project.img} crumbs={[{ label: "Home", to: "/" }, { label: "Campaigns", to: "/campaigns" }, { label: project.title }]} />
+      <PageHero title={project.title} image={heroBg} crumbs={[{ label: "Home", to: "/" }, { label: "Campaigns", to: "/campaigns" }, { label: project.title }]} />
       <section className="py-14 sm:py-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid lg:grid-cols-[minmax(0,1fr)_360px] gap-10 items-start">
           <div className="space-y-10">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoImg from "@/assets/logo/rk-logo.png";
+import { useSiteSettings, getFullUrl } from "@/lib/useSiteSettings";
 
 interface MinistryLogoProps {
   variant?: "light" | "dark" | "gold";
@@ -13,6 +14,9 @@ export default function MinistryLogo({
   size = "md",
   className = "",
 }: MinistryLogoProps) {
+  const { settings } = useSiteSettings();
+  const effectiveLogo = settings?.logo ? getFullUrl(settings.logo) : logoImg;
+
   const sizeMap = {
     sm: "w-9 h-9 sm:w-10 sm:h-10",
     md: "w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14",
@@ -32,8 +36,8 @@ export default function MinistryLogo({
         className={`relative rounded-full overflow-hidden shadow-md border-2 border-amber-400/90 bg-white p-0.5 flex items-center justify-center ${currentSize}`}
       >
         <img
-          src={logoImg}
-          alt="RK MINISTRIES Logo"
+          src={effectiveLogo}
+          alt={settings?.siteName || "RK MINISTRIES Logo"}
           className="w-full h-full object-contain rounded-full"
           loading="eager"
         />

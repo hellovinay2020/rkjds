@@ -18,6 +18,8 @@ import {
   ArrowRight,
   Phone,
   Video,
+  Image as ImageIcon,
+  UserCheck,
 } from "lucide-react";
 import { FaYoutube, FaFacebookF, FaInstagram, FaCross, FaDove, FaHandsPraying } from "react-icons/fa6";
 import { MINISTRY_CONFIG } from "@/data/ministryConfig";
@@ -38,7 +40,7 @@ export default function MinistryServicesHub() {
             कलीसियाई सेवाएं, बपतिस्मा एवं सदस्य पोर्टल
           </h2>
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            गाँव मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उ.प्र.) — विश्वासियों की सुविधा हेतु ऑनलाइन बपतिस्मा आवेदन, प्रार्थना निवेदन, डिजिटल पहचान पत्र एवं प्रशासन पोर्टल।
+            गाँव मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उ.प्र.) — विश्वासियों की सुविधा हेतु ऑनलाइन बपतिस्मा आवेदन, प्रार्थना निवेदन, डिजिटल पहचान पत्र एवं सदस्य सेवाएं।
           </p>
         </div>
 
@@ -73,13 +75,6 @@ export default function MinistryServicesHub() {
                   className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-amber-50 text-slate-800 font-semibold transition"
                 >
                   <span className="flex items-center gap-1.5"><FileText className="w-3.5 h-3.5 text-amber-600" /> बपतिस्मा सत्यापन (Verify)</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-amber-600" />
-                </Link>
-                <Link
-                  to="/baptism-certificate"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-amber-50 text-slate-800 font-semibold transition"
-                >
-                  <span className="flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-amber-600" /> प्रमाण पत्र (Certificate)</span>
                   <ArrowRight className="w-3.5 h-3.5 text-amber-600" />
                 </Link>
               </div>
@@ -141,7 +136,55 @@ export default function MinistryServicesHub() {
             </Link>
           </div>
 
-          {/* Card 3: Membership & ID Card */}
+          {/* Card 3: Photo & Video Gallery */}
+          <div className="bg-white rounded-3xl p-6 shadow-md border border-slate-200/90 hover:shadow-xl hover:border-amber-400 transition-all duration-300 flex flex-col justify-between space-y-5">
+            <div className="space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/15 text-purple-600 flex items-center justify-center">
+                <Video className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-lg text-[#0A2540]">
+                  फोटो एवं वीडियो गैलरी
+                </h3>
+                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                  कलीसियाई सभाएं, प्रार्थना, बपतिस्मा और आराधना की सुंदर झलकियाँ।
+                </p>
+              </div>
+
+              <div className="pt-2 space-y-2 text-xs">
+                <Link
+                  to="/gallery"
+                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-purple-50 text-slate-800 font-semibold transition"
+                >
+                  <span className="flex items-center gap-1.5"><ImageIcon className="w-3.5 h-3.5 text-purple-600" /> फोटो गैलरी (Photo Gallery)</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-purple-600" />
+                </Link>
+                <Link
+                  to="/video-gallery"
+                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-purple-50 text-slate-800 font-semibold transition"
+                >
+                  <span className="flex items-center gap-1.5"><Video className="w-3.5 h-3.5 text-purple-600" /> वीडियो गैलरी (Video Gallery)</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-purple-600" />
+                </Link>
+                <Link
+                  to="/events"
+                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-purple-50 text-slate-800 font-semibold transition"
+                >
+                  <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5 text-purple-600" /> सभाएं एवं समय (Worship Events)</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-purple-600" />
+                </Link>
+              </div>
+            </div>
+
+            <Link
+              to="/gallery"
+              className="w-full py-2.5 px-4 rounded-xl bg-[#0A2540] hover:bg-blue-900 text-white font-bold text-xs text-center transition block shadow-sm"
+            >
+              गैलरी देखें →
+            </Link>
+          </div>
+
+          {/* Card 4: Church Membership & ID Card Portal */}
           <div className="bg-white rounded-3xl p-6 shadow-md border border-slate-200/90 hover:shadow-xl hover:border-amber-400 transition-all duration-300 flex flex-col justify-between space-y-5">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-blue-500/15 text-blue-600 flex items-center justify-center">
@@ -149,10 +192,10 @@ export default function MinistryServicesHub() {
               </div>
               <div>
                 <h3 className="font-extrabold text-lg text-[#0A2540]">
-                  सदस्यता व पहचान पत्र
+                  कलीसिया सदस्यता (Membership)
                 </h3>
                 <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  आरके मिनिस्ट्रीज परिवार में शामिल हों व कार्ड जनरेट करें।
+                  आरके मिनिस्ट्रीज परिवार में शामिल हों व पहचान पत्र जनरेट करें।
                 </p>
               </div>
 
@@ -161,21 +204,14 @@ export default function MinistryServicesHub() {
                   to="/member-registration"
                   className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-800 font-semibold transition"
                 >
-                  <span className="flex items-center gap-1.5"><UserPlus className="w-3.5 h-3.5 text-blue-600" /> सदस्य पंजीकरण फॉर्म</span>
+                  <span className="flex items-center gap-1.5"><UserPlus className="w-3.5 h-3.5 text-blue-600" /> नया सदस्य पंजीकरण फॉर्म</span>
                   <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
                 </Link>
                 <Link
                   to="/id-card"
                   className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-800 font-semibold transition"
                 >
-                  <span className="flex items-center gap-1.5"><CreditCard className="w-3.5 h-3.5 text-blue-600" /> पहचान पत्र (ID Card)</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
-                </Link>
-                <Link
-                  to="/member-portal"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-800 font-semibold transition"
-                >
-                  <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5 text-blue-600" /> मेम्बर पोर्टल लॉगिन</span>
+                  <span className="flex items-center gap-1.5"><CreditCard className="w-3.5 h-3.5 text-blue-600" /> सदस्यता पहचान पत्र (ID Card)</span>
                   <ArrowRight className="w-3.5 h-3.5 text-blue-600" />
                 </Link>
               </div>
@@ -185,62 +221,7 @@ export default function MinistryServicesHub() {
               to="/member-registration"
               className="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs text-center transition block shadow-sm"
             >
-              नया सदस्य पंजीकरण →
-            </Link>
-          </div>
-
-          {/* Card 4: Church Portals & Tools */}
-          <div className="bg-white rounded-3xl p-6 shadow-md border border-slate-200/90 hover:shadow-xl hover:border-amber-400 transition-all duration-300 flex flex-col justify-between space-y-5">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center">
-                <FaCross className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-extrabold text-lg text-[#0A2540]">
-                  डैशबोर्ड एवं बैकअप
-                </h3>
-                <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  चेयरमैन, मैनेजर एवं फील्ड वर्कर संचालन नियंत्रण।
-                </p>
-              </div>
-
-              <div className="pt-2 space-y-2 text-xs">
-                <Link
-                  to="/chairman"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 text-slate-800 font-semibold transition"
-                >
-                  <span className="flex items-center gap-1.5"><FaCross className="w-3.5 h-3.5 text-emerald-600" /> चेयरमैन डैशबोर्ड</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-600" />
-                </Link>
-                <Link
-                  to="/manager"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 text-slate-800 font-semibold transition"
-                >
-                  <span className="flex items-center gap-1.5"><Briefcase className="w-3.5 h-3.5 text-emerald-600" /> मैनेजर डैशबोर्ड</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-600" />
-                </Link>
-                <Link
-                  to="/field-worker"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 text-slate-800 font-semibold transition"
-                >
-                  <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5 text-emerald-600" /> रिटेलर / फील्ड वर्कर</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-600" />
-                </Link>
-                <Link
-                  to="/local-backup"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 hover:bg-emerald-50 text-slate-800 font-semibold transition"
-                >
-                  <span className="flex items-center gap-1.5"><HardDrive className="w-3.5 h-3.5 text-emerald-600" /> लोकल डेटा बैकअप</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-emerald-600" />
-                </Link>
-              </div>
-            </div>
-
-            <Link
-              to="/chairman"
-              className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs text-center transition block shadow-sm"
-            >
-              चेयरमैन व्यू खोलें →
+              सदस्यता पंजीकरण शुरू करें →
             </Link>
           </div>
         </div>

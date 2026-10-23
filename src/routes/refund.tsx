@@ -67,7 +67,7 @@ export default function RefundPage() {
         },
         {
           title: "Contact for Refunds",
-          body: <p>For any refund-related queries, please write to <a className="text-orange font-semibold" href="mailto:azaramesh@gmail.com">azaramesh@gmail.com</a> or call +91 95980 59289 during office hours (Mon–Sat, 10am–6pm IST).</p>,
+          body: <p>For any refund-related queries, please write to <a className="text-orange font-semibold" href="mailto:azaramesh@gmail.com">azaramesh@gmail.com</a> or call +91 94153 14486 during office hours (Mon–Sat, 10am–6pm IST).</p>,
         },
       ]}
     />

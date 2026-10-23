@@ -12,9 +12,9 @@ import heroImg from "@/assets/breadcrume/breadcrume-logo.png";
 import aboutGroup from "@/assets/about-group.jpg";
 import ctaMember from "@/assets/cta-member.jpg";
 import ctaVolunteer from "@/assets/cta-volunteer.jpg";
-import program1 from "@/assets/program-1.jpg";
-import program2 from "@/assets/program-2.jpg";
-import program3 from "@/assets/program-3.jpg";
+import program1 from "@/assets/Our Programs/WomenEmpowermentProgram.png";
+import program2 from "@/assets/Our Programs/EducationSupportInitiative.png";
+import program3 from "@/assets/Our Programs/HealthSafetyCampaign.png";
 
 // ── Stats ──────────────────────────────────────────────────────────────────
 const stats = [
@@ -217,10 +217,10 @@ export default function FinancialHelpPage() {
       <div className="bg-navy text-white py-3">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex flex-wrap justify-center gap-6 sm:gap-10 text-[13px]">
           {[
-            { label: "Registered NGO • Since 1997" },
-            { label: "URN • AAJAM8783GE20213" },
-            { label: "PAN • AAJAM8783G" },
-            { label: "Transparent Organization • Transparent NGO" },
+            { label: "Trust Reg. No. • 45/2026" },
+            { label: "NGO DARPAN ID • UP/2026/1218239" },
+            { label: "PAN Card • AANAR9870K" },
+            { label: "RKJSD TRUST • RK MINISTRIES" },
           ].map((t) => (
             <div key={t.label} className="flex items-center gap-2">
               <BadgeCheck className="w-4 h-4 text-orange flex-shrink-0" />
@@ -607,8 +607,8 @@ export default function FinancialHelpPage() {
       ═══════════════════════════════════════════════════════════════════ */}
       <div className="bg-secondary/50 border-t border-border py-6">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-8 flex flex-wrap justify-center gap-6 text-[13px] text-text-2">
-          <a href="tel:+919598059289" className="flex items-center gap-2 hover:text-orange transition">
-            <Phone className="w-4 h-4 text-orange" /> +91 95980 59289
+          <a href="tel:+919415314486" className="flex items-center gap-2 hover:text-orange transition">
+            <Phone className="w-4 h-4 text-orange" /> +91 94153 14486
           </a>
           <a href="mailto:azaramesh@gmail.com" className="flex items-center gap-2 hover:text-orange transition">
             <Mail className="w-4 h-4 text-orange" /> azaramesh@gmail.com

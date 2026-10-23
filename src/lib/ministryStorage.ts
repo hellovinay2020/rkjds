@@ -41,6 +41,7 @@ export interface BaptismApplication {
   videoUrl?: string;
   documentName?: string;
   documentUrl?: string;
+  photoUrl?: string;
   // 2 Witnesses / Evidence fields (as requested: "2 colam 2 Witness/Evidence fields")
   witness1: {
     name: string;
@@ -116,7 +117,7 @@ const initialMembers: MemberRecord[] = [
     id: "RKM-2026-1001",
     name: "Ramesh Kumar",
     nameHindi: "रमेश कुमार",
-    mobile: "9598059289",
+    mobile: "9415314486",
     email: "azaramesh@gmail.com",
     fatherName: "Ram Prasad",
     motherName: "Shanti Devi",
@@ -208,7 +209,7 @@ const initialBaptisms: BaptismApplication[] = [
   {
     id: "BAP-2026-0891",
     name: "Rajesh Kumar",
-    mobile: "9598059289",
+    mobile: "9415314486",
     email: "azaramesh@gmail.com",
     fatherName: "Ram Prasad",
     motherName: "Shanti Devi",
@@ -222,7 +223,7 @@ const initialBaptisms: BaptismApplication[] = [
     witness1: {
       name: "Pastor Ramesh Kumar",
       relation: "Church Chairman / Pastor",
-      mobile: "9598059289",
+      mobile: "9415314486",
       statement: "I have known the candidate for 4 years. He faithfully attends church and confesses Jesus Christ."
     },
     witness2: {
@@ -262,7 +263,7 @@ const initialBaptisms: BaptismApplication[] = [
     witness2: {
       name: "Ramesh Kumar",
       relation: "Pastor",
-      mobile: "9598059289",
+      mobile: "9415314486",
       statement: "Statement of faith verified and confirmed."
     },
     applicationDate: "2026-04-01",
@@ -319,7 +320,7 @@ const initialPrayers: PrayerRequest[] = [
   {
     id: "PR-2026-02",
     name: "Raju Masih",
-    mobile: "9598059289",
+    mobile: "9415314486",
     address: "Mustafabad, Mubarakpur",
     subject: "Family / परिवार",
     details: "Praying for peace, unity and financial breakthrough in our household.",

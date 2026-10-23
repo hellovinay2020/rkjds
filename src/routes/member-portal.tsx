@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import PageHero from "@/components/PageHero";
 import { MinistryStorage, MemberRecord } from "@/lib/ministryStorage";
 import { MINISTRY_CONFIG } from "@/data/ministryConfig";
 
@@ -43,22 +44,11 @@ export default function MemberPortalPage() {
     <div className="bg-slate-50 text-slate-900 font-sans min-h-screen">
       <SiteHeader />
 
-      {/* Hero */}
-      <div className="relative bg-gradient-to-br from-[#07172C] via-[#0A2540] to-[#143D69] text-white py-14 px-4 border-b border-amber-500/20">
-        <div className="max-w-4xl mx-auto text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-            <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5 text-amber-400" /> सदस्य पोर्टल (Member Portal)</span>
-            <span>•</span>
-            <span>RK MINISTRIES</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display">
-            सदस्य पोर्टल — <span className="text-amber-400">RK MINISTRIES</span>
-          </h1>
-          <p className="text-slate-200 text-sm md:text-base max-w-xl mx-auto">
-            अपने पहचान पत्र, बपतिस्मा प्रमाण पत्र, प्रार्थना निवेदन व कलीसियाई सूचनाओं का व्यक्तिगत डैशबोर्ड।
-          </p>
-        </div>
-      </div>
+      <PageHero
+        title="Member Portal"
+        accent="सदस्य पोर्टल"
+        description="अपने पहचान पत्र, बपतिस्मा प्रमाण पत्र, प्रार्थना निवेदन व कलीसियाई सूचनाओं का व्यक्तिगत डैशबोर्ड।"
+      />
 
       <main className="max-w-5xl mx-auto px-4 py-8">
         {currentMember ? (
@@ -255,7 +245,7 @@ export default function MemberPortalPage() {
                   required
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="उदा. 9598059289 या RKM-2026-1001"
+                  placeholder="उदा. 9415314486 या RKM-2026-1001"
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                 />
               </div>

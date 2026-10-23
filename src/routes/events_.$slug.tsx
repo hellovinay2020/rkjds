@@ -2,9 +2,11 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import PageHero from "@/components/PageHero";
 import Preloader from "@/components/Preloader";
-import { fetchEvents, getEvent } from "@/data/events";
-import { Calendar, Clock, MapPin, Phone, User, Tag, Users, Ticket, CheckCircle2, ArrowRight, Share2, Facebook, Twitter, Linkedin, ChevronRight } from "lucide-react";
+import heroBg from "@/assets/breadcrume/breadcrume-logo.png";
+import { fetchEvents, fetchEventBySlug, getEvent, EventItem } from "@/data/events";
+import { Calendar, Clock, MapPin, Phone, User, Tag, Users, Ticket, CheckCircle2, ArrowRight } from "lucide-react";
 
 export default function EventDetailPage() {
   const [loaderData, setLoaderData] = useState<any>(null);
@@ -16,11 +18,14 @@ export default function EventDetailPage() {
     async function load() {
       if (!slug) return;
       try {
+        let ev: EventItem | null | undefined = await fetchEventBySlug(slug);
         const events = await fetchEvents();
-        const ev = getEvent(slug, events);
+        if (!ev) {
+          ev = getEvent(slug, events);
+        }
         if (!ev) { setNotFound(true); setLoading(false); return; }
         setLoaderData({ ev, events });
-        document.title = `${ev.title} — Mahila Chetna Samiti `;
+        document.title = `${ev.title} — RK MINISTRIES`;
       } catch (e) { console.error(e); }
       setLoading(false);
     }
@@ -37,19 +42,24 @@ export default function EventDetailPage() {
   return (
     <div className="bg-background text-text font-sans">
       <SiteHeader />
-      <section className="relative bg-[#0B1F3A] text-white overflow-hidden">
-        <img src={ev.img} alt={ev.title} className="absolute inset-0 w-full h-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1F3A] via-[#0B1F3A]/80 to-[#0B1F3A]/40" />
-        <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6 py-20 sm:py-24">
-          <nav className="flex items-center gap-1.5 text-[13px] text-white/70 mb-4"><Link to="/" className="hover:text-orange-2">Home</Link><ChevronRight className="w-3.5 h-3.5" /><Link to="/events" className="hover:text-orange-2">Events</Link><ChevronRight className="w-3.5 h-3.5" /><span className="text-white">{ev.title}</span></nav>
-          <div className="inline-flex items-center gap-2 bg-orange/20 border border-orange/40 rounded-full px-4 py-1.5 text-[12px] font-semibold uppercase tracking-wider text-orange-2 mb-4"><Tag className="w-3.5 h-3.5" /> {ev.category}</div>
-          <h1 className="font-display font-extrabold text-[34px] sm:text-[46px] md:text-[54px] leading-[1.05] max-w-3xl">{ev.title}</h1>
-
-        </div>
-      </section>
+      <PageHero
+        title={ev.title}
+        image={heroBg}
+        crumbs={[{ label: "Home", to: "/" }, { label: "Events", to: "/events" }, { label: ev.title }]}
+      />
       <section className="py-14 sm:py-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_360px] gap-10">
           <div>
+            <div className="mb-6">
+              {ev.category && (
+                <span className="inline-block bg-orange/10 text-orange font-bold text-xs uppercase px-3 py-1 rounded-full mb-2">
+                  {ev.category}
+                </span>
+              )}
+              <h1 className="font-display font-extrabold text-[24px] sm:text-[32px] text-navy leading-tight">
+                {ev.title}
+              </h1>
+            </div>
             <div className="rounded-[20px] overflow-hidden shadow-soft"><img src={ev.img} alt={ev.title} className="w-full h-[320px] sm:h-[420px] object-cover" /></div>
             <div className="mt-10">
               <h2 className="font-display font-extrabold text-[26px] text-navy">About the Event</h2>

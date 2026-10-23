@@ -25,27 +25,27 @@ export type DonationSettings = {
 };
 
 const fallbackBankAccount: BankAccount = {
-  accountName: "Mahila Chetna Samiti",
-  accountNumber: "50100329633950",
-  ifsc: "HDFC0001896",
-  bankName: "HDFC Bank",
-  branch: "NARAYAN BHAWAN ETAH ROAD SHIKOHABAD UP, SHIKOHABAD-205135, UTTAR PRADESH",
-  accountType: "Current Account",
+  accountName: "XXXXXX",
+  accountNumber: "XXXXXXXXXXXX",
+  ifsc: "XXXX000XXXX",
+  bankName: "XXXXXX Bank",
+  branch: "XXXXXX",
+  accountType: "Current / Savings Account",
 };
 
 const fallbackDonation: DonationSettings = {
   onceAmounts: [1000, 2000, 3000, 5000],
   monthlyAmounts: [500, 1000, 2000, 5000],
-  upiId: "",
+  upiId: "XXXXXX@upi",
   upiQrCode: "",
-  paytmNumber: "+91 95980 59289",
+  paytmNumber: "XXXXXX",
   qrCode: "",
   bankAccounts: [fallbackBankAccount],
-  pan: "AAJAM8783G",
-  registrationId: "CSR00050218",
-  registrationNumber: "UP/2019/0243662",
-  certification: "Church / Ministry Trust",
-  urn: "AAJAM8783GE20213",
+  pan: "AANAR9870K",
+  registrationId: "45/2026",
+  registrationNumber: "45/2026",
+  certification: "Church / Ministry Trust (DARPAN ID: UP/2026/1218239)",
+  urn: "45/2026",
 };
 
 function transformBankAccount(raw: any): BankAccount {
@@ -61,18 +61,33 @@ function transformBankAccount(raw: any): BankAccount {
 
 function transformDonationSettings(raw: any): DonationSettings {
   const ds = raw.donationSettings || {};
+
+  const accounts: BankAccount[] = [];
+  if (raw.bankDetails && (raw.bankDetails.accountName || raw.bankDetails.accountNumber || raw.bankDetails.bankName)) {
+    accounts.push(transformBankAccount(raw.bankDetails));
+  }
+  if (Array.isArray(raw.bankAccounts)) {
+    raw.bankAccounts.forEach((b: any) => {
+      if (b.accountName || b.accountNumber || b.bankName) {
+        accounts.push(transformBankAccount(b));
+      }
+    });
+  }
+
+  const effectiveQr = raw.qrCode || raw.upiQrCode || ds.upiQrCode || "";
+
   return {
-    onceAmounts: Array.isArray(ds.onceAmounts) ? ds.onceAmounts.filter((n: any) => typeof n === "number") : [1000, 2000, 3000, 5000],
-    monthlyAmounts: Array.isArray(ds.monthlyAmounts) ? ds.monthlyAmounts.filter((n: any) => typeof n === "number") : [],
-    upiId: raw.upiId || ds.upiId || "9598059289@upi",
-    upiQrCode: getFullUrl(raw.upiQrCode || ds.upiQrCode || "") || "",
-    paytmNumber: raw.paytmNumber || ds.paytmNumber || "+91 95980 59289",
-    qrCode: getFullUrl(raw.qrCode || "") || "",
-    bankAccounts: Array.isArray(raw.bankAccounts) ? raw.bankAccounts.map(transformBankAccount).filter((b: BankAccount) => b.accountName) : [fallbackBankAccount],
-    pan: raw.pan || "",
-    registrationId: raw.registrationId || "",
-    registrationNumber: raw.registrationNumber || "",
-    certification: raw.certification || "",
+    onceAmounts: Array.isArray(ds.onceAmounts) && ds.onceAmounts.length > 0 ? ds.onceAmounts.filter((n: any) => typeof n === "number") : [500, 1000, 2500, 5000, 30000],
+    monthlyAmounts: Array.isArray(ds.monthlyAmounts) && ds.monthlyAmounts.length > 0 ? ds.monthlyAmounts.filter((n: any) => typeof n === "number") : [500, 1000, 1500, 3000],
+    upiId: raw.upiId || ds.upiId || "9415314486@upi",
+    upiQrCode: getFullUrl(effectiveQr) || "",
+    paytmNumber: raw.paytmNumber || ds.paytmNumber || "+91 94153 14486",
+    qrCode: getFullUrl(effectiveQr) || "",
+    bankAccounts: accounts.length > 0 ? accounts : [fallbackBankAccount],
+    pan: raw.pan || "AANAR9870K",
+    registrationId: raw.registrationId || "UP/2026/1218239",
+    registrationNumber: raw.registrationNumber || "45/2026",
+    certification: raw.certification || "Church / Ministry Trust (DARPAN ID: UP/2026/1218239)",
     urn: raw.urn || "",
   };
 }

@@ -11,9 +11,13 @@ import {
   MapPin,
   Play,
   HeartHandshake,
+  Upload,
+  FileCheck2,
+  X,
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import PageHero from "@/components/PageHero";
 import { MinistryStorage, Testimony } from "@/lib/ministryStorage";
 import { MINISTRY_CONFIG } from "@/data/ministryConfig";
 
@@ -30,6 +34,28 @@ export default function TestimonyPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<{ name: string; size: number; url?: string } | null>(null);
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const fileUrl = file.type.startsWith("image/") ? URL.createObjectURL(file) : undefined;
+      setUploadedFile({ name: file.name, size: file.size, url: fileUrl });
+    }
+  };
+
+  const handleRemoveFile = () => {
+    if (uploadedFile?.url) {
+      URL.revokeObjectURL(uploadedFile.url);
+    }
+    setUploadedFile(null);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,24 +96,11 @@ export default function TestimonyPage() {
     <div className="bg-slate-50 text-slate-900 font-sans min-h-screen">
       <SiteHeader />
 
-      {/* Hero */}
-      <div className="relative bg-gradient-to-br from-[#07172C] via-[#0A2540] to-[#143D69] text-white py-16 px-4 border-b border-amber-500/20">
-        <div className="max-w-4xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-            <span className="flex items-center gap-1.5"><Sparkles className="w-3.5 h-3.5 text-amber-400" /> ऑनलाइन गवाही (Online Testimony)</span>
-            <span>•</span>
-            <span>Miracles & Praise Reports</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display">
-            प्रभु के अद्भुत कार्यों की गवाही — <span className="text-amber-400">RK MINISTRIES</span>
-          </h1>
-          <p className="text-slate-200 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            "और वे मेम्ने के लोहू के कारण, और अपनी गवाही के वचन के कारण उस पर जयवन्त हुए" (प्रकाशितवाक्य 12:11)
-            <br />
-            यीशु मसीह ने आपके जीवन में जो चंगाई, छुटकारा व आशीष दी है, उसे दूसरों के साथ साझा कर परमेश्वर की महिमा करें।
-          </p>
-        </div>
-      </div>
+      <PageHero
+        title="Online Testimony"
+        accent="ऑनलाइन गवाही"
+        description="और वे मेम्ने के लोहू के कारण, और अपनी गवाही के वचन के कारण उस पर जयवन्त हुए (प्रकाशितवाक्य 12:11) — यीशु मसीह ने आपके जीवन में जो चंगाई, छुटकारा व आशीष दी है, उसे साझा करें।"
+      />
 
       <main className="max-w-5xl mx-auto px-4 py-10 grid lg:grid-cols-12 gap-8">
         
@@ -139,7 +152,7 @@ export default function TestimonyPage() {
                     required
                     value={formData.mobile}
                     onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                    placeholder="9598059289"
+                    placeholder="9415314486"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -247,6 +260,65 @@ export default function TestimonyPage() {
                   placeholder="प्रभु ने आपके जीवन में क्या चमत्कार किया? कैसे प्रार्थना का उत्तर मिला? पूरा विवरण लिखें..."
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                 />
+              </div>
+
+              {/* Upload File / Photo / Audio / Document */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  गवाही फ़ाइल / फ़ोटो / मेडिकल रिपोर्ट संलग्न करें (Attach File / Photo / Proof)
+                </label>
+
+                {uploadedFile ? (
+                  <div className="p-3 rounded-xl bg-emerald-50 border-2 border-emerald-400 flex items-center justify-between gap-3 shadow-sm">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      {uploadedFile.url ? (
+                        <img
+                          src={uploadedFile.url}
+                          alt="preview"
+                          className="w-10 h-10 rounded-lg object-cover border border-emerald-300 shrink-0"
+                        />
+                      ) : (
+                        <div className="w-9 h-9 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                          <FileCheck2 className="w-5 h-5" />
+                        </div>
+                      )}
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="font-bold text-xs sm:text-sm text-slate-900 truncate max-w-[180px] sm:max-w-[220px]">
+                            {uploadedFile.name}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-extrabold shrink-0">
+                            ✓ अपलोड सफल
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-emerald-800">
+                          साइज: {formatFileSize(uploadedFile.size)} • चयनित फाइल
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-rose-600 hover:border-rose-300 transition text-xs font-semibold flex items-center gap-1 shrink-0"
+                      title="फाइल हटाएं या बदलें"
+                    >
+                      <X className="w-3.5 h-3.5 text-rose-500" />
+                      <span>हटाएं</span>
+                    </button>
+                  </div>
+                ) : (
+                  <label className="flex items-center justify-center gap-2 px-3 py-2.5 border-2 border-dashed border-amber-400 bg-amber-50/50 hover:bg-amber-50 rounded-xl cursor-pointer text-xs font-semibold text-amber-900 transition">
+                    <Upload className="w-4 h-4 text-amber-600" />
+                    <span>फ़ाइल चुनें (फ़ोटो, मेडिकल रिपोर्ट, ऑडियो, PDF)</span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept=".jpg,.jpeg,.png,.pdf,.mp3,.m4a,.wav,.doc,.docx"
+                      onChange={handleFileUpload}
+                    />
+                  </label>
+                )}
               </div>
 
               <button

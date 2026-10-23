@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronDown, type LucideIcon } from "lucide-react";
-import { FaBullseye, FaCross } from "react-icons/fa6";
+import { FaBullseye, FaCross, FaDove, FaHandsPraying } from "react-icons/fa6";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import Preloader from "@/components/Preloader";
@@ -13,13 +13,12 @@ import {
   Target, Eye, Gem, Sparkles, BookOpen, HeartPulse, GraduationCap,
   Leaf, Scale, HandHeart, Home as HomeIcon, ArrowRight, Calendar, MapPin, IndianRupee, Shield, Copy, Check, Smartphone,
   Quote, CheckCircle2, Building2, BadgeCheck, ChevronRight, Send, Image as ImageIcon, PlayCircle, Play, X, Loader2,
+  Bell, QrCode, Church, Receipt,
 } from "lucide-react";
 
-import banner11 from "@/assets/herosection/banner_img11.png";
-import banner22 from "@/assets/herosection/banner_img22.png";
-import banner33 from "@/assets/herosection/banner_img33.png";
-import banner44 from "@/assets/herosection/banner_img44.png";
-import banner55 from "@/assets/herosection/banner_img55.png";
+import banner1 from "@/assets/herosection/banner1.png";
+import banner2 from "@/assets/herosection/banner2.png";
+import banner3 from "@/assets/herosection/banner3.png";
 import worshipBanner from "@/assets/about/R.K. Ministries Sunrise Worship Banner.png";
 import program1 from "@/assets/Our Programs/WomenEmpowermentProgram.png";
 import program2 from "@/assets/Our Programs/EducationSupportInitiative.png";
@@ -29,16 +28,15 @@ import project1 from "@/assets/Featured Projects/SakshamWomenProject.png";
 import project2 from "@/assets/Featured Projects/ShikshaSetuProject.png";
 import project3 from "@/assets/Featured Projects/SwasthyaSurakshaProject.png";
 import project4 from "@/assets/Featured Projects/GramVikasInitiative.png";
-import sakshamProjectImg from "@/assets/project/Saksham-Skill development project for Women's.png";
-import balSanskarProjectImg from "@/assets/project/Bal Sanskar-Providing Education to Slum Children.png";
-import maaAnnapurnaProjectImg from "@/assets/project/Maa Annapurna-Providing free food to the needy.png";
-import saharaProjectImg from "@/assets/project/Sahara-Supporting Widows.png";
-import svanaSevaProjectImg from "@/assets/project/SVANA SEVA-Feeding the street Dogs.png";
-import ctaVolunteer from "@/assets/cta-volunteer.jpg";
-import story1 from "@/assets/story-1.jpg";
-import story2 from "@/assets/story-2.jpg";
-import story3 from "@/assets/story-3.jpg";
-import ctaMember from "@/assets/cta-member.jpg";
+import villageGospelProjectImg from "@/assets/project/village-gospel.jpg";
+import holyBaptismProjectImg from "@/assets/project/holy-baptism.jpg";
+import healingPrayerProjectImg from "@/assets/project/healing-prayer.jpg";
+import compassionReliefProjectImg from "@/assets/project/compassion-relief.jpg";
+import bibleDistProjectImg from "@/assets/project/bible-distribution.jpg";
+import sundayWorshipEventImg from "@/assets/events/sunday-worship.jpg";
+import holyBaptismEventImg from "@/assets/events/holy-baptism.jpg";
+import fastingPrayerEventImg from "@/assets/events/fasting-prayer.jpg";
+import villageOutreachEventImg from "@/assets/events/village-outreach.jpg";
 import gallery1 from "@/assets/Causes/GirlChildEducation.png";
 import gallery2 from "@/assets/Blogs/HealthAwareness.png";
 import gallery3 from "@/assets/herosection/NariSashaktikaran.png";
@@ -51,12 +49,9 @@ import video3 from "@/assets/herosection/Sahayata.png";
 import blog1Img from "@/assets/Blogs/EmpoweringRuralWomen.png";
 import blog2Img from "@/assets/Blogs/ImportanceofGirlsEducation.png";
 import blog3Img from "@/assets/Blogs/HealthAwareness.png";
-import faqImg from "@/assets/Gallery/img4.png";
-import cause1Img from "@/assets/Causes/GirlChildEducation.png";
-import cause2Img from "@/assets/Causes/WomenHealthHygiene.png";
-import cause3Img from "@/assets/Causes/LivelihoodSkills.png";
+import faqImg from "@/assets/faq/faq-church.jpg";
 import upiQrFallback from "@/assets/qr-code/qr-code-1.jpeg";
-import logoImage from "@/assets/logo/rk-logo.png";
+import rameshChairmanImg from "@/assets/Teams/Trustee Chairman Ramesh Kumar.jpeg";
 
 const nav: { label: string; to: string }[] = [
   { label: "Home", to: "/" },
@@ -68,9 +63,9 @@ const nav: { label: string; to: string }[] = [
 ];
 
 const trust = [
-  { icon: ShieldCheck, title: "Registered NGO", sub: "Since 1997" },
-  { icon: FileCheck2, title: "URN Number", sub: "AAJAM8783GE20213" },
-  { icon: BadgeCheck, title: "Darpan ID", sub: "UP/2019/0243662" },
+  { icon: ShieldCheck, title: "Trust Reg. No.", sub: "45/2026" },
+  { icon: FileCheck2, title: "PAN Card No.", sub: "AANAR9870K" },
+  { icon: BadgeCheck, title: "NGO Darpan ID", sub: "UP/2026/1218239" },
   { icon: PieChart, title: "Transparent NGO", sub: "We Ensure Transparency" },
 ];
 
@@ -115,19 +110,13 @@ const projects = [
   { img: project4, title: "Gram Vikas Initiative", desc: "Working for village development and livelihoods.", impact: "40+ Villages" },
 ];
 
-const stories = [
-  { img: story1, name: "Suman Devi", role: "Entrepreneur", text: "With the support of Mahila Chetna Samiti , I learned tailoring and today I run my own small business and support my family." },
-  { img: story2, name: "Anita Kumari", role: "Beneficiary", text: "Education support helped my children continue their studies. Today, my daughter wants to become a teacher." },
-  { img: story3, name: "Rekha Sharma", role: "Community Member", text: "Health camps in our village have made a big difference. We are more aware and taking better care of our health." },
-];
-
 const whyUs = [
-  { icon: ShieldCheck, title: "Registered NGO", desc: "Registered since 1997, fully trusted", color: "#00843D" },
-  { icon: FileCheck2, title: "12A & 80G Approved", desc: "Tax benefits on your donations", color: "#063B76" },
-  { icon: PieChart, title: "Transparent NGO", desc: "Clear processes and financial reporting", color: "#F58220" },
-  { icon: Users, title: "Experienced Team", desc: "Dedicated people working for change", color: "#0B5A4A" },
-  { icon: HandHeart, title: "Community Reach", desc: "Strong presence in villages and communities", color: "#176A8A" },
-  { icon: Award, title: "Proven Impact", desc: "Real change in 25,000+ lives", color: "#00843D" },
+  { icon: BookOpen, title: "प्रभु यीशु मसीह का पवित्र वचन", desc: "पवित्र बाइबिल की सच्ची शिक्षाओं और प्रभु यीशु मसीह के सामर्थी वचनों द्वारा जीवन का आत्मिक मार्गदर्शन।", color: "#D97706", badge: "पवित्र बाइबिल सत्य" },
+  { icon: FaHandsPraying, title: "चंगाई व अलौकिक छुटकारा", desc: "प्रभु यीशु मसीह के नाम में असाध्य रोगों से चंगाई, पापों से क्षमा और दुष्ट शक्तियों के बंधनों से पूर्ण मुक्ति।", color: "#2563EB", badge: "प्रार्थना द्वारा चंगाई" },
+  { icon: FaDove, title: "पवित्र जल बपतिस्मा व शिष्यत्व", desc: "प्रभु यीशु मसीह की आज्ञानुसार जल बपतिस्मा, मसीही शिष्यत्व और कलीसिया में आधिकारिक सदस्यता प्रमाण पत्र।", color: "#059669", badge: "बाइबलीय आज्ञा पालन" },
+  { icon: FaCross, title: "जीवंत स्तुति-आराधना व संगति", desc: "प्रत्येक रविवार एवं शुक्रवार को प्रभु यीशु मसीह के चरणों में स्तुति, भक्ति भजन और आत्मीय पारिवारिक फेलोशिप।", color: "#7C3AED", badge: "सामूहिक आराधना" },
+  { icon: HandHeart, title: "विधवा व निर्धन प्रेम सेवा", desc: "प्रभु यीशु मसीह के आदेशानुसार असहाय विधवाओं, अनाथों और संकटग्रस्त परिवारों को नियमित राशन व वस्त्र सहायता।", color: "#DC2626", badge: "ईसाई करुणा सेवा" },
+  { icon: ShieldCheck, title: "पंजीकृत व समर्पित मिनिस्ट्री", desc: "पंजीकरण संख्या 45/2026, नीति आयोग दर्पण (UP/2026/1218239) प्रमाणित, पास्टर रमेश कुमार के नेतृत्व में पूर्ण समर्पित।", color: "#0D9488", badge: "Reg. 45/2026" },
 ];
 
 const partners = [
@@ -146,6 +135,7 @@ const partners = [
 import ImpactMapSection from "@/components/IndiaImpactMap";
 import { getFullUrl } from "@/lib/api";
 import api from "@/lib/api";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 import {
   fetchHomeHero, fetchHomeCounters, fetchHomePrograms, fetchHomeProjects,
   fetchHomeStories, fetchHomeEvents, fetchHomeBlogs, fetchHomeCauses,
@@ -160,13 +150,268 @@ import {
 } from "@/data/homepage";
 
 const indexFaqs = [
-  { q: "What is RK MINISTRIES?", a: "RK MINISTRIES is a Christian ministry and evangelical church fellowship based in Mubarakpur, Azamgarh (U.P.), dedicated to spreading the Gospel of Jesus Christ, prayer, healing, and salvation." },
-  { q: "Where is RK MINISTRIES located?", a: "Village - Mustafabad, Post - Gujarpar, Police station - Mubarakpur, District - Azamgarh, Uttar Pradesh 276404." },
-  { q: "Who leads RK MINISTRIES?", a: "Pastor Ramesh Kumar serves as the Chairman and Founder of RK MINISTRIES." },
-  { q: "How can I apply for Holy Baptism or Prayer?", a: "You can apply online through our Baptism Application portal with 2 witnesses/evidence, or submit an Online Prayer Request 24x7." },
-  { q: "What are the Sunday Worship service timings?", a: "Sunday Worship Service: 10:00 AM - 1:00 PM; Friday Fasting & Healing Prayer: 6:00 PM - 8:30 PM." },
-  { q: "How can I get a Membership ID Card?", a: "Register through our Member Registration form to receive an instant verified Member ID Card and Certificate." }
+  {
+    q: "आरके मिनिस्ट्रीज (RK MINISTRIES) क्या है और इसका मुख्य उद्देश्य क्या है?",
+    a: "आरके मिनिस्ट्रीज प्रभु यीशु मसीह की एक मसीही चर्च फेलोशिप व पंजीकृत संस्था है (Reg. No. 45/2026, NGO दर्पण: UP/2026/1218239)। इसका मुख्य उद्देश्य प्रभु यीशु मसीह के प्रेम, सुसमाचार प्रचार, निरंतर प्रार्थना, बीमारियों से चंगाई, पापों से छुटकारा और दीन-दुखियों की निःस्वार्थ सेवा करना है।"
+  },
+  {
+    q: "प्रभु यीशु मसीह की रविवार आराधना एवं उपवास प्रार्थना का समय क्या है?",
+    a: "प्रत्येक रविवार को मुख्य आराधना, स्तुति व चंगाई प्रार्थना सभा प्रातः 10:00 बजे से दोपहर 1:30 बजे तक होती है। प्रत्येक शुक्रवार को विशेष उपवास व छुटकारा प्रार्थना सभा प्रातः 11:00 बजे से दोपहर 3:00 बजे तक आयोजित की जाती है।"
+  },
+  {
+    q: "प्रभु यीशु मसीह के नाम में व्यक्तिगत प्रार्थना अनुरोध (Prayer Request) कैसे भेजें?",
+    a: "आप हमारी वेबसाइट पर 'Prayer Request' पोर्टल के माध्यम से 24x7 ऑनलाइन प्रार्थना अनुरोध भेज सकते हैं, या हमारी प्रार्थना हेल्पलाइन +91 94153 14486 पर सीधे कॉल करके पास्टर जी से प्रार्थना करवा सकते हैं।"
+  },
+  {
+    q: "पवित्र जल बपतिस्मा (Holy Water Baptism) के लिए क्या नियम हैं और कैसे आवेदन करें?",
+    a: "प्रभु यीशु मसीह पर विश्वास लाने वाले नए विश्वासी वेबसाइट के 'Baptism Application' फॉर्म द्वारा 2 गवाहों के विवरण के साथ ऑनलाइन आवेदन कर सकते हैं। सत्यापन के उपरांत पवित्र जल बपतिस्मा और आधिकारिक बपतिस्मा प्रमाण पत्र प्रदान किया जाता है।"
+  },
+  {
+    q: "आरके मिनिस्ट्रीज का मुख्य चर्च व प्रार्थना केंद्र कहाँ स्थित है?",
+    a: "हमारा मुख्य प्रार्थना केंद्र: ग्राम - मुस्तफाबाद, पोस्ट - गूजरपार, थाना - मुबारकपुर, जनपद - आजमगढ़, उत्तर प्रदेश - 276404 में स्थित है। यहाँ सभी धर्म व जाति के भाई-बहन प्रभु यीशु मसीह के चरणों में शांति व चंगाई पाने हेतु सादर आमंत्रित हैं।"
+  },
+  {
+    q: "कलीसिया की सदस्यता (Membership ID Card) कैसे प्राप्त करें?",
+    a: "वेबसाइट पर 'Member Registration' फॉर्म भरकर आप आरके मिनिस्ट्रीज के पंजीकृत सदस्य बन सकते हैं, जिसके बाद आपको तुरंत डिजिटल मेम्बरशिप आईडी कार्ड और सर्टिफिकेट प्राप्त हो जाता है।"
+  }
 ];
+
+function HomeContactSection() {
+  const { settings } = useSiteSettings();
+  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  const phone = settings?.contactPhone || "+91 94153 14486";
+  const email = settings?.contactEmail || "azaramesh@gmail.com";
+  const address = settings?.contactAddress || "Village - Mustafabad, Post- Gujarpar, Mubarakpur, Azamgarh, U.P. 276404";
+  const mapUrl = settings?.mapEmbedUrl || "https://maps.google.com/maps?q=Mustafabad,+Mubarakpur,+Azamgarh,+Uttar+Pradesh&hl=en&z=14&output=embed";
+
+  const socials = [
+    { I: Youtube, href: settings?.socialLinks?.youtube || "https://youtube.com/@rkministry-p9t?si=4qyVyJkr9Mv3YJPh" },
+    { I: Facebook, href: settings?.socialLinks?.facebook || "https://www.facebook.com/share/1FKM6aGUFq/" },
+    { I: Instagram, href: settings?.socialLinks?.instagram || "https://www.instagram.com/ramesh32086?mdxt=MTV0cGVrczZ6a3BjaQ==" },
+  ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus(null);
+    if (!form.name.trim()) {
+      return setStatus({ type: "error", text: "कृपया अपना नाम दर्ज करें (Please enter your name)." });
+    }
+    if (!form.phone.trim() && !form.email.trim()) {
+      return setStatus({ type: "error", text: "कृपया मोबाइल नंबर या ईमेल दर्ज करें (Please enter your phone or email)." });
+    }
+    if (!form.message.trim()) {
+      return setStatus({ type: "error", text: "कृपया अपना संदेश या प्रार्थना का विवरण लिखें (Please enter your message)." });
+    }
+
+    setLoading(true);
+    try {
+      await api.post("/contact", {
+        name: form.name.trim(),
+        email: form.email.trim() || `${form.phone.trim()}@rkministries.org`,
+        phone: form.phone.trim(),
+        subject: form.subject.trim() || "होमपेज पूछताछ व प्रार्थना संदेश (Homepage Inquiry)",
+        message: form.message.trim(),
+      });
+      setStatus({
+        type: "success",
+        text: "धन्यवाद! आपका संदेश सफलतापूर्वक भेज दिया गया है। हमारी टीम जल्द ही आपसे संपर्क करेगी।",
+      });
+      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err: any) {
+      setStatus({
+        type: "error",
+        text: err?.response?.data?.message || "संदेश भेजने में त्रुटि हुई। कृपया सीधे हेल्पलाइन +91 94153 14486 पर संपर्क करें।",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section className="relative py-16 sm:py-24 bg-gradient-to-br from-[#091f82] via-[#102E5A] to-[#091f82] overflow-hidden">
+      {/* Decorative orbs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-orange/20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-success/20 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+
+      <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 rounded-full px-4 py-1.5 text-orange-2 text-[12px] font-bold uppercase tracking-[0.18em]">
+            <Send className="w-3.5 h-3.5" /> Get In Touch
+          </div>
+          <h2 className="section-title mt-4 text-white">
+            We Would Love To <span className="text-orange-2">Hear From You</span>
+          </h2>
+          <p className="mt-3 text-white/70">
+            Have questions, suggestions, or want to collaborate? Reach out — we're always here for you.
+          </p>
+        </div>
+
+        {/* Main card */}
+        <div className="bg-white/95 backdrop-blur-xl rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)] overflow-hidden grid lg:grid-cols-[1fr_1.2fr]">
+          {/* Left: info + map */}
+          <div className="relative bg-gradient-to-br from-orange to-orange-2 text-white p-8 sm:p-10 flex flex-col gap-6">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
+
+            <div className="relative">
+              <h3 className="text-[22px] sm:text-[26px] font-extrabold leading-tight">Contact Information</h3>
+              <p className="mt-2 text-white/85 text-[14px]">Fill the form or reach us directly using the details below.</p>
+            </div>
+
+            <div className="relative space-y-3.5">
+              {[
+                { icon: MapPin, title: "Visit Us", body: address },
+                { icon: Phone, title: "Call Us", body: phone },
+                { icon: Mail, title: "Email Us", body: email },
+              ].map((c) => (
+                <div
+                  key={c.title}
+                  className="group bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 hover:border-white/30 rounded-2xl p-4 flex gap-4 items-start transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
+                >
+                  <div className="w-11 h-11 shrink-0 rounded-xl bg-white/20 group-hover:bg-white group-hover:text-orange text-white backdrop-blur border border-white/30 flex items-center justify-center transition-all duration-300">
+                    <c.icon className="w-5 h-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/75">{c.title}</div>
+                    <div className="text-[14px] font-semibold mt-1 whitespace-pre-line leading-relaxed text-white">{c.body}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="relative mt-2">
+              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 mb-3">Follow Us</div>
+              <div className="flex gap-2">
+                {socials.map((s, i) => (
+                  <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/15 hover:bg-white hover:text-orange backdrop-blur border border-white/20 flex items-center justify-center transition">
+                    <s.I className="w-4 h-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative mt-auto rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl">
+              <iframe
+                title="Map"
+                src={mapUrl}
+                className="w-full h-[180px] border-0"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Right: form */}
+          <div className="p-8 sm:p-10 lg:p-12">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-10 h-[2px] bg-orange rounded-full" />
+              <span className="text-orange text-[12px] font-bold uppercase tracking-[0.18em]">Send Message</span>
+            </div>
+            <h3 className="text-[24px] sm:text-[30px] font-extrabold text-navy leading-tight">Let's Start A Conversation</h3>
+            <p className="mt-2 text-text-2 text-[14px]">Drop us a message — we usually respond within 24 hours.</p>
+
+            {status && (
+              <div
+                className={`mt-4 p-4 rounded-xl text-[13px] font-medium border flex items-start gap-2 ${
+                  status.type === "success"
+                    ? "bg-green-50 border-green-200 text-green-700"
+                    : "bg-red-50 border-red-200 text-red-700"
+                }`}
+              >
+                {status.type === "success" ? (
+                  <CheckCircle2 className="w-4 h-4 flex-shrink-0 mt-0.5 text-green-600" />
+                ) : (
+                  <span className="font-bold flex-shrink-0 text-red-600">!</span>
+                )}
+                <span>{status.text}</span>
+              </div>
+            )}
+
+            <form className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4" onSubmit={handleSubmit} noValidate>
+              <div className="relative group">
+                <UserPlus className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-2 group-focus-within:text-orange transition" />
+                <input
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="Your Name *"
+                  className="w-full bg-secondary border border-slate-200 rounded-2xl pl-11 pr-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition"
+                />
+              </div>
+
+              <div className="relative group">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-2 group-focus-within:text-orange transition" />
+                <input
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  placeholder="Your Email (optional)"
+                  className="w-full bg-secondary border border-slate-200 rounded-2xl pl-11 pr-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition"
+                />
+              </div>
+
+              <div className="relative group">
+                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-2 group-focus-within:text-orange transition" />
+                <input
+                  type="tel"
+                  required
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  placeholder="Your Phone Number *"
+                  className="w-full bg-secondary border border-slate-200 rounded-2xl pl-11 pr-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition"
+                />
+              </div>
+
+              <div className="relative group">
+                <Sparkles className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-2 group-focus-within:text-orange transition" />
+                <input
+                  type="text"
+                  value={form.subject}
+                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                  placeholder="Subject (e.g. Prayer / Inquiry)"
+                  className="w-full bg-secondary border border-slate-200 rounded-2xl pl-11 pr-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition"
+                />
+              </div>
+
+              <textarea
+                required
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                placeholder="Your Message / Prayer Request..."
+                rows={5}
+                className="sm:col-span-2 bg-secondary border border-slate-200 rounded-2xl px-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition resize-none"
+              />
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="sm:col-span-2 group relative overflow-hidden bg-gradient-to-r from-orange to-orange-2 text-white rounded-2xl px-6 py-4 font-bold inline-flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(255,107,0,0.35)] hover:shadow-[0_15px_40px_rgba(255,107,0,0.5)] hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending Message...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+                    Send Message
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Index() {
   const [ld, setLd] = useState<any>({
@@ -242,8 +487,8 @@ export default function Index() {
       <section className="overflow-hidden bg-[#0A2540] text-white border-y border-amber-500/30" aria-label="Ministry note">
         <div className="flex items-center min-h-10 sm:min-h-12">
           <div className="relative z-10 shrink-0 bg-amber-500 text-slate-950 px-4 sm:px-7 py-2.5 text-[11px] sm:text-[13px] font-black uppercase tracking-[0.16em] shadow-[8px_0_18px_rgba(2,40,87,0.35)] flex items-center gap-1.5">
-            <FaCross className="w-3.5 h-3.5 text-slate-950" />
-            <span>RK MINISTRIES</span>
+            <Bell className="w-3.5 h-3.5 text-slate-950" />
+            <span>NOTICE</span>
           </div>
           <div className="overflow-hidden whitespace-nowrap">
             <div className="flex w-max animate-[marquee-x_22s_linear_infinite] gap-10 px-6 text-[13px] sm:text-[15px] font-semibold tracking-wide">
@@ -254,9 +499,11 @@ export default function Index() {
                     "प्रभु यीशु मसीह पर विश्वास कर, तो तू और तेरा घराना उद्धार पाएगा।" (प्रेरितों 16:31)
                   </span>
                   <span className="text-amber-400">|</span>
+                  <span>ट्रस्ट पंजीयन सं.: 45/2026 • DARPAN ID: UP/2026/1218239 • PAN: AANAR9870K</span>
+                  <span className="text-amber-400">|</span>
                   <span>ऑनलाइन बपतिस्मा आवेदन एवं प्रार्थना निवेदन सेवा</span>
                   <span className="text-amber-400">|</span>
-                  <span>गाँव - मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उ.प्र.) 276404 • हेल्पलाइन: +91 95980 59289</span>
+                  <span>मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उ.प्र.) 276404 • हेल्पलाइन: +91 94153 14486 • ईमेल: azaramesh@gmail.com</span>
                 </span>
               ))}
             </div>
@@ -306,7 +553,7 @@ export default function Index() {
 
               <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] ring-1 ring-black/5">
                 <img
-                  src={worshipBanner}
+                  src={ld.aboutData?.mainImage ? getFullUrl(ld.aboutData.mainImage) : (ld.aboutData?.images?.[0] ? getFullUrl(ld.aboutData.images[0]) : worshipBanner)}
                   alt="About RK MINISTRIES"
                   className="w-full h-[280px] sm:h-[360px] lg:h-[440px] object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
@@ -317,8 +564,12 @@ export default function Index() {
                     <Heart className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <p className="text-[11px] text-text-2 font-medium uppercase tracking-wide">Our Impact</p>
-                    <p className="text-[13px] font-bold text-navy leading-tight">Grassroots Change, One Life at a Time</p>
+                    <p className="text-[11px] text-text-2 font-medium uppercase tracking-wide">
+                      {ld.aboutData?.impactTitle || "Our Impact"}
+                    </p>
+                    <p className="text-[13px] font-bold text-navy leading-tight">
+                      {ld.aboutData?.impactSubtitle || "Grassroots Change, One Life at a Time"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -326,7 +577,7 @@ export default function Index() {
 
             {/* Text col */}
             <div className="flex flex-col">
-              <div className="eyebrow">About Our Fellowship</div>
+              <div className="eyebrow">{ld.aboutData?.eyebrow || "About Our Fellowship"}</div>
               <h2 className="section-title mt-2 text-left">
                 {ld.aboutData?.heading || "RK MINISTRIES – Spreading Faith, Hope & Salvation"}
               </h2>
@@ -348,11 +599,11 @@ export default function Index() {
 
               {/* Quick-stats row */}
               <div className="mt-6 grid grid-cols-3 gap-3">
-                {[
+                {((ld.aboutData?.stats && ld.aboutData.stats.length > 0) ? ld.aboutData.stats : [
                   { num: "10+", label: "Years Active" },
                   { num: "50K+", label: "Lives Touched" },
                   { num: "25+", label: "Programs Run" },
-                ].map((s) => (
+                ]).map((s) => (
                   <div key={s.label} className="text-center rounded-2xl py-4 px-2 bg-white/60 backdrop-blur-sm border border-white/70 shadow-sm">
                     <p className="text-[20px] font-extrabold bg-gradient-to-r from-[#0B1F3A] to-[#1E40AF] bg-clip-text text-transparent leading-tight">{s.num}</p>
                     <p className="text-[11px] text-text-2 font-medium mt-0.5">{s.label}</p>
@@ -392,61 +643,24 @@ export default function Index() {
           </div>
         )}
 
-        {/* ── MVV Cards (static fallback) ───────────────────────────── */}
-        {!ld.aboutData && (
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 mt-14">
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { icon: Target, color: "#2E8B57", bg: "rgba(19,110,17,0.08)", border: "rgba(19,110,17,0.15)", title: "Our Mission", body: "Mahila Chetna Samiti works to turn compassion into action through sustainable grassroots programs in education, skill development, women empowerment, social welfare, food support and animal care." },
-                { icon: Eye, color: "#FF6B00", bg: "rgba(236,102,17,0.08)", border: "rgba(236,102,17,0.18)", title: "Our Vision", body: "To build an inclusive society where every child gets the opportunity to learn, every woman gets the opportunity to become independent, every needy person receives dignity and support, and every living being is treated with compassion." },
-                { icon: Gem, color: "#2563EB", bg: "rgba(2,40,87,0.06)", border: "rgba(2,40,87,0.12)", title: "Our Values", values: ["Empowerment", "Integrity", "Compassion", "Transparency", "Accountability", "Inclusiveness"] },
-              ].map((c) => (
-                <div
-                  key={c.title}
-                  className="group relative rounded-3xl p-7 bg-white/60 backdrop-blur-sm border shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                  style={{ borderColor: c.border }}
-                >
-                  {/* Top accent line */}
-                  <div className="absolute top-0 left-8 right-8 h-[3px] rounded-b-full opacity-70" style={{ background: c.color }} />
 
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm" style={{ background: c.bg, color: c.color }}>
-                    <c.icon className="w-7 h-7" />
-                  </div>
-
-                  <h3 className="mt-5 text-[18px] font-bold text-navy">{c.title}</h3>
-
-                  {c.body && (
-                    <p className="mt-3 text-text-2 text-[14px] leading-[1.75]">{c.body}</p>
-                  )}
-
-                  {c.values && (
-                    <div className="mt-4 grid grid-cols-2 gap-y-2 gap-x-2">
-                      {c.values.map((v) => (
-                        <div key={v} className="flex items-center gap-1.5 text-[13px] text-text font-medium">
-                          <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" style={{ color: c.color }} />
-                          {v}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </section>
 
       {/* FOUNDER / CHAIRMAN MESSAGE */}
       {(() => {
         const f = ld.founderData;
-        const designation = "Chairman & Pastor";
-        const photo = logoImage;
-        const msgTitle = "सेवा, समर्पण और सुसमाचार — जीवन बदलने वाली आत्मिक आशीष।";
-        const msgParagraphs: string[] = [];
-        msgParagraphs.push("आरके मिनिस्ट्रीज (RK MINISTRIES) में आपका हार्दिक स्वागत करते हुए मुझे असीम आनंद हो रहा है।");
-        msgParagraphs.push("हमारा ध्येय प्रभु यीशु मसीह के प्रेम, चंगाई, जल बपतिस्मा और उद्धार के संदेश को हर गाँव, हर परिवार तक पहुँचाना है। मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उ.प्र.) से संचालित यह आत्मिक सेवा आज अनेक जीवनों में शांति और नया जीवन ला रही है।");
-        msgParagraphs.push("यदि आप किसी भी बीमारी, पारिवारिक क्लेश या आत्मिक संकट में हैं, तो हमारी प्रार्थना टीम आपके साथ खड़ी है। आइए, विश्वास के साथ मिलकर प्रभु की स्तुति करें।");
-        msgParagraphs.push("सप्रेम जय मसीह की — पास्टर रमेश कुमार, चेयरमैन, RK MINISTRIES");
+        const designation = f?.designation || "संस्थापक एवं ट्रस्टी अध्यक्ष (Founder Chairman & Pastor)";
+        const founderName = f?.name || "पास्टर रमेश कुमार";
+        const photo = f?.photo ? getFullUrl(f.photo) : rameshChairmanImg;
+        const msgTitle = f?.title || "सेवा, समर्पण और सुसमाचार — जीवन बदलने वाली आत्मिक आशीष।";
+        const tagText = f?.tag || "पास्टर संदेश (Message from Chairman)";
+        const defaultParas = [
+          "आरके मिनिस्ट्रीज (RK MINISTRIES) में आपका हार्दिक स्वागत करते हुए मुझे असीम आनंद हो रहा है।",
+          "हमारा ध्येय प्रभु यीशु मसीह के प्रेम, चंगाई, जल बपतिस्मा और उद्धार के संदेश को हर गाँव, हर परिवार तक पहुँचाना है। मुस्तफाबाद, मुबारकपुर, आज़मगढ़ (उ.प्र.) से संचालित यह आत्मिक सेवा आज अनेक जीवनों में शांति और नया जीवन ला रही है।",
+          "यदि आप किसी भी बीमारी, पारिवारिक क्लेश या आत्मिक संकट में हैं, तो हमारी प्रार्थना टीम आपके साथ खड़ी है। आइए, विश्वास के साथ मिलकर प्रभु की स्तुति करें।",
+          "सप्रेम जय मसीह की — पास्टर रमेश कुमार, चेयरमैन, RK MINISTRIES"
+        ];
+        const msgParagraphs: string[] = (f?.paragraphs && f.paragraphs.length > 0) ? f.paragraphs : defaultParas;
         return (
           <section className="py-12 sm:py-16 lg:py-20 bg-[#F7F4EC] overflow-hidden">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
@@ -454,7 +668,7 @@ export default function Index() {
               {/* Section header — centered */}
               <div className="text-center mb-10 lg:mb-14">
                 <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 text-amber-800 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-wider">
-                  <Quote className="w-3.5 h-3.5" /> पास्टर संदेश (Message from Chairman)
+                  <Quote className="w-3.5 h-3.5" /> {tagText}
                 </div>
                 <h2 className="font-display font-extrabold text-navy text-[28px] sm:text-[36px] lg:text-[42px] leading-[1.1] mt-4 max-w-3xl mx-auto">
                   {msgTitle}
@@ -481,30 +695,31 @@ export default function Index() {
                       <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-navy/6 blur-3xl pointer-events-none" />
 
                       {/* Image */}
-                      <div className="relative rounded-2xl overflow-hidden ring-1 ring-black/5">
+                      <div className="relative rounded-2xl overflow-hidden ring-1 ring-black/5 bg-slate-100">
                         <img
                           src={photo}
-                          alt="RK MINISTRIES Logo"
+                          alt={`${founderName} - ${designation}`}
                           width={1024}
                           height={1280}
                           loading="lazy"
-                          className="w-full h-[340px] sm:h-[400px] object-contain bg-white p-8 transition-transform duration-700 group-hover:scale-105"
+                          className="w-full h-[360px] sm:h-[420px] object-cover object-top transition-transform duration-700 group-hover:scale-105"
                         />
                         {/* Bottom gradient overlay */}
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 via-navy/50 to-transparent pt-16 pb-4 px-4">
-                          <p className="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-semibold">{designation}</p>
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#0B1F3A]/95 via-[#0B1F3A]/60 to-transparent pt-16 pb-4 px-4 text-center">
+                          <p className="text-[15px] font-bold text-amber-300">{founderName}</p>
+                          <p className="text-[11px] uppercase tracking-[0.1em] text-white/90 font-medium">{designation}</p>
                         </div>
                       </div>
                     </div>
 
                     {/* Signature strip inside card */}
                     <div className="mt-3 flex items-center gap-3 rounded-xl bg-[#F7F4EC]/80 px-4 py-3">
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-sm text-white">
                         <FaCross className="w-4 h-4 text-white" />
                       </div>
                       <div>
-                        <p className="text-[12px] font-bold text-[#0A2540]">पास्टर रमेश कुमार (Chairman)</p>
-                        <p className="text-[10px] text-slate-500">RK MINISTRIES, आज़मगढ़</p>
+                        <p className="text-[13px] font-bold text-[#0A2540]">{founderName}</p>
+                        <p className="text-[11px] text-slate-600 font-medium">{designation}</p>
                       </div>
                     </div>
                   </div>
@@ -568,41 +783,42 @@ export default function Index() {
       {(() => {
         const staticProjects = [
           {
-            title: "Saksham - Skill Development Project for Women",
-            desc: "Skill development project empowering women through vocational training and entrepreneurship support.",
-            impact: "2,500+ Women",
-            slug: "saksham-women-project",
-            img: sakshamProjectImg,
+            title: "Village Gospel Outreach & Fellowship (ग्राम संगति व सुसमाचार प्रचार)",
+            desc: "Spreading the gospel of Lord Jesus Christ, holding open-air prayer meetings and establishing village fellowships across rural Uttar Pradesh.",
+            impact: "3,500+ Believers",
+            slug: "village-gospel-fellowship",
+            img: villageGospelProjectImg,
           },
           {
-            title: "Bal Sanskar - Providing Education to Slum Children",
-            desc: "Bringing quality education and learning support to children living in slums and underserved areas.",
-            impact: "1,500+ Children",
-            slug: "bal-sanskar-education",
-            img: balSanskarProjectImg,
+            title: "Healing Prayer & Fasting Deliverance Ministry (चंगाई व उपवास प्रार्थना)",
+            desc: "Dedicated weekly Sunday and Friday fasting prayer services interceding for the sick, broken-hearted, and burdened souls.",
+            impact: "10,000+ Prayers",
+            slug: "healing-prayer-ministry",
+            img: healingPrayerProjectImg,
           },
           {
-            title: "Maa Annapurna - Providing Free Food to the Needy",
-            desc: "Daily free food distribution to the needy, homeless and marginalized communities.",
-            impact: "50,000+ Meals",
-            slug: "maa-annapurna-food",
-            img: maaAnnapurnaProjectImg,
+            title: "Holy Water Baptism & Spiritual Discipleship (पवित्र जल बपतिस्मा)",
+            desc: "Guiding new believers through repentance, water baptism in the name of the Father, Son, and Holy Spirit, and foundational discipleship.",
+            impact: "850+ Baptisms",
+            slug: "holy-baptism-mission",
+            img: holyBaptismProjectImg,
           },
           {
-            title: "Sahara - Supporting Widows",
-            desc: "Empowering widows with livelihood support, counseling and social security assistance.",
-            impact: "800+ Women",
-            slug: "sahara-supporting-widows",
-            img: saharaProjectImg,
+            title: "Christian Compassion: Widow & Poor Relief (विधवा व निर्धन सहायता)",
+            desc: "Following Christ's command to care for widows and fatherless through monthly food ration kits, warm blankets, and medical support.",
+            impact: "1,200+ Families",
+            slug: "compassion-widow-relief",
+            img: compassionReliefProjectImg,
           },
           {
-            title: "SVANA SEVA - Feeding the Street Dogs",
-            desc: "Feeding and caring for street dogs, promoting compassion towards animals.",
-            impact: "2,000+ Dogs Fed",
-            slug: "svana-seva-street-dogs",
-            img: svanaSevaProjectImg,
+            title: "Holy Bible Distribution & Sunday School (पवित्र बाइबिल वितरण व संडे स्कूल)",
+            desc: "Providing free Hindi Holy Bibles to seekers, scripture study materials, and Christian moral education to village children.",
+            impact: "5,000+ Bibles",
+            slug: "bible-distribution-education",
+            img: bibleDistProjectImg,
           },
         ];
+        const displayProjects = (ld.projects && ld.projects.length > 0) ? ld.projects : staticProjects;
         return (
           <section className="py-12 sm:py-16 bg-white overflow-hidden">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
@@ -610,11 +826,11 @@ export default function Index() {
               {/* Section header */}
               <div className="text-center mb-10 lg:mb-14">
                 <div className="inline-flex items-center gap-2 rounded-full bg-orange/10 text-orange px-4 py-1.5 text-[12px] font-semibold uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5" /> All Initiatives
+                  <Sparkles className="w-3.5 h-3.5" /> Our Ministries & Missions
                 </div>
-                <h2 className="section-title mt-3">Campaigns That Transform Lives</h2>
+                <h2 className="section-title mt-3">Our Ministries & Missions</h2>
                 <p className="mt-3 text-text-2 text-[15px] max-w-2xl mx-auto leading-relaxed">
-                  Explore our grassroots campaigns making real, measurable impact in communities across the country.
+                  Explore our grassroots ministries and missions making real, measurable impact in communities across the region.
                 </p>
                 <div className="mt-4 flex items-center justify-center gap-2">
                   <div className="h-[3px] w-6 rounded-full bg-orange/30" />
@@ -625,9 +841,9 @@ export default function Index() {
 
               {/* Cards grid */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-                {staticProjects.map((p, idx) => (
+                {displayProjects.map((p, idx) => (
                   <div
-                    key={p.title}
+                    key={p.slug || p.title || idx}
                     className="group relative rounded-3xl bg-white border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_50px_rgba(0,0,0,0.12)] hover:-translate-y-1.5 transition-all duration-400 overflow-hidden"
                   >
                     {/* Top accent line */}
@@ -668,7 +884,7 @@ export default function Index() {
                           to={`/campaigns/${p.slug}`}
                           className="w-full inline-flex items-center justify-between px-3.5 py-2 rounded-xl bg-orange/5 hover:bg-orange text-orange hover:text-white font-semibold text-[13px] transition-all duration-300 group/btn"
                         >
-                          <span>Campaigns Details</span>
+                          <span>Learn More</span>
                           <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                         </Link>
                       </div>
@@ -680,7 +896,7 @@ export default function Index() {
               {/* CTA */}
               <div className="text-center mt-12">
                 <Link to="/campaigns" className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-orange-2 to-orange text-white font-semibold px-8 py-3.5 shadow-lg shadow-orange/25 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-orange/30 transition-all duration-300">
-                  View All Campaigns <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  View All Project <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
             </div>
@@ -692,43 +908,44 @@ export default function Index() {
       {(() => {
         const staticEvents = [
           {
-            title: "Free Health Checkup Camp",
-            desc: "Join our free health checkup camp and get expert consultation and medicines.",
-            date: "25 May 2026",
-            location: "Community Center, Lucknow",
-            category: "Health",
-            slug: "free-health-checkup-camp",
-            img: gallery1,
+            title: "प्रभु यीशु मसीह रविवार महान चंगाई व आराधना महोत्सव",
+            desc: "प्रभु यीशु मसीह के सामर्थी नाम में रविवार की विशेष आराधना, स्तुति व चंगाई प्रार्थना।",
+            date: "Every Sunday",
+            location: "आरके मिनिस्ट्रीज मुख्य प्रार्थना भवन, आजमगढ़",
+            category: "आराधना व चंगाई",
+            slug: "sunday-healing-prayer-service",
+            img: sundayWorshipEventImg,
           },
           {
-            title: "Tree Plantation Drive",
-            desc: "Let's come together to plant more trees and create a greener tomorrow.",
-            date: "05 June 2026",
-            location: "Village Green Area, Lucknow",
-            category: "Environment",
-            slug: "tree-plantation-drive",
-            img: gallery2,
+            title: "प्रभु यीशु मसीह शुक्रवार उपवास व विशेष छुटकारा प्रार्थना",
+            desc: "प्रभु यीशु मसीह के पवित्र चरणों में उपवास, पश्चाताप और संकटों से आत्मिक छुटकारे हेतु प्रार्थना।",
+            date: "Every Friday",
+            location: "आरके मिनिस्ट्रीज प्रार्थना भवन, आजमगढ़",
+            category: "उपवास प्रार्थना",
+            slug: "friday-fasting-prayer",
+            img: fastingPrayerEventImg,
           },
           {
-            title: "Women Awareness Workshop",
-            desc: "Awareness session on women rights, health, hygiene and empowerment.",
-            date: "15 June 2026",
-            location: "Community Hall, Lucknow",
-            category: "Empowerment",
-            slug: "women-awareness-workshop",
-            img: gallery3,
+            title: "प्रभु यीशु मसीह पवित्र जल बपतिस्मा दीक्षा समारोह",
+            desc: "प्रभु यीशु मसीह के सुसमाचार पर विश्वास लाकर नए विश्वासियों का पवित्र जल बपतिस्मा समर्पण।",
+            date: "28 July 2026",
+            location: "आरके मिनिस्ट्रीज बपतिस्मा सरोवर, आजमगढ़",
+            category: "पवित्र बपतिस्मा",
+            slug: "holy-baptism-service",
+            img: holyBaptismEventImg,
           },
           {
-            title: "Skill Development Training",
-            desc: "Free skill training for women and youth to build a better future.",
-            date: "28 June 2026",
-            location: "Training Center, Lucknow",
-            category: "Livelihood",
-            slug: "skill-development-training",
-            img: gallery4,
+            title: "प्रभु यीशु मसीह ग्रामीण सुसमाचार प्रचार व प्रेम सेवा संगति",
+            desc: "प्रभु यीशु मसीह के प्रेम का संदेश, सुसमाचार सभा और निःशुल्क राशन किट व कंबल वितरण।",
+            date: "15 August 2026",
+            location: "गूजरपार व मुबारकपुर क्षेत्र, आजमगढ़",
+            category: "सुसमाचार प्रचार",
+            slug: "village-outreach-gospel-fellowship",
+            img: villageOutreachEventImg,
           },
         ];
 
+        const displayEvents = (ld.events && ld.events.length > 0) ? ld.events : staticEvents;
         const cardAccents = ["#2E8B57", "#FF6B00", "#8B5CF6", "#2563EB"];
 
         return (
@@ -744,10 +961,10 @@ export default function Index() {
                   <Calendar className="w-3.5 h-3.5 text-orange" /> Don't Miss Out
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy mt-3 tracking-tight">
-                  Events
+                  Events & Worship Services
                 </h2>
                 <p className="mt-3 text-text-2 text-[15px] max-w-xl mx-auto leading-relaxed">
-                  Participate in our events and be part of the change we are creating across communities.
+                  प्रभु यीशु मसीह की पवित्र संगति, स्तुति-आराधना, उपवास प्रार्थना व सुसमाचार सेवा महोत्सवों में सम्मिलित हों।
                 </p>
                 <div className="mt-4 flex items-center justify-center gap-2">
                   <div className="h-[3px] w-6 rounded-full bg-orange/30" />
@@ -758,15 +975,14 @@ export default function Index() {
 
               {/* Events Grid */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {staticEvents.map((e, idx) => {
-                  const dateParts = e.date.split(" ");
-                  const day = dateParts[0] || "";
-                  const month = dateParts[1] || "";
+                {displayEvents.map((e, idx) => {
+                  const day = e.day || (e.date ? e.date.split(" ")[0] : "Sun");
+                  const month = e.month || (e.date ? e.date.split(" ")[1] : "Worship");
                   const accent = cardAccents[idx % cardAccents.length];
 
                   return (
                     <div
-                      key={e.title}
+                      key={e.slug || e.title || idx}
                       className="group relative flex flex-col justify-between bg-white rounded-3xl border border-gray-100/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_45px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-400 overflow-hidden"
                     >
                       {/* Top accent line */}
@@ -865,60 +1081,60 @@ export default function Index() {
       {(() => {
         const focusAreasList = [
           {
-            icon: HandHeart,
-            label: "Women Empowerment",
-            desc: "Building leadership, financial self-reliance, and livelihood opportunities for women.",
-            color: "#00843D",
-            bg: "#E8F5EE",
+            icon: FaCross,
+            label: "प्रभु यीशु मसीह सुसमाचार प्रचार",
+            desc: "प्रभु यीशु मसीह के जीवनदायी सुसमाचार, शांति, सत्य व अनंत जीवन का संदेश गांव-गांव और जन-जन तक पहुंचाना।",
+            color: "#D97706",
+            bg: "#FEF3C7",
+          },
+          {
+            icon: FaHandsPraying,
+            label: "चंगाई व अलौकिक छुटकारा प्रार्थना",
+            desc: "प्रभु यीशु मसीह के सामर्थी नाम में असाध्य बीमारियों, दुष्ट आत्माओं और पारिवारिक संकटों से पूर्ण चंगाई व छुटकारा।",
+            color: "#2563EB",
+            bg: "#EFF6FF",
+          },
+          {
+            icon: FaDove,
+            label: "पवित्र जल बपतिस्मा व शिष्यत्व",
+            desc: "प्रभु यीशु मसीह की आज्ञानुसार पिता, पुत्र व पवित्र आत्मा के नाम में बपतिस्मा और मसीही जीवन का समर्पण।",
+            color: "#059669",
+            bg: "#ECFDF5",
           },
           {
             icon: BookOpen,
-            label: "Child Education",
-            desc: "Providing quality learning materials, mentoring, and support for slum children.",
-            color: "#063B76",
-            bg: "#E8F0F8",
+            label: "पवित्र बाइबिल अध्ययन व संडे स्कूल",
+            desc: "प्रभु यीशु मसीह के जीवित वचनों की शिक्षा, बच्चों का संडे स्कूल और ग्रामीण अंचलों में निःशुल्क बाइबिल वितरण।",
+            color: "#7C3AED",
+            bg: "#F5F3FF",
+          },
+          {
+            icon: HandHeart,
+            label: "विधवा व अनाथ करुणा सेवा",
+            desc: "प्रभु यीशु मसीह के प्रेम के अनुसार असहाय विधवाओं, अनाथों और निर्धन परिवारों को मासिक राशन किट व वस्त्र सहायता।",
+            color: "#DC2626",
+            bg: "#FEF2F2",
           },
           {
             icon: HeartPulse,
-            label: "Support & Care",
-            desc: "Compassionate aid, food distribution, and emergency care for needy families.",
-            color: "#0B5A4A",
-            bg: "#E6F4EF",
+            label: "निःशुल्क चिकित्सा व स्वास्थ्य सेवा",
+            desc: "प्रभु यीशु मसीह की दया भावना से सुदूर ग्रामीण अंचलों में निःशुल्क स्वास्थ्य शिविर, डॉक्टर परामर्श व दवा वितरण।",
+            color: "#0D9488",
+            bg: "#F0FDFA",
+          },
+          {
+            icon: Users,
+            label: "ग्राम संगति व पारिवारिक प्रार्थना",
+            desc: "प्रभु यीशु मसीह के नाम में परिवारों को जोड़ना, गांव-गांव प्रार्थना सेल और समाज में आपसी प्रेम व शांति की स्थापना।",
+            color: "#1E40AF",
+            bg: "#EEF2FF",
           },
           {
             icon: ShieldCheck,
-            label: "Safety & Protection",
-            desc: "Advocating community safety, awareness against violence, and child protection.",
-            color: "#F58220",
-            bg: "#FFF1E5",
-          },
-          {
-            icon: GraduationCap,
-            label: "Skill Development",
-            desc: "Vocational courses in tailoring, crafts, and computer skills for youth.",
-            color: "#00843D",
-            bg: "#E8F5EE",
-          },
-          {
-            icon: Heart,
-            label: "Women's Health",
-            desc: "Free medical checkups, hygiene awareness workshops, and maternal support.",
-            color: "#D96B18",
-            bg: "#FFF0E3",
-          },
-          {
-            icon: Scale,
-            label: "Legal Awareness",
-            desc: "Empowering citizens with knowledge of their fundamental rights and government schemes.",
-            color: "#176A8A",
-            bg: "#E7F3F7",
-          },
-          {
-            icon: Building2,
-            label: "Rural Development",
-            desc: "Grassroots community initiatives to build cleaner, self-sustainable villages.",
-            color: "#0B5A4A",
-            bg: "#E6F4EF",
+            label: "आध्यात्मिक परामर्श व शांति मिशन",
+            desc: "प्रभु यीशु मसीह की शिक्षाओं द्वारा भटके हुए युवाओं को सही मार्ग, नशामुक्ति और परिवारों को शांति व संबल प्रदान करना।",
+            color: "#B45309",
+            bg: "#FFFBEB",
           },
         ];
 
@@ -928,13 +1144,13 @@ export default function Index() {
               {/* Header */}
               <div className="text-center mb-12 sm:mb-16">
                 <div className="inline-flex items-center gap-2 rounded-full bg-orange/10 border border-orange/20 text-orange px-4 py-1.5 text-[12px] font-bold uppercase tracking-wider shadow-sm">
-                  <Sparkles className="w-3.5 h-3.5 text-orange" /> Our Focus Areas
+                  <Sparkles className="w-3.5 h-3.5 text-orange" /> प्रभु यीशु मसीह आत्मिक व सेवा क्षेत्र (Our Focus Areas)
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy mt-3 tracking-tight">
-                  Education, Support, Safety — Our Commitment
+                  प्रभु यीशु मसीह का पवित्र सुसमाचार, चंगाई व दया सेवा — हमारा समर्पण
                 </h2>
                 <p className="mt-3 text-text-2 text-[15px] max-w-2xl mx-auto leading-relaxed">
-                  Dedicated grassroots programs addressing critical social needs to foster self-reliance, equality, and lasting positive impact.
+                  प्रभु यीशु मसीह के प्रेम, पवित्र वचन और शिक्षाओं के अनुसार आत्मिक उद्धार, चंगाई प्रार्थना, पवित्र जल बपतिस्मा और दीन-दुखियों की निःस्वार्थ सेवा।
                 </p>
                 <div className="mt-4 flex items-center justify-center gap-2">
                   <div className="h-[3px] w-6 rounded-full bg-orange/30" />
@@ -1043,31 +1259,7 @@ export default function Index() {
         </section>
       )}
 
-      {/* PROJECTS */}
-      {ld.projects.length > 0 && (
-        <section className="py-10 sm:py-14 bg-[#FFF4EC]">
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid lg:grid-cols-[280px_1fr] gap-8">
-            <div>
-              <div className="eyebrow">Featured Projects</div>
-              <h2 className="section-title mt-2">Projects That Change Lives</h2>
-              <p className="mt-3 text-text-2 text-[14px] leading-relaxed">Some of our key projects that are bringing change in communities.</p>
-              <Link to="/campaigns" className="btn-orange mt-5">View All Campaigns <ArrowRight className="w-4 h-4" /></Link>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {ld.projects.map((p) => (
-                <div key={p.title} className="card-soft card-soft-hover overflow-hidden">
-                  {p.img && <img src={p.img} alt={p.title} width={640} height={512} loading="lazy" className="w-full h-40 object-cover" />}
-                  <div className="p-5">
-                    <h3 className="text-[15px] font-bold text-navy leading-snug">{p.title}</h3>
-                    <p className="mt-2 text-[13px] text-text-2 leading-relaxed">{p.desc}</p>
-                    {p.impact && <div className="mt-3 text-[12px] font-bold text-orange">Impact: {p.impact}</div>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+
 
       {/* STORIES */}
       {ld.stories.length > 0 && (
@@ -1098,70 +1290,64 @@ export default function Index() {
         </section>
       )}
 
-      {/* DONATION BANNER — Change a Child's Life */}
-      <section className="relative py-14 sm:py-22 bg-gradient-to-b from-[#FAF8F5] via-[#FDFBF7] to-[#F5F2EB] overflow-hidden">
-        {/* Decorative background ambient blur */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-[#2E8B57]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* MAKE A DIFFERENCE — Every Rupee You Give Changes a Life */}
+      <section className="py-16 sm:py-20 bg-gradient-to-b from-[#FAF8F5] via-[#FDFBF7] to-[#F5F2EB] border-t border-slate-100 overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 grid lg:grid-cols-[1.1fr_1fr] gap-10 items-start">
+          <div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-orange/10 text-orange text-[12px] font-bold uppercase tracking-wider">
+              Make a Difference
+            </span>
+            <h2 className="text-[32px] sm:text-[40px] font-extrabold text-navy font-display leading-tight mt-4">
+              Every Rupee You Give <span className="text-orange">Changes a Life</span>
+            </h2>
+            <div className="mt-3 h-1 w-16 bg-orange rounded-full" />
+            <p className="mt-5 text-text-2 text-[15px] leading-relaxed">
+              Your offerings, tithes, and donations directly support RKV MINISTRIES, Sunday worship services, village gospel outreach, baptism sacraments, prayer fellowship, and community aid in Azamgarh, Uttar Pradesh.
+            </p>
 
-        <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6">
-          <div className="relative rounded-[32px] sm:rounded-[38px] bg-gradient-to-br from-[#061838] via-[#0d2a56] to-[#04122d] overflow-hidden shadow-[0_25px_70px_-15px_rgba(2,40,87,0.4)] border border-white/10">
-            {/* Ambient inner glow orbs */}
-            <div className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 rounded-full bg-orange/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-[#2E8B57]/20 blur-3xl" />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px]" />
-
-            <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 p-6 sm:p-10 lg:p-14 items-center">
-              {/* LEFT COLUMN */}
-              <div className="text-white">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-orange text-[12px] font-bold uppercase tracking-wider shadow-sm">
-                  <Heart className="w-3.5 h-3.5 fill-orange text-orange animate-pulse" /> Every Child Deserves A Chance
-                </div>
-
-                <h2 className="font-display font-extrabold text-white text-[32px] sm:text-[44px] lg:text-[50px] leading-[1.08] tracking-tight mt-5">
-                  Change a Child's Life <br className="hidden sm:inline" />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange via-[#ffa04d] to-amber-300">Today</span>
-                </h2>
-
-                <p className="mt-4 text-white/80 text-[15px] sm:text-[16px] max-w-xl leading-relaxed">
-                  Your small contribution provides quality education, nutritious meals, and vital healthcare to underserved children. Every rupee is not just a donation — it is hope, it is a dream.
-                </p>
-
-                {/* Impact Stat Highlights */}
-                <div className="mt-7 grid grid-cols-3 gap-3 max-w-lg">
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/10 text-center">
-                    <div className="text-[20px] sm:text-[24px] font-extrabold text-white leading-tight">25K+</div>
-                    <div className="text-[11px] font-semibold text-white/70 mt-1">Lives Touched</div>
+            <div className="mt-8 grid sm:grid-cols-2 gap-4">
+              {homeDonateCauses.map((c) => (
+                <div
+                  key={c.title}
+                  className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 flex items-center gap-3.5 sm:gap-4 hover:shadow-md hover:border-amber-400/50 hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm"
+                    style={{ backgroundColor: `${c.color}15`, color: c.color }}
+                  >
+                    <c.icon className="w-6 h-6" />
                   </div>
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/10 text-center">
-                    <div className="text-[20px] sm:text-[24px] font-extrabold text-white leading-tight">100%</div>
-                    <div className="text-[11px] font-semibold text-white/70 mt-1">Direct Impact</div>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-3.5 border border-white/10 text-center">
-                    <div className="text-[20px] sm:text-[24px] font-extrabold text-orange leading-tight">80G</div>
-                    <div className="text-[11px] font-semibold text-white/70 mt-1">Tax Benefit</div>
+                  <div className="min-w-0">
+                    <div className="font-bold text-navy text-[14.5px] font-display truncate leading-tight">
+                      {c.title}
+                    </div>
+                    <div className="text-[11.5px] text-slate-400 font-medium truncate mt-0.5">
+                      {c.subtitle}
+                    </div>
+                    <div
+                      className="text-[12.5px] font-bold mt-1 inline-block"
+                      style={{ color: c.color }}
+                    >
+                      {c.amount}
+                    </div>
                   </div>
                 </div>
-
-                {/* Trust Badges */}
-                <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center gap-y-2.5 gap-x-4 text-white/75 text-[12px] font-semibold">
-                  <span className="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                    <ShieldCheck className="w-4 h-4 text-[#2E8B57]" /> 80G Tax Exemption
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                    <BadgeCheck className="w-4 h-4 text-orange" /> 100% Verified NGO
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                    <FileCheck2 className="w-4 h-4 text-sky-400" /> Instant Receipt
-                  </span>
-                </div>
-              </div>
-
-              {/* RIGHT COLUMN — Donate Form Card */}
-              <div className="w-full">
-                <HomeDonateForm />
-              </div>
+              ))}
             </div>
+
+            <div className="mt-8 grid sm:grid-cols-3 gap-4">
+              {homeDonateTrust.map((t) => (
+                <div key={t.title} className="bg-white border border-border rounded-[16px] p-5 text-center shadow-sm">
+                  <t.icon className="w-7 h-7 text-orange mx-auto" />
+                  <div className="font-bold text-navy mt-2 text-[14px] font-display">{t.title}</div>
+                  <div className="text-[12px] text-text-2 mt-1 leading-relaxed">{t.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full">
+            <HomeDonateForm ds={ld.donationSettings} />
           </div>
         </div>
       </section>
@@ -1175,13 +1361,13 @@ export default function Index() {
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
             <div className="inline-flex items-center gap-2 rounded-full bg-orange/10 border border-orange/20 text-orange px-4 py-1.5 text-[12px] font-bold uppercase tracking-wider shadow-sm">
-              <ShieldCheck className="w-3.5 h-3.5 text-orange" /> Why Choose Us
+              <ShieldCheck className="w-3.5 h-3.5 text-orange" /> प्रभु यीशु मसीह पर विश्वास व संगति (Why Choose Us)
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy mt-3 tracking-tight">
-              We Are Committed To <span className="text-orange">Real Impact</span>
+              प्रभु यीशु मसीह के वचनों में <span className="text-orange">सच्चा विश्वास और आत्मिक रूपांतरण</span>
             </h2>
             <p className="mt-3 text-text-2 text-[14px] sm:text-[15px] leading-relaxed">
-              Transparent governance, verified accreditations, and 25+ years of dedicated service empowering grassroots communities across India.
+              प्रभु यीशु मसीह की जीवित उपस्थिति, निरंतर उपवास व चंगाई प्रार्थना, पवित्र बाइबिल शिक्षा और समर्पित सेवा के माध्यम से जीवन में सच्ची शांति, उद्धार और आत्मिक उन्नति।
             </p>
             <div className="mt-4 flex items-center justify-center gap-2">
               <div className="h-[3px] w-6 rounded-full bg-orange/30" />
@@ -1228,8 +1414,8 @@ export default function Index() {
 
                 {/* Bottom Trust Badge */}
                 <div className="mt-5 pt-4 border-t border-slate-100 flex items-center text-[11px] font-semibold text-slate-400">
-                  <span className="inline-flex items-center gap-1.5 text-slate-500 font-medium">
-                    <CheckCircle2 className="w-3.5 h-3.5" style={{ color: w.color }} /> Verified Standard
+                  <span className="inline-flex items-center gap-1.5 text-slate-600 font-medium">
+                    <CheckCircle2 className="w-3.5 h-3.5" style={{ color: w.color }} /> {w.badge}
                   </span>
                 </div>
               </div>
@@ -1238,54 +1424,7 @@ export default function Index() {
         </div>
       </section>
 
-      {/* EVENTS — full width */}
-      {ld.events.length > 0 && (
-        <section className="py-16 sm:py-20 bg-gradient-to-br from-[#FFF7F0] via-white to-[#FFF1E5] relative overflow-hidden">
-          <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-orange/10 blur-3xl" />
-          <div className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-navy/5 blur-3xl" />
-          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 relative">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
-              <div>
-                <div className="eyebrow"> Events</div>
-                <h2 className="section-title mt-2">Join Our Events & Be Part Of Change</h2>
-                <p className="mt-3 text-text-2 max-w-xl">Participate in our workshops, camps and drives happening across India.</p>
-              </div>
-              <Link to="/events" className="btn-orange self-start md:self-auto">View All Events <ArrowRight className="w-4 h-4" /></Link>
-            </div>
-            <Carousel
-              opts={{ align: "start", loop: true }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-4">
-                {ld.events.map((e) => (
-                  <CarouselItem key={e.t} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                    <article className="card-soft card-soft-hover p-6 group relative overflow-hidden h-full">
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange to-orange-2 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
-                      <div className="flex items-start gap-5">
-                        <div className="w-20 shrink-0 rounded-2xl overflow-hidden text-center shadow-md">
-                          <div className="bg-orange text-white text-[11px] font-bold py-1 uppercase tracking-wider">{e.m}</div>
-                          <div className="bg-white text-navy py-3">
-                            <div className="text-[32px] font-extrabold leading-none">{e.d}</div>
-                            <div className="text-[11px] text-text-2 font-semibold mt-1">{e.y}</div>
-                          </div>
-                        </div>
-                        <div className="min-w-0">
-                          <h3 className="text-[18px] font-bold text-navy leading-tight">{e.t}</h3>
-                          <div className="mt-2 flex items-center gap-1.5 text-[13px] text-text-2"><MapPin className="w-3.5 h-3.5 text-orange shrink-0" /> {e.l}</div>
-                        </div>
-                      </div>
-                      <p className="mt-4 text-[14px] text-text-2 leading-relaxed">{e.desc}</p>
-                      <Link to="/events" className="mt-4 inline-flex items-center gap-1 text-[13px] text-orange font-bold group-hover:gap-2 transition-all">Register Now <ArrowRight className="w-3.5 h-3.5" /></Link>
-                    </article>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-0 sm:-left-4 top-1/2 -translate-y-1/2 h-10 w-10 border-slate-200 bg-white text-navy shadow-lg hover:bg-orange hover:text-white hover:border-orange transition-all" />
-              <CarouselNext className="right-0 sm:-right-4 top-1/2 -translate-y-1/2 h-10 w-10 border-slate-200 bg-white text-navy shadow-lg hover:bg-orange hover:text-white hover:border-orange transition-all" />
-            </Carousel>
-          </div>
-        </section>
-      )}
+
 
       {/* GALLERY — full width */}
       {galleryHasContent && (
@@ -1656,126 +1795,7 @@ export default function Index() {
 
 
       {/* CONTACT — modern split layout */}
-      <section className="relative py-16 sm:py-24 bg-gradient-to-br from-[#091f82] via-[#102E5A] to-[#091f82] overflow-hidden">
-        {/* Decorative orbs */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-orange/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-success/20 rounded-full blur-[120px]" />
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-
-        <div className="relative max-w-[1280px] mx-auto px-4 sm:px-6">
-          {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur border border-white/15 rounded-full px-4 py-1.5 text-orange-2 text-[12px] font-bold uppercase tracking-[0.18em]">
-              <Send className="w-3.5 h-3.5" /> Get In Touch
-            </div>
-            <h2 className="section-title mt-4 text-white">
-              We Would Love To <span className="text-orange-2">Hear From You</span>
-            </h2>
-            <p className="mt-3 text-white/70">
-              Have questions, suggestions, or want to collaborate? Reach out — we're always here for you.
-            </p>
-          </div>
-
-          {/* Main card */}
-          <div className="bg-white/95 backdrop-blur-xl rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)] overflow-hidden grid lg:grid-cols-[1fr_1.2fr]">
-            {/* Left: info + map */}
-            <div className="relative bg-gradient-to-br from-orange to-orange-2 text-white p-8 sm:p-10 flex flex-col gap-6">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2" />
-
-              <div className="relative">
-                <h3 className="text-[22px] sm:text-[26px] font-extrabold leading-tight">Contact Information</h3>
-                <p className="mt-2 text-white/85 text-[14px]">Fill the form or reach us directly using the details below.</p>
-              </div>
-
-              <div className="relative space-y-3.5">
-                {[
-                  { icon: MapPin, title: "Visit Us", body: "Village - Mustafabad, Post- Gujarpar, Mubarakpur, Azamgarh, U.P. 276404" },
-                  { icon: Phone, title: "Call Us", body: "+91 95980 59289" },
-                  { icon: Mail, title: "Email Us", body: "azaramesh@gmail.com" },
-                ].map((c) => (
-                  <div
-                    key={c.title}
-                    className="group bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 hover:border-white/30 rounded-2xl p-4 flex gap-4 items-start transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
-                  >
-                    <div className="w-11 h-11 shrink-0 rounded-xl bg-white/20 group-hover:bg-white group-hover:text-orange text-white backdrop-blur border border-white/30 flex items-center justify-center transition-all duration-300">
-                      <c.icon className="w-5 h-5" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/75">{c.title}</div>
-                      <div className="text-[14px] font-semibold mt-1 whitespace-pre-line leading-relaxed text-white">{c.body}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="relative mt-2">
-                <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/70 mb-3">Follow Us</div>
-                <div className="flex gap-2">
-                  {[
-                    { I: Youtube, href: "https://youtube.com/@rkministry-p9t?si=4qyVyJkr9Mv3YJPh" },
-                    { I: Facebook, href: "https://www.facebook.com/share/1FKM6aGUFq/" },
-                    { I: Instagram, href: "https://www.instagram.com/ramesh32086?mdxt=MTV0cGVrczZ6a3BjaQ==" },
-                  ].map((s, i) => (
-                    <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/15 hover:bg-white hover:text-orange backdrop-blur border border-white/20 flex items-center justify-center transition">
-                      <s.I className="w-4 h-4" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative mt-auto rounded-2xl overflow-hidden border-2 border-white/20 shadow-xl">
-                <iframe
-                  title="Map"
-                  src="https://maps.google.com/maps?q=Mustafabad,+Mubarakpur,+Azamgarh,+Uttar+Pradesh&hl=en&z=14&output=embed"
-                  className="w-full h-[180px] border-0"
-                />
-              </div>
-            </div>
-
-            {/* Right: form */}
-            <div className="p-8 sm:p-10 lg:p-12">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-10 h-[2px] bg-orange rounded-full" />
-                <span className="text-orange text-[12px] font-bold uppercase tracking-[0.18em]">Send Message</span>
-              </div>
-              <h3 className="text-[24px] sm:text-[30px] font-extrabold text-navy leading-tight">Let's Start A Conversation</h3>
-              <p className="mt-2 text-text-2 text-[14px]">Drop us a message — we usually respond within 24 hours.</p>
-
-              <form className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {[
-                  { p: "Your Name", icon: UserPlus, type: "text" },
-                  { p: "Your Email", icon: Mail, type: "email" },
-                  { p: "Your Phone", icon: Phone, type: "tel" },
-                  { p: "Subject", icon: Sparkles, type: "text" },
-                ].map((f) => (
-                  <div key={f.p} className="relative group">
-                    <f.icon className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-text-2 group-focus-within:text-orange transition" />
-                    <input
-                      type={f.type}
-                      placeholder={f.p}
-                      className="w-full bg-secondary border border-slate-200 rounded-2xl pl-11 pr-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition"
-                    />
-                  </div>
-                ))}
-                <textarea
-                  placeholder="Your Message..."
-                  rows={5}
-                  className="sm:col-span-2 bg-secondary border border-slate-200 rounded-2xl px-4 py-3.5 text-[14px] placeholder:text-text-2 focus:outline-none focus:border-orange focus:bg-white focus:shadow-[0_0_0_4px_rgba(255,107,0,0.1)] transition resize-none"
-                />
-                <button
-                  type="button"
-                  className="sm:col-span-2 group relative overflow-hidden bg-gradient-to-r from-orange to-orange-2 text-white rounded-2xl px-6 py-4 font-bold inline-flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(255,107,0,0.35)] hover:shadow-[0_15px_40px_rgba(255,107,0,0.5)] hover:-translate-y-0.5 transition-all"
-                >
-                  <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
-                  Send Message
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HomeContactSection />
 
       {/* CAUSES PREVIEW */}
       {ld.causes.length > 0 && (
@@ -1903,31 +1923,23 @@ export default function Index() {
           {/* Left image */}
           <div className="relative">
             <div className="relative rounded-[24px] overflow-hidden shadow-soft">
-              <img src={faqImg} alt="Members of Mahila Chetna Samiti " className="w-full h-[480px] object-cover" />
+              <img src={ld.donationSettings?.faqImage || faqImg} alt="आरके मिनिस्ट्रीज - प्रभु यीशु मसीह प्रार्थना सभा" className="w-full h-[480px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-tr from-navy/50 via-navy/10 to-transparent" />
-            </div>
-            <div className="hidden md:block absolute -bottom-6 -left-6 bg-orange text-white rounded-[18px] p-5 shadow-soft max-w-[220px]">
-              <div className="font-display font-extrabold text-[28px] leading-none">100%</div>
-              <div className="text-[12px] mt-1 opacity-95">Trusted &amp; transparent programs</div>
-            </div>
-            <div className="hidden md:block absolute -top-6 -right-6 bg-white rounded-[18px] p-4 shadow-soft border border-border max-w-[200px]">
-              <div className="text-orange font-display font-extrabold text-[22px]">25,000+</div>
-              <div className="text-[12px] text-text-2 mt-0.5">Lives Impacted Since 2003</div>
             </div>
           </div>
 
           {/* Right FAQ */}
           <div>
-            <div className="eyebrow">Got Questions?</div>
-            <h2 className="section-title mt-2">Frequently Asked <span className="text-orange">Questions</span></h2>
+            <div className="eyebrow">प्रभु यीशु मसीह संगति व सेवा</div>
+            <h2 className="section-title mt-2">अक्सर पूछे जाने वाले <span className="text-orange">सवाल (FAQs)</span></h2>
             <div className="mt-3 h-1 w-16 bg-orange rounded-full" />
-            <p className="mt-4 text-text-2 text-[15px] leading-relaxed">Have questions about our initiatives, registrations, or how you can participate? Find quick answers below or reach out to us directly.</p>
+            <p className="mt-4 text-text-2 text-[15px] leading-relaxed">प्रभु यीशु मसीह की प्रार्थना सभाओं, चंगाई संगति, बपतिस्मा और आरके मिनिस्ट्रीज की सेवकाई से संबंधित सामान्य प्रश्नों के उत्तर यहाँ पाएं।</p>
 
             <div className="mt-6 space-y-3">
-              {(ld.faqs.length > 0 ? ld.faqs : indexFaqs).map((f, i) => {
+              {((ld.faqs && ld.faqs.length > 0) ? ld.faqs : indexFaqs).map((f: any, i: number) => {
                 const isOpen = openFaq === i;
                 return (
-                  <div key={f.q} className={`bg-white rounded-[14px] overflow-hidden transition-all border ${isOpen ? "border-orange shadow-soft" : "border-border"}`}>
+                  <div key={f.q || i} className={`bg-white rounded-[14px] overflow-hidden transition-all border ${isOpen ? "border-orange shadow-soft" : "border-border"}`}>
                     <button onClick={() => setOpenFaq(isOpen ? null : i)} className="w-full flex items-center justify-between gap-4 p-5 text-left">
                       <div className="flex items-center gap-3">
                         <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-[13px] flex-shrink-0 ${isOpen ? "bg-orange text-white" : "bg-orange/10 text-orange"}`}>{String(i + 1).padStart(2, "0")}</span>
@@ -1950,14 +1962,14 @@ export default function Index() {
       {/* FLOATING CALL & WHATSAPP BUTTONS — LEFT SIDE */}
       <div className="fixed left-4 bottom-6 z-50 flex flex-col gap-3">
         <a
-          href="tel:+919598059289"
+          href="tel:+919415314486"
           className="group w-11 h-11 rounded-full bg-[#136e11] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(19,110,17,0.45)] hover:shadow-[0_12px_40px_rgba(19,110,17,0.65)] hover:-translate-y-1 transition-all duration-300"
           aria-label="Call us"
         >
           <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
         </a>
         <a
-          href="https://wa.me/919598059289"
+          href="https://wa.me/919415314486"
           target="_blank"
           rel="noopener noreferrer"
           className="group w-11 h-11 rounded-full bg-[#136e11] text-white flex items-center justify-center shadow-[0_8px_30px_rgba(19,110,17,0.45)] hover:shadow-[0_12px_40px_rgba(19,110,17,0.65)] hover:-translate-y-1 transition-all duration-300"
@@ -1983,11 +1995,16 @@ function DirectDonationsSection({ ds }: { ds: any }) {
 
   const bank = ds?.bankAccounts?.[0];
   const upiQr = ds?.upiQrCode;
-  const paytmNumber = ds?.paytmNumber || "+91 95980 59289";
+  const upiId = ds?.upiId || "9415314486@upi";
+  const paytmNumber = ds?.paytmNumber || "+91 94153 14486";
   const contactEmail = ds?.contactEmail || "azaramesh@gmail.com";
-  const contactPhone = ds?.contactPhone || "+91 95980 59289";
-  const accountNo = "50100329633950";
-  const ifsc = "HDFC0001896";
+  const contactPhone = ds?.contactPhone || "+91 94153 14486";
+  const accountNo = bank?.accountNumber || "";
+  const ifsc = bank?.ifsc || "";
+  const bankName = bank?.bankName || "State Bank of India";
+  const branch = bank?.branch || "Mubarakpur, Azamgarh";
+  const accountType = bank?.accountType || "Current / Savings Account";
+  const accountName = bank?.accountName || "RKV MINISTRIES";
 
   return (
     <section className="py-16 sm:py-24 bg-gradient-to-b from-white via-secondary/30 to-white relative overflow-hidden">
@@ -2044,12 +2061,20 @@ function DirectDonationsSection({ ds }: { ds: any }) {
               </div>
 
               {/* QR Code Container */}
-              <div className="mt-6 w-full max-w-[300px] rounded-3xl border-2 border-orange/25 bg-gradient-to-b from-orange/5 via-white to-orange/5 p-4 shadow-md">
-                <div className="bg-white rounded-2xl p-3 border border-slate-100 flex items-center justify-center aspect-square overflow-hidden shadow-inner">
-                  <img src={upiQrFallback} alt="UPI QR Code" className="w-full h-full object-contain" />
+              <div className="mt-6 w-full max-w-[300px] rounded-3xl border-2 border-orange/25 bg-gradient-to-b from-orange/5 via-white to-orange/5 p-4 shadow-md relative">
+                <div className="bg-white rounded-2xl p-3 border border-slate-100 flex flex-col items-center justify-center aspect-square overflow-hidden shadow-inner relative">
+                  {upiQr ? (
+                    <img src={upiQr} alt="UPI QR Code" className="w-full h-full object-contain" />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center p-4 text-center">
+                      <QrCode className="w-16 h-16 text-slate-300 mb-2" />
+                      <span className="font-mono text-sm font-bold text-navy">{upiId}</span>
+                      <span className="text-[11px] text-text-2 mt-1">Scan via any UPI app</span>
+                    </div>
+                  )}
                 </div>
                 <div className="mt-3 flex items-center justify-center gap-1.5 text-navy text-[12px] font-bold">
-                  <BadgeCheck className="w-4 h-4 text-[#2E8B57]" /> Verified Official NGO Merchant
+                  <BadgeCheck className="w-4 h-4 text-[#2E8B57]" /> Verified Official Ministry Account
                 </div>
               </div>
 
@@ -2059,13 +2084,13 @@ function DirectDonationsSection({ ds }: { ds: any }) {
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block leading-tight">
                     Registered Mobile / UPI
                   </span>
-                  <span className="text-[13px] font-extrabold text-navy truncate block mt-0.5">
-                    {paytmNumber}
+                  <span className="text-[13px] font-extrabold text-navy truncate block mt-0.5 font-mono">
+                    {upiId}
                   </span>
                 </div>
                 <button
                   type="button"
-                  onClick={() => copyToClipboard(paytmNumber, "upi")}
+                  onClick={() => copyToClipboard(upiId, "upi")}
                   className="px-3 py-1.5 rounded-xl bg-orange/10 hover:bg-orange text-orange hover:text-white font-bold text-[12px] transition-all flex items-center gap-1 shrink-0"
                 >
                   {copiedKey === "upi" ? (
@@ -2083,7 +2108,7 @@ function DirectDonationsSection({ ds }: { ds: any }) {
 
             {/* Bottom Security Note */}
             <div className="mt-6 inline-flex items-center gap-2 bg-emerald-50 text-emerald-800 font-bold text-[12px] px-4 py-2 rounded-full border border-emerald-200/60 shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-[#2E8B57]" /> 100% Direct &amp; 80G Tax Exemption Eligible
+              <ShieldCheck className="w-4 h-4 text-[#2E8B57]" /> 100% Direct &amp; Tax Exemption Eligible
             </div>
           </div>
 
@@ -2111,11 +2136,12 @@ function DirectDonationsSection({ ds }: { ds: any }) {
               {/* Rows */}
               <div className="space-y-3">
                 {[
-                  { label: "Bank Name", value: "HDFC Bank", copyable: false, key: "bank" },
-                  { label: "Account Number", value: accountNo, copyable: true, key: "acc", highlight: true },
-                  { label: "IFSC Code", value: ifsc, copyable: true, key: "ifsc", highlight: true },
-                  { label: "Account Type", value: "Current Account", copyable: false, key: "type" },
-                  { label: "Branch", value: "NARAYAN BHAWAN ETAH ROAD SHIKOHABAD UP, SHIKOHABAD-205135, UTTAR PRADESH", copyable: false, key: "branch" },
+                  ...(accountName ? [{ label: "Account Name", value: accountName, copyable: false, key: "name" }] : []),
+                  { label: "Bank Name", value: bankName, copyable: false, key: "bank" },
+                  ...(accountNo ? [{ label: "Account Number", value: accountNo, copyable: true, key: "acc", highlight: true }] : []),
+                  ...(ifsc ? [{ label: "IFSC Code", value: ifsc, copyable: true, key: "ifsc", highlight: true }] : []),
+                  { label: "Account Type", value: accountType, copyable: false, key: "type" },
+                  ...(branch ? [{ label: "Branch", value: branch, copyable: false, key: "branch" }] : []),
                 ].map((row) => (
                   <div
                     key={row.key}
@@ -2156,6 +2182,30 @@ function DirectDonationsSection({ ds }: { ds: any }) {
                   </div>
                 ))}
               </div>
+
+              {/* Additional Bank Accounts if any */}
+              {Array.isArray(ds?.bankAccounts) && ds.bankAccounts.length > 1 && (
+                <div className="mt-4 pt-3 border-t border-slate-100">
+                  <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Additional Accounts</span>
+                  <div className="space-y-2">
+                    {ds.bankAccounts.slice(1).map((extra: any, idx: number) => (
+                      <div key={idx} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-[12px] flex justify-between items-center">
+                        <div>
+                          <strong className="text-navy block">{extra.bankName}</strong>
+                          <span className="text-slate-500 font-mono">A/C: {extra.accountNumber} • IFSC: {extra.ifsc}</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => copyToClipboard(extra.accountNumber, `extra-${idx}`)}
+                          className="px-2 py-1 rounded bg-white text-orange font-bold text-[11px] border border-orange/20"
+                        >
+                          {copiedKey === `extra-${idx}` ? "Copied" : "Copy"}
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Note & WhatsApp Receipt verification */}
@@ -2165,14 +2215,14 @@ function DirectDonationsSection({ ds }: { ds: any }) {
                   i
                 </div>
                 <div className="text-[13px] text-slate-700 leading-relaxed">
-                  <span className="font-bold text-navy block mb-0.5">Tax Receipt &amp; 80G Certificate:</span>
+                  <span className="font-bold text-navy block mb-0.5">Donation Receipt &amp; Confirmation:</span>
                   Please share your transaction screenshot or UTR number with us at{" "}
                   <span className="font-extrabold text-[#091f82]">{contactEmail}</span> or WhatsApp at{" "}
-                  <span className="font-extrabold text-[#091f82]">{contactPhone}</span> to receive your 80G tax certificate and official receipt.
+                  <span className="font-extrabold text-[#091f82]">{contactPhone}</span> to receive your official donation receipt.
                   <div className="mt-3">
                     <a
                       href={`https://wa.me/${contactPhone.replace(/\D/g, "")}?text=${encodeURIComponent(
-                        "Hello, I have made a direct bank transfer donation to Mahila Chetna Samiti. Here is my transaction receipt:"
+                        "Hello, I have made a direct bank transfer donation to RKV MINISTRIES. Here is my transaction receipt:"
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -2192,17 +2242,76 @@ function DirectDonationsSection({ ds }: { ds: any }) {
   );
 }
 
-function HomeDonateForm() {
+const homeDonateCauses = [
+  {
+    icon: FaHandsPraying,
+    title: "सुसमाचार प्रचार सेवकाई",
+    subtitle: "Village Gospel Outreach",
+    amount: "₹1,500 / गाँव सभा",
+    color: "#D97706",
+  },
+  {
+    icon: BookOpen,
+    title: "पवित्र बाइबिल वितरण",
+    subtitle: "Free Bible Distribution",
+    amount: "₹500 / 2 पवित्र बाइबिल",
+    color: "#2563EB",
+  },
+  {
+    icon: Church,
+    title: "रविवार संगति व आराधना",
+    subtitle: "Church Worship & Fellowship",
+    amount: "₹2,500 / मासिक सहयोग",
+    color: "#059669",
+  },
+  {
+    icon: Heart,
+    title: "ज़रूरतमंद व चंगाई सेवा",
+    subtitle: "Compassion & Healing Aid",
+    amount: "₹3,000 / परिवार सहायता",
+    color: "#7C3AED",
+  },
+];
+
+const homeDonateTrust = [
+  { icon: Shield, title: "100% Secure", desc: "Encrypted, PCI-compliant payments." },
+  { icon: BadgeCheck, title: "80G Tax Benefit", desc: "Save up to 50% in taxes on every donation." },
+  { icon: Receipt, title: "Instant Receipt", desc: "Auto-mailed receipt for your records." },
+];
+
+function HomeDonateForm({ ds }: { ds?: any }) {
+  const { settings } = useSiteSettings();
+  const dynamicOnce: number[] = (ds?.onceAmounts && ds.onceAmounts.length > 0)
+    ? ds.onceAmounts
+    : (settings?.donationSettings?.onceAmounts && settings.donationSettings.onceAmounts.length > 0
+      ? settings.donationSettings.onceAmounts
+      : [500, 1000, 2500, 5000, 30000]);
+
+  const dynamicMonthly: number[] = (ds?.monthlyAmounts && ds.monthlyAmounts.length > 0)
+    ? ds.monthlyAmounts
+    : (settings?.donationSettings?.monthlyAmounts && settings.donationSettings.monthlyAmounts.length > 0
+      ? settings.donationSettings.monthlyAmounts
+      : [500, 1000, 1500, 3000]);
+
   const [hName, setHName] = useState("");
   const [hEmail, setHEmail] = useState("");
   const [hPhone, setHPhone] = useState("");
+  const [hAddress, setHAddress] = useState("");
   const [hPan, setHPan] = useState("");
-  const [hAmount, setHAmount] = useState(1000);
-  const [customAmount, setCustomAmount] = useState("");
   const [freq, setFreq] = useState<"once" | "monthly">("once");
+
+  const amounts = freq === "monthly" ? dynamicMonthly : dynamicOnce;
+  const [hAmount, setHAmount] = useState<number>(dynamicOnce[1] || dynamicOnce[0] || 1000);
+  const [customAmount, setCustomAmount] = useState("");
   const [hLoading, setHLoading] = useState(false);
   const [hMsg, setHMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [rzpReady, setRzpReady] = useState(false);
+
+  useEffect(() => {
+    const list = freq === "monthly" ? dynamicMonthly : dynamicOnce;
+    setHAmount(list[1] || list[0] || 1000);
+    setCustomAmount("");
+  }, [freq, JSON.stringify(dynamicOnce), JSON.stringify(dynamicMonthly)]);
 
   useEffect(() => {
     if ((window as any).Razorpay) return setRzpReady(true);
@@ -2229,6 +2338,8 @@ function HomeDonateForm() {
         donorName: hName.trim(),
         donorEmail: hEmail.trim(),
         donorPhone: hPhone.replace(/\D/g, ""),
+        donorAddress: hAddress.trim(),
+        address: hAddress.trim(),
         donorPAN: hPan.trim(),
         donationType: freq,
         purpose: "General Donation",
@@ -2238,7 +2349,7 @@ function HomeDonateForm() {
         key: keyId,
         amount: oa,
         currency,
-        name: "Mahila Chetna Samiti ",
+        name: "RKV MINISTRIES",
         description: "Donation",
         prefill: { name: hName.trim(), email: hEmail.trim(), contact: hPhone.replace(/\D/g, "") },
         theme: { color: "#FF6B00" },
@@ -2254,8 +2365,9 @@ function HomeDonateForm() {
             setHName("");
             setHEmail("");
             setHPhone("");
+            setHAddress("");
             setHPan("");
-            setHAmount(1000);
+            setHAmount((freq === "monthly" ? dynamicMonthly : dynamicOnce)[1] || 1000);
             setCustomAmount("");
           } catch {
             setHMsg({ type: "error", text: "Verification failed. Contact support." });
@@ -2310,8 +2422,8 @@ function HomeDonateForm() {
 
       {/* Choose Amount */}
       <label className="mt-6 block text-[13px] font-semibold text-navy">Choose Amount</label>
-      <div className="mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
-        {[1000, 2000, 3000, 5000].map((a) => (
+      <div className={`mt-2 grid gap-2 ${amounts.length <= 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-3 sm:grid-cols-5"}`}>
+        {amounts.map((a: number) => (
           <button
             key={a}
             type="button"
@@ -2320,8 +2432,8 @@ function HomeDonateForm() {
               setCustomAmount("");
             }}
             className={`py-3 rounded-xl border text-[14px] font-bold transition ${hAmount === a && !customAmount
-              ? "border-orange bg-orange text-white"
-              : "border-border text-navy hover:border-orange"
+              ? "border-orange bg-orange text-white shadow-sm"
+              : "border-border text-navy hover:border-orange bg-slate-50/50"
               }`}
           >
             ₹{a.toLocaleString()}
@@ -2383,6 +2495,13 @@ function HomeDonateForm() {
         </div>
         <input
           type="text"
+          placeholder="Address (Full Postal Address / City, State)"
+          value={hAddress}
+          onChange={(e) => setHAddress(e.target.value)}
+          className="w-full border border-slate-200 rounded-xl px-3 py-3 text-[14px] focus:outline-none focus:border-orange"
+        />
+        <input
+          type="text"
           placeholder="PAN (for 80G receipt)"
           value={hPan}
           onChange={(e) => setHPan(e.target.value)}
@@ -2427,83 +2546,177 @@ function QRMock() {
 
 const staticHeroSlides: HomeHero[] = [
   {
-    img: banner11,
-    title: "Support & Safety —",
-    accent: "Support For All",
-    desc: "Free health camps, awareness drives, support services and safety programs delivered to 500+ villages across the country.",
-    overlayId: "education",
+    img: banner1,
+    title: "RK MINISTRIES —",
+    accent: "Church & Evangelical Fellowship",
+    desc: "Spreading Faith, Hope, Love and the Gospel of Jesus Christ across communities.",
+    overlayId: "banner-1",
   },
   {
-    img: banner22,
-    title: "Community Development —",
-    accent: "Building Stronger Communities",
-    desc: "Empowering rural communities through livelihood programs, skill development and sustainable development initiatives across India.",
-    overlayId: "skill",
+    img: banner2,
+    title: "Worship & Healing —",
+    accent: "Faith & Prayer Gatherings",
+    desc: "Sunday Worship Service, Fasting & Healing Prayer, and Cottage Prayer Gatherings.",
+    overlayId: "banner-2",
   },
   {
-    img: banner33,
-    title: "Empowerment —",
-    accent: "Women Empowerment",
-    desc: "Empowering women through education, skills and livelihood programs across India.",
-    overlayId: "education",
-  },
-  {
-    img: banner44,
-    title: "Health & Safety —",
-    accent: "Health For All",
-    desc: "Free health camps, screenings and safety programs for underprivileged communities across India.",
-    overlayId: "skill",
-  },
-  {
-    img: banner55,
-    title: "Skill Development —",
-    accent: "Building Futures",
-    desc: "Skill development and livelihood programs helping communities grow and thrive across India.",
-    overlayId: "skill",
+    img: banner3,
+    title: "Community Outreach —",
+    accent: "Love & Compassion in Action",
+    desc: "Empowering believers and serving families with spiritual guidance and social welfare.",
+    overlayId: "banner-3",
   },
 ];
 
 function HeroSlider({ slides }: { slides: HomeHero[] }) {
-  const heroSlides = slides.length > 0 ? slides : staticHeroSlides;
+  const heroSlides = slides && slides.length > 0 ? slides : staticHeroSlides;
   const [i, setI] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const n = heroSlides.length;
+
   useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % n), 5000);
+    if (n <= 1 || isPaused) return;
+    const t = setInterval(() => setI((p) => (p + 1) % n), 6000);
     return () => clearInterval(t);
-  }, [n]);
+  }, [n, isPaused]);
+
   const go = (d: number) => setI((p) => (p + d + n) % n);
+
   return (
-    <section className="relative bg-[#091f82] overflow-hidden">
-      {heroSlides.map((s, idx) => (
-        <img
-          key={idx}
-          src={s.img}
-          alt=""
-          width={1280}
-          height={800}
-          className={`w-full h-auto block transition-opacity duration-1000 ${idx === i ? "opacity-100" : "opacity-0"} ${idx === 0 ? "" : "absolute inset-0"}`}
-        />
-      ))}
+    <section
+      className="relative bg-[#091f82] overflow-hidden select-none group"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      aria-label="Hero Carousel"
+    >
+      {/* Slides Container - Fixed to original 1920 x 800 aspect ratio, responsive on mobile & tablet */}
+      <div className="relative w-full aspect-[1920/800] min-h-[220px] sm:min-h-[280px] md:min-h-[360px] lg:min-h-0 overflow-hidden flex items-center">
+        {heroSlides.map((s, idx) => {
+          const isActive = idx === i;
+          const hasOverlay = s.showOverlay || (!!s.badge || (!!s.title && !s.overlayId && !String(s.img || '').toLowerCase().includes('banner')));
 
-      {/* Arrows */}
-      <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/15 hover:bg-white/30 backdrop-blur flex items-center justify-center text-white z-20">
-        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-      </button>
-      <button onClick={() => go(1)} aria-label="Next" className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/15 hover:bg-white/30 backdrop-blur flex items-center justify-center text-white z-20">
-        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-      </button>
+          return (
+            <div
+              key={idx}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                isActive ? "opacity-100 z-10" : "opacity-0 pointer-events-none z-0"
+              }`}
+            >
+              {/* Slide Background Image - object-cover ensures any uploaded image fits perfectly without distortion */}
+              {s.primaryBtnLink && !hasOverlay ? (
+                <Link to={s.primaryBtnLink} className="block w-full h-full cursor-pointer">
+                  <img
+                    src={s.img}
+                    alt={s.title || `Slide ${idx + 1}`}
+                    width={1920}
+                    height={800}
+                    className="w-full h-full object-cover object-center"
+                    loading={idx === 0 ? "eager" : "lazy"}
+                  />
+                </Link>
+              ) : (
+                <img
+                  src={s.img}
+                  alt={s.title || `Slide ${idx + 1}`}
+                  width={1920}
+                  height={800}
+                  className="w-full h-full object-cover object-center"
+                  loading={idx === 0 ? "eager" : "lazy"}
+                />
+              )}
 
-      {/* Dots */}
-      <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-        {heroSlides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setI(idx)}
-            aria-label={`Slide ${idx + 1}`}
-            className={`h-2 rounded-full transition-all ${idx === i ? "w-8 bg-orange" : "w-2 bg-white/50 hover:bg-white/80"}`}
-          />
-        ))}
+              {/* Dynamic Text Overlay (responsive for mobile, tablet, desktop) */}
+              {hasOverlay && (
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-slate-950/20 sm:bg-gradient-to-r sm:from-slate-950/90 sm:via-slate-950/60 sm:to-transparent flex items-center">
+                  <div className="max-w-[1280px] w-full mx-auto px-4 sm:px-8 lg:px-16 py-3 sm:py-6 lg:py-10">
+                    <div className="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl text-left">
+                      {s.badge && (
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wider backdrop-blur-md mb-1.5 sm:mb-2.5">
+                          <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400" />
+                          <span>{s.badge}</span>
+                        </div>
+                      )}
+                      {s.title && (
+                        <h1 className="text-base sm:text-2xl md:text-3xl lg:text-5xl font-black text-white leading-tight sm:leading-tight drop-shadow-md">
+                          {s.title}
+                          {s.accent && <span className="text-amber-400 block sm:inline sm:ml-2">{s.accent}</span>}
+                        </h1>
+                      )}
+                      {s.desc && (
+                        <p className="mt-1 sm:mt-2 text-[11px] sm:text-xs md:text-sm lg:text-base text-slate-200 line-clamp-2 md:line-clamp-3 leading-relaxed drop-shadow">
+                          {s.desc}
+                        </p>
+                      )}
+                      {(s.primaryBtnLabel || s.secondaryBtnLabel) && (
+                        <div className="mt-2.5 sm:mt-3.5 lg:mt-5 flex flex-wrap items-center gap-2 sm:gap-3">
+                          {s.primaryBtnLabel && (
+                            <Link
+                              to={s.primaryBtnLink || "/donate"}
+                              className="px-3.5 py-1.5 sm:px-5 sm:py-2 lg:px-6 lg:py-2.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold text-xs sm:text-sm shadow-md transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-1.5"
+                            >
+                              {s.primaryBtnLabel}
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          )}
+                          {s.secondaryBtnLabel && (
+                            <Link
+                              to={s.secondaryBtnLink || "/contact"}
+                              className="px-3.5 py-1.5 sm:px-5 sm:py-2 lg:px-6 lg:py-2.5 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm border border-white/30 backdrop-blur-md transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-1.5"
+                            >
+                              {s.secondaryBtnLabel}
+                            </Link>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
+
+      {/* Navigation Arrows */}
+      {n > 1 && (
+        <>
+          <button
+            onClick={() => go(-1)}
+            aria-label="Previous slide"
+            className="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full bg-slate-950/40 hover:bg-amber-500 text-white hover:text-slate-950 backdrop-blur-md border border-white/20 hover:border-amber-400 flex items-center justify-center transition-all duration-200 shadow-xl z-20"
+          >
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+          <button
+            onClick={() => go(1)}
+            aria-label="Next slide"
+            className="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full bg-slate-950/40 hover:bg-amber-500 text-white hover:text-slate-950 backdrop-blur-md border border-white/20 hover:border-amber-400 flex items-center justify-center transition-all duration-200 shadow-xl z-20"
+          >
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 z-20 bg-slate-950/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+            {heroSlides.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setI(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`transition-all duration-300 rounded-full ${
+                  idx === i ? "w-6 sm:w-8 h-1.5 sm:h-2 bg-amber-500 shadow-sm" : "w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Slide Number Counter */}
+          <div className="absolute bottom-2.5 right-3 sm:bottom-4 sm:right-6 z-20 hidden sm:flex items-center gap-1 bg-slate-950/50 backdrop-blur-md text-white/80 border border-white/10 px-2.5 py-0.5 rounded-full text-[11px] font-semibold">
+            <span className="text-amber-400">{String(i + 1).padStart(2, "0")}</span>
+            <span className="opacity-50">/</span>
+            <span>{String(n).padStart(2, "0")}</span>
+          </div>
+        </>
+      )}
     </section>
   );
 }

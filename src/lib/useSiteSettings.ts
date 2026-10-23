@@ -3,10 +3,16 @@ import api, { getFullUrl } from "@/lib/api";
 
 export type SiteSettings = {
   siteName?: string;
+  siteNameLine1?: string;
+  siteNameLine2?: string;
+  siteNameLine3?: string;
   logo?: string;
   favicon?: string;
   receiptLogo?: string;
+  faqImage?: string;
   qrCode?: string;
+  upiId?: string;
+  paytmNumber?: string;
   contactEmail?: string;
   contactPhone?: string;
   contactAddress?: string;
@@ -29,6 +35,18 @@ export type SiteSettings = {
     bankName?: string;
     branch?: string;
     accountType?: string;
+  };
+  bankAccounts?: Array<{
+    bankName?: string;
+    accountName?: string;
+    accountNumber?: string;
+    ifsc?: string;
+    branch?: string;
+    accountType?: string;
+  }>;
+  donationSettings?: {
+    onceAmounts?: number[];
+    monthlyAmounts?: number[];
   };
   orgName?: string;
   tagline?: string;

@@ -11,52 +11,35 @@ import {
   Sparkles,
   ShieldCheck,
   FileText,
-  Smartphone,
-  Database,
   Calendar,
   User,
   UserPlus,
   CreditCard,
-  Briefcase,
-  Users,
-  BarChart3,
   BookOpen,
-  Award,
 } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaYoutube, FaCross, FaDove, FaHandsPraying } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaYoutube, FaDove, FaHandsPraying, FaLinkedinIn, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { useSiteSettings } from "@/lib/useSiteSettings";
 import MinistryLogo from "./MinistryLogo";
 import { MINISTRY_CONFIG } from "@/data/ministryConfig";
 
 const sacraments = [
+  { label: "Online Prayer Request", to: "/prayer-request", Icon: FaHandsPraying },
+  { label: "Holy Bible (Hindi / English)", to: "/bible", Icon: BookOpen },
+  { label: "Service & Worship Timings", to: "/events", Icon: Calendar },
   { label: "Baptism Application", to: "/baptism-application", Icon: FaDove },
   { label: "Baptism Verification", to: "/baptism-verify", Icon: FileText },
-  { label: "Baptism Certificate", to: "/baptism-certificate", Icon: Award },
-  { label: "Online Prayer Request", to: "/prayer-request", Icon: FaHandsPraying },
-  { label: "Online Testimony", to: "/testimony", Icon: Sparkles },
-  { label: "Holy Bible (Hindi/English)", to: "/bible", Icon: BookOpen },
-] as const;
-
-const memberAndPortals = [
-  { label: "Member Portal", to: "/member-portal", Icon: User },
   { label: "Member Registration", to: "/member-registration", Icon: UserPlus },
   { label: "Membership ID Card & Cert", to: "/id-card", Icon: CreditCard },
-  { label: "Chairman Dashboard", to: "/chairman", Icon: FaCross },
-  { label: "Manager Dashboard", to: "/manager", Icon: Briefcase },
-  { label: "Retailer / Field Worker", to: "/field-worker", Icon: Users },
-  { label: "Reports & Analytics", to: "/reports", Icon: BarChart3 },
-  { label: "Local Data Backup", to: "/local-backup", Icon: Database },
-  { label: "Mobile App / PWA", to: "/mobile-app", Icon: Smartphone },
 ] as const;
 
-const aboutMinistry = [
-  { label: "About RK Ministries", to: "/about" },
-  { label: "Pastor Ramesh (Chairman)", to: "/founder" },
-  { label: "Mission & Vision", to: "/mission-vision" },
-  { label: "Trust Documents", to: "/documents" },
-  { label: "Terms & Conditions", to: "/terms" },
-  { label: "Privacy Policy", to: "/privacy" },
-  { label: "Contact Us", to: "/contact" },
+const aboutAndPolicies = [
+  { label: "About RK Ministries", to: "/about", Icon: ShieldCheck },
+  { label: "Pastor Ramesh (Chairman)", to: "/founder", Icon: User },
+  { label: "Mission & Vision", to: "/mission-vision", Icon: Sparkles },
+  { label: "Ministry Documents", to: "/documents", Icon: FileText },
+  { label: "Online Testimony", to: "/testimony", Icon: Sparkles },
+  { label: "Privacy Policy", to: "/privacy", Icon: ShieldCheck },
+  { label: "Terms & Conditions", to: "/terms", Icon: FileText },
 ] as const;
 
 function LinkCol({
@@ -105,10 +88,13 @@ export default function SiteFooter() {
   const address = s.contactAddress || MINISTRY_CONFIG.address;
 
   const socialItems = [
-    { I: FaYoutube, href: MINISTRY_CONFIG.socialLinks.youtube, label: "YouTube", color: "hover:bg-red-600" },
-    { I: FaFacebookF, href: MINISTRY_CONFIG.socialLinks.facebook, label: "Facebook", color: "hover:bg-blue-600" },
-    { I: FaInstagram, href: MINISTRY_CONFIG.socialLinks.instagram, label: "Instagram", color: "hover:bg-pink-600" },
-  ];
+    { I: FaYoutube, href: s.socialLinks?.youtube || MINISTRY_CONFIG.socialLinks.youtube, label: "YouTube", color: "hover:bg-red-600" },
+    { I: FaFacebookF, href: s.socialLinks?.facebook || MINISTRY_CONFIG.socialLinks.facebook, label: "Facebook", color: "hover:bg-blue-600" },
+    { I: FaInstagram, href: s.socialLinks?.instagram || MINISTRY_CONFIG.socialLinks.instagram, label: "Instagram", color: "hover:bg-pink-600" },
+    { I: FaWhatsapp, href: s.socialLinks?.whatsapp, label: "WhatsApp", color: "hover:bg-emerald-600" },
+    { I: FaLinkedinIn, href: s.socialLinks?.linkedin, label: "LinkedIn", color: "hover:bg-blue-700" },
+    { I: FaXTwitter, href: s.socialLinks?.twitter, label: "Twitter", color: "hover:bg-slate-800" },
+  ].filter((item) => Boolean(item.href));
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -123,14 +109,14 @@ export default function SiteFooter() {
   };
 
   return (
-    <footer className="bg-[#051329] text-white pt-16 pb-8 border-t-2 border-amber-500/40 relative overflow-hidden">
+    <footer className="bg-[#051329] text-white pt-12 pb-4 border-t-2 border-amber-500/40 relative overflow-hidden">
       {/* Background glow & subtle sacred pattern */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 relative z-10">
         {/* Top Info Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 pb-8 border-b border-white/10">
           
           {/* Col 1 & 2: Ministry Brand, Mission & Socials */}
           <div className="lg:col-span-2 space-y-4">
@@ -138,15 +124,15 @@ export default function SiteFooter() {
               <MinistryLogo variant="light" size="lg" />
               <div>
                 <h3 className="text-xl sm:text-2xl font-bold font-display text-white tracking-wide">
-                  RK MINISTRIES
+                  {s.siteNameLine1 && s.siteNameLine2 ? `${s.siteNameLine1} ${s.siteNameLine2}` : (s.siteName || s.orgName || "RKV MINISTRIES")}
                 </h3>
                 <p className="text-amber-400 text-xs sm:text-sm font-medium">
-                  Church & Evangelical Fellowship • Azamgarh, U.P.
+                  {s.siteNameLine3 || s.tagline || "Church & Evangelical Fellowship"}
                 </p>
               </div>
             </div>
             <p className="text-slate-300 text-[13.5px] leading-relaxed max-w-md pt-1">
-              <strong className="text-white">RK MINISTRIES</strong> (आरके मिनिस्ट्रीज) प्रभु यीशु मसीह के प्रेम, सुसमाचार, चंगाई और उद्धार को जन-जन तक पहुँचाने हेतु समर्पित है। हम प्रार्थना, संगति, बपतिस्मा और आत्मिक सहायता द्वारा समाज में शांति व आशा का संचार करते हैं।
+              <strong className="text-white">{s.siteName || "RKV MINISTRIES"}</strong> प्रभु यीशु मसीह के प्रेम, सुसमाचार, चंगाई और उद्धार को जन-जन तक पहुँचाने हेतु समर्पित है। हम प्रार्थना, संगति, बपतिस्मा और आत्मिक सहायता द्वारा समाज में शांति व आशा का संचार करते हैं।
             </p>
 
             {/* Service Timings Card */}
@@ -190,9 +176,9 @@ export default function SiteFooter() {
             <LinkCol title="Sacraments & Prayer" items={sacraments} />
           </div>
 
-          {/* Col 4: Portals & Dashboards */}
+          {/* Col 4: About & Policies */}
           <div className="lg:col-span-1">
-            <LinkCol title="Portals & Systems" items={memberAndPortals} />
+            <LinkCol title="About & Policies" items={aboutAndPolicies} />
           </div>
 
           {/* Col 5: Contact Details */}
@@ -233,12 +219,12 @@ export default function SiteFooter() {
                 </a>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-1.5">
                 <Link
                   to="/donate"
-                  className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition-transform hover:scale-102"
+                  className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-3 rounded-lg bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-[11.5px] shadow-sm shadow-amber-500/20 transition-transform hover:scale-[1.01]"
                 >
-                  <Heart className="w-3.5 h-3.5 fill-slate-950" />
+                  <Heart className="w-3 h-3 fill-slate-950 shrink-0" />
                   <span>Support / Tithes (दान / दशमांश)</span>
                 </Link>
               </div>
@@ -247,19 +233,20 @@ export default function SiteFooter() {
         </div>
 
         {/* Bottom Credits */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div>
-            © {new Date().getFullYear()} <strong className="text-slate-200">RK MINISTRIES</strong>. All Rights Reserved. Village Mustafabad, Mubarakpur, Azamgarh, U.P.
-          </div>
-          <div className="flex items-center gap-4 text-[12.5px]">
-            <Link to="/about" className="hover:text-amber-300">About</Link>
-            <span>•</span>
-            <Link to="/terms" className="hover:text-amber-300">Terms</Link>
-            <span>•</span>
-            <Link to="/privacy" className="hover:text-amber-300">Privacy Policy</Link>
-            <span>•</span>
-            <Link to="/local-backup" className="text-amber-400 hover:underline font-semibold">Data Backup</Link>
-          </div>
+        <div className="pt-3.5 text-center text-[12px] sm:text-[12.5px] text-slate-400">
+          <p className="leading-normal">
+            All Rights Copyright © 2026 Reserved by{" "}
+            <strong className="text-slate-300 font-semibold">RK MINISTRIES</strong>{" "}
+            Design &amp; Developed By{" "}
+            <a
+              href="https://axsemsoftwares.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-amber-400 hover:text-amber-300 font-semibold underline underline-offset-2 transition-colors"
+            >
+              Team Axsem Softwares
+            </a>
+          </p>
         </div>
       </div>
 

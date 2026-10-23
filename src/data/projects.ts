@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import api, { getFullUrl } from "@/lib/api";
-import balSanskarImg from "@/assets/project/Bal Sanskar-Providing Education to Slum Children.png";
-import maaAnnapurnaImg from "@/assets/project/Maa Annapurna-Providing free food to the needy.png";
-import saharaImg from "@/assets/project/Sahara-Supporting Widows.png";
-import sakshamSkillImg from "@/assets/project/Saksham-Skill development project for Women's.png";
-import svanaSevaImg from "@/assets/project/SVANA SEVA-Feeding the street Dogs.png";
+import villageGospelImg from "@/assets/project/village-gospel.jpg";
+import holyBaptismImg from "@/assets/project/holy-baptism.jpg";
+import healingPrayerImg from "@/assets/project/healing-prayer.jpg";
+import compassionReliefImg from "@/assets/project/compassion-relief.jpg";
+import bibleDistImg from "@/assets/project/bible-distribution.jpg";
 import healthCareImg from "@/assets/Our Programs/HealthSafetyCampaign.png";
 import disasterReliefImg from "@/assets/Our Programs/EducationSupportInitiative.png";
 
@@ -26,13 +26,231 @@ export type Project = {
 };
 
 const fallbackProjects: Project[] = [
-  { slug: "saksham-women-project", img: sakshamSkillImg, title: "Saksham - Skill Development Project for Women", desc: "Skill development project empowering women through vocational training and entrepreneurship support.", impact: "2,500+ Women", loc: "8 States", tag: "Women", started: "2015", about: ["There are many women's who have the capability and ability to work hard and wants to provide financial support to their families but many fail to do so due to lack of skills.", "To empower such women's Mahila Chetna Samiti has taken an initiative to train such women's by providing free Computer Training courses, Stitching courses and Teachers training courses [ECCED].", "We also make sure that after pursuing this courses this women's have a carrier and get a job in the market and can be self dependent."], objectives: ["Provide free Computer Training courses", "Provide free Stitching courses", "Provide Teachers Training courses [ECCED]", "Provide vocational and digital skill training", "Facilitate self-help groups and micro-finance", "Help women get a job and become self dependent"], activities: [{ title: "Computer Training", desc: "Free computer literacy and digital skill courses." }, { title: "Stitching Courses", desc: "Hands-on tailoring and garment making training." }, { title: "Teachers Training [ECCED]", desc: "Early Childhood Care and Education training for careers as teachers." }, { title: "Skill Training Centers", desc: "Hands-on training in tailoring, beauty, computers." }, { title: "Job Placement Support", desc: "Market-linked career guidance and job placement." }, { title: "Entrepreneurship Bootcamps", desc: "Business basics and pitch coaching." }], stats: [{ label: "Women Trained", value: "2,500+" }, { label: "Self-Help Groups", value: "120" }], locations: ["Lucknow", "Kanpur", "Varanasi"] },
-  { slug: "bal-sanskar-education", img: balSanskarImg, title: "Bal Sanskar - Providing Education to Slum Children", desc: "Bringing quality education and learning support to children living in slums and underserved areas.", impact: "1,500+ Children", loc: "Mumbai, Dahisar", tag: "Education", started: "2022", about: ["One major project Mahila Chetna Samiti is working on is educating kids in slum by opening a Pre-primary school which is being run under Foundation.", "The major reason to do this is because in today's day the fee structure of private schools have gone so high that the people in slums or remote areas cannot afford to pay that fees due to which many children's miss out the best years of learning.", "So to break this barrier foundation has started this school with all the best facilities.", "We thank you for your support and donations which will help us to provide basic things to students and to open up more centers in the future."], objectives: ["Run a Pre-primary school for slum children", "Provide quality education with the best facilities", "Make education affordable for slum and remote area families", "Enroll out-of-school children", "Provide study material and learning support", "Provide basic things to students", "Open up more centers in the future"], activities: [{ title: "Pre-primary School", desc: "Affordable pre-primary education for slum children." }, { title: "Quality Teaching", desc: "Trained teachers and best learning facilities." }, { title: "Study Kits", desc: "Books, bags and stationery distribution." }, { title: "Basic Needs Support", desc: "Essential items provided to students." }, { title: "Parent Awareness Drives", desc: "Engaging parents on the value of early education." }, { title: "New Centers", desc: "Expanding to open more centers in the future." }], stats: [{ label: "Children Educated", value: "1,500+" }, { label: "Learning Centers", value: "8" }], locations: ["Mumbai", "Dahisar"] },
-  { slug: "maa-annapurna-food", img: maaAnnapurnaImg, title: "Maa Annapurna - Providing Free Food to the Needy", desc: "Daily free food distribution to the needy, homeless and marginalized communities.", impact: "50,000+ Meals", loc: "Mumbai", tag: "Food", started: "2020", about: ["A person can survive without any supply but its hard to survive with a Empty Stomach. According to the latest global index India is topping the charts in hunger rate.", "It is one of the biggest issues being faced by many. Many people come from places for the treatment of their loved ones suffering from different diseases.", "The family members are forced to stay out side the hospital and the lack proper access to food and shelter.", "Mahila Chetna Samiti has taken an initiative to feed such poor and people who are in need."], objectives: ["Fight hunger by providing free food to the needy", "Feed families who come to hospitals for their loved ones' treatment", "Provide food and basic support to people in need", "Set up feeding centers and distribution points", "Distribute food kits to marginalized communities", "Expand reach to combat India's hunger rate"], activities: [{ title: "Free Meal Distribution", desc: "Daily cooked meals at distribution points." }, { title: "Hospital Support Meals", desc: "Meals for families staying outside hospitals." }, { title: "Food Kits", desc: "Monthly ration kits for families in need." }, { title: "Feeding Centers", desc: "Community kitchens serving nutritious food." }, { title: "Hygiene & Water Support", desc: "Access to clean water and hygiene essentials." }, { title: "Community Outreach", desc: "Identifying and reaching the neediest families." }], stats: [{ label: "Meals Served", value: "50,000+" }, { label: "Distribution Points", value: "6" }], locations: ["Mumbai"] },
-  { slug: "sahara-supporting-widows", img: saharaImg, title: "Sahara - Supporting Widows", desc: "Empowering widows with livelihood support, counseling and social security assistance.", impact: "800+ Women", loc: "Mumbai", tag: "Women", started: "2019", about: ["The loss of a spouse is a loss of a companion, a soul mate, Perhaps of income. Due to this big loss the women who have never stepped out of the house finds very difficult to full fill her basic needs.", "Mahila Chetna Samiti has taken an initiative to help such Widows by providing monthly groceries. With this help the family of the Widow will have one less thing to worry about and take care of her family and try to leave peacefully.", "My Karma also provides an extended support to such Widows in tough times of any emergencies like paying for their medications or their children's school fees."], objectives: ["Provide monthly groceries to widows", "Help widows and their families live peacefully", "Support medication costs during emergencies", "Support children's school fees of widowed families", "Extend help during tough times and emergencies", "Provide counseling and livelihood opportunities"], activities: [{ title: "Monthly Grocery Support", desc: "Monthly ration and groceries for widows." }, { title: "Emergency Medical Aid", desc: "Financial help for medications during emergencies." }, { title: "Children's Education Support", desc: "School fee support for children of widows." }, { title: "Counseling Support", desc: "Emotional and legal counseling for widows." }, { title: "Skill Training", desc: "Vocational training for self-employment." }, { title: "Livelihood Support", desc: "Helping widows become self dependent." }], stats: [{ label: "Women Supported", value: "800+" }, { label: "Skill Trainings", value: "60+" }], locations: ["Mumbai"] },
-  { slug: "svana-seva-street-dogs", img: svanaSevaImg, title: "SVANA SEVA - Feeding the Street Dogs", desc: "Feeding and caring for street dogs, promoting compassion towards animals.", impact: "2,000+ Dogs Fed", loc: "Mumbai", tag: "Animal Welfare", started: "2021", about: ["It is said that the Dogs are the body guards of goddess Lakshmi, hairava can be appeased and the goddess blessings is obtained by feeding his vehicle-Dogs", "Even it is said that by feeding the dogs you may raise your financial standing, Draw possibilities and riches and have peace and pleasure in your household. By giving food to Stree dogs you can show you love and kindness and also receive the same from them.", "You can also spread Joy and happiness to others and make this world a better place.", "Mahila Chetna Samiti has taken an initiative to feed this voice less animal with your great support."], objectives: ["Feed street dogs regularly", "Provide food to voiceless animals with public support", "Promote kindness and compassion towards animals", "Raise awareness about animal welfare", "Encourage people to feed and care for street dogs", "Spread joy and happiness through animal care"], activities: [{ title: "Feeding Campaigns", desc: "Daily feeding drives for street dogs." }, { title: "Awareness Drives", desc: "Compassion workshops on animal welfare." }, { title: "Community Feeding Support", desc: "Providing food to people who feed street dogs." }, { title: "Rescue & Care Support", desc: "Helping injured and sick street dogs." }, { title: "School Awareness Programs", desc: "Teaching children kindness towards animals." }], stats: [{ label: "Dogs Fed", value: "2,000+" }, { label: "Feeding Points", value: "5" }], locations: ["Mumbai"] },
-  { slug: "health-care", img: healthCareImg, title: "Health Care and Safety Initiative", desc: "Improving access to health awareness, preventive care and essential support for underserved communities.", impact: "5,000+ People", loc: "Communities across India", tag: "Health Care", started: "2021", about: ["Mahila Chetna Samiti works to make essential health information and support more accessible to women, children and families in underserved communities.", "Through awareness activities, health camps and practical guidance, the initiative helps people make informed decisions and access timely care.", "Your support helps us reach more communities with preventive health education and essential assistance."], objectives: ["Promote preventive health awareness", "Support health camps and screenings", "Improve access to essential care information", "Raise awareness about women's health and hygiene", "Connect families with available support"], activities: [{ title: "Health Awareness Camps", desc: "Community sessions on prevention and healthy living." }, { title: "Screening Support", desc: "Helping underserved families access basic screenings." }, { title: "Women's Health Sessions", desc: "Practical education on hygiene and well-being." }, { title: "Care Referrals", desc: "Connecting people with appropriate local services." }], stats: [{ label: "People Reached", value: "5,000+" }, { label: "Health Camps", value: "35+" }], locations: ["Mumbai", "Maharashtra"] },
-  { slug: "disaster-relief", img: disasterReliefImg, title: "Disaster Relief and Community Support", desc: "Providing timely essential supplies and recovery support to families affected by emergencies.", impact: "3,000+ Families", loc: "Across India", tag: "Disaster Relief", started: "2020", about: ["When communities face floods, fires or other emergencies, families often need immediate help with food, clothing and basic essentials.", "Mahila Chetna Samiti supports affected communities through relief distribution and coordinated local assistance.", "With continued support, we can respond faster and help families begin rebuilding their lives with dignity."], objectives: ["Provide essential supplies during emergencies", "Support affected families with food and hygiene kits", "Coordinate local relief distribution", "Help communities recover with dignity", "Build rapid response partnerships"], activities: [{ title: "Relief Kit Distribution", desc: "Food, water, hygiene and essential item distribution." }, { title: "Emergency Assistance", desc: "Immediate support for families facing urgent needs." }, { title: "Community Coordination", desc: "Working with local partners to reach affected areas." }, { title: "Recovery Support", desc: "Helping families access continued recovery assistance." }], stats: [{ label: "Families Supported", value: "3,000+" }, { label: "Relief Drives", value: "25+" }], locations: ["Across India"] },
+  {
+    slug: "village-gospel-fellowship",
+    img: villageGospelImg,
+    title: "Village Gospel Outreach & Fellowship (ग्राम संगति व सुसमाचार प्रचार)",
+    desc: "Spreading the gospel of Lord Jesus Christ, holding open-air prayer meetings and establishing village fellowships across rural Uttar Pradesh.",
+    impact: "3,500+ Believers",
+    loc: "Azamgarh & Rural UP",
+    tag: "Gospel Fellowship",
+    started: "2018",
+    about: [
+      "Under RK Ministries, Pastor Ramesh Kumar leads village gospel outreaches across remote villages of Azamgarh, Mau, and Eastern Uttar Pradesh.",
+      "Weekly village prayer fellowships bring families together to hear the living word of God, find peace in Christ, and experience spiritual renewal.",
+      "We provide spiritual guidance, counselling for troubled families, and foster communal harmony and love through Christ's teachings."
+    ],
+    objectives: [
+      "Proclaim the good news of the gospel to remote rural villages",
+      "Plant and nurture village prayer fellowship cells",
+      "Provide personal pastoral guidance and family counselling",
+      "Distribute spiritual literature and Bibles in local languages",
+      "Foster unity, peace, and spiritual transformation"
+    ],
+    activities: [
+      { title: "Village Prayer Meetings", desc: "Open-air worship, gospel preaching, and intercession." },
+      { title: "Pastoral Visitation", desc: "Visiting village families, praying for homes and peace." },
+      { title: "Fellowship Building", desc: "Training local church believers and village prayer leaders." },
+      { title: "Spiritual Counselling", desc: "Guidance for families dealing with distress or illness." }
+    ],
+    stats: [
+      { label: "Villages Reached", value: "85+" },
+      { label: "Fellowship Groups", value: "40+" }
+    ],
+    locations: ["Azamgarh", "Mubarakpur", "Mau", "Eastern UP"]
+  },
+  {
+    slug: "healing-prayer-ministry",
+    img: healingPrayerImg,
+    title: "Healing Prayer & Fasting Deliverance Ministry (चंगाई व उपवास प्रार्थना)",
+    desc: "Dedicated weekly Sunday and Friday fasting prayer services interceding for the sick, broken-hearted, and burdened souls.",
+    impact: "10,000+ Prayers",
+    loc: "Mubarakpur, Azamgarh",
+    tag: "Prayer & Healing",
+    started: "2016",
+    about: [
+      "RK Ministries conducts dedicated healing and fasting prayer services where hundreds gather seeking miraculous divine intervention and deliverance.",
+      "With laying on of hands and heartfelt corporate intercession in the name of Jesus Christ, believers testify to healing from prolonged illnesses and peace of mind.",
+      "A special pastoral prayer helpline supports believers in urgent spiritual, health, or emotional emergencies."
+    ],
+    objectives: [
+      "Conduct weekly Friday fasting prayers and Sunday worship services",
+      "Intercede for the sick, terminally ill, and distressed",
+      "Provide a sanctuary of hope, spiritual comfort, and healing",
+      "Maintain a dedicated pastoral prayer emergency line"
+    ],
+    activities: [
+      { title: "Friday Fasting Prayer", desc: "Deep intercession and repentance for family restoration." },
+      { title: "Healing Service", desc: "Prayer with laying of hands for physical and spiritual wholeness." },
+      { title: "Testimony Sharing", desc: "Glorifying God through personal testimonies of healing." },
+      { title: "Emergency Helpline", desc: "Pastoral telephone prayer for families in distress." }
+    ],
+    stats: [
+      { label: "Weekly Attendees", value: "1,200+" },
+      { label: "Documented Testimonies", value: "950+" }
+    ],
+    locations: ["Mubarakpur", "Azamgarh", "Uttar Pradesh"]
+  },
+  {
+    slug: "holy-baptism-mission",
+    img: holyBaptismImg,
+    title: "Holy Water Baptism & Spiritual Discipleship (पवित्र जल बपतिस्मा)",
+    desc: "Guiding new believers through repentance, water baptism in the name of the Father, Son, and Holy Spirit, and foundational discipleship.",
+    impact: "850+ Baptisms",
+    loc: "Uttar Pradesh",
+    tag: "Discipleship",
+    started: "2017",
+    about: [
+      "Water baptism is a solemn commandment of Lord Jesus Christ, marking the public confession of faith and beginning of a transformed holy life.",
+      "RK Ministries provides thorough biblical catechism, pre-baptism counseling, and spiritual mentorship to prepare believers for this sacred commitment.",
+      "New believers are welcomed into church fellowship and assigned mentors to grow in prayer, scripture reading, and righteous living."
+    ],
+    objectives: [
+      "Administer biblical water baptism by immersion",
+      "Provide foundational biblical teachings and doctrines",
+      "Mentor new believers into strong Christian walk and discipleship",
+      "Strengthen local church family and spiritual accountability"
+    ],
+    activities: [
+      { title: "Baptism Preparatory Classes", desc: "Weekly classes exploring the biblical significance of baptism." },
+      { title: "River & Water Immersion", desc: "Sacred baptism services conducted with solemnity and joy." },
+      { title: "Post-Baptism Discipleship", desc: "Systematic Bible study on Christian living and faith." },
+      { title: "Certificate of Baptism", desc: "Official church record and ministry documentation." }
+    ],
+    stats: [
+      { label: "Baptisms Administered", value: "850+" },
+      { label: "Discipleship Batches", value: "32+" }
+    ],
+    locations: ["Azamgarh", "Mau", "Varanasi Region"]
+  },
+  {
+    slug: "compassion-widow-relief",
+    img: compassionReliefImg,
+    title: "Christian Compassion: Widow & Poor Relief (विधवा व निर्धन सहायता)",
+    desc: "Following Christ's command to care for widows and fatherless through monthly food ration kits, warm blankets, and medical support.",
+    impact: "1,200+ Families",
+    loc: "Azamgarh & Eastern UP",
+    tag: "Charity & Relief",
+    started: "2019",
+    about: [
+      "Pure and undefiled religion before God is to visit the fatherless and widows in their affliction. RK Ministries puts Christ's love into direct action.",
+      "We provide monthly grocery kits containing flour, rice, pulses, oil, spices, and hygiene essentials to destitute widows who have no breadwinner.",
+      "During cold winters, we distribute warm blankets, clothes, and arrange free medical consultations and prescription medicines."
+    ],
+    objectives: [
+      "Support destitute widows with dignity and monthly nutrition",
+      "Distribute winter blankets and warm clothing in remote colonies",
+      "Assist impoverished families with emergency medical funds",
+      "Demonstrate Christ's unconditional love through humanitarian relief"
+    ],
+    activities: [
+      { title: "Monthly Grocery Kits", desc: "Flour, rice, dal, cooking oil and essentials for vulnerable widows." },
+      { title: "Winter Blanket Drive", desc: "Distributing quality blankets to poor families each winter." },
+      { title: "Medical Aid Support", desc: "Financial help for essential medicines and healthcare checkups." },
+      { title: "Widow Fellowship & Prayer", desc: "Monthly gathering providing emotional comfort and prayer." }
+    ],
+    stats: [
+      { label: "Widow Families Supported", value: "1,200+" },
+      { label: "Blankets Distributed", value: "4,500+" }
+    ],
+    locations: ["Mubarakpur", "Azamgarh", "Uttar Pradesh"]
+  },
+  {
+    slug: "bible-distribution-education",
+    img: bibleDistImg,
+    title: "Holy Bible Distribution & Sunday School (पवित्र बाइबिल वितरण व संडे स्कूल)",
+    desc: "Providing free Hindi Holy Bibles to seekers, scripture study materials, and Christian moral education to village children.",
+    impact: "5,000+ Bibles",
+    loc: "Eastern UP",
+    tag: "Bible & Education",
+    started: "2018",
+    about: [
+      "'Your word is a lamp to my feet and a light to my path.' RK Ministries distributes free copies of the Holy Bible in Hindi to village seekers and believers.",
+      "Our vibrant Sunday School ministry teaches children Bible stories, hymns, scripture memory verses, and Christian moral values.",
+      "We supply educational notebooks, stationery kits, and school bags to underprivileged children so they can excel in school and love God."
+    ],
+    objectives: [
+      "Distribute free Holy Bibles and Gospel tracts to rural seekers",
+      "Run weekly Sunday school classes with dedicated Christian teachers",
+      "Provide school stationery kits and learning materials to poor kids",
+      "Organize annual Vacation Bible School (VBS) and youth camps"
+    ],
+    activities: [
+      { title: "Free Bible Distribution", desc: "Providing Holy Bibles and New Testaments to seekers." },
+      { title: "Weekly Sunday School", desc: "Scripture lessons, Christian songs, and moral character education." },
+      { title: "Student Stationery Kits", desc: "Notebooks, pens, bags for poor students." },
+      { title: "Vacation Bible School", desc: "Annual joyful spiritual retreat for rural children and youth." }
+    ],
+    stats: [
+      { label: "Bibles Distributed", value: "5,000+" },
+      { label: "Children in Sunday School", value: "1,500+" }
+    ],
+    locations: ["Azamgarh", "Mau", "Gorakhpur Region"]
+  },
+  {
+    slug: "health-care",
+    img: healthCareImg,
+    title: "Free Medical Camp & Community Health Initiative",
+    desc: "Improving access to health awareness, free doctor checkups and essential medicine for underserved rural communities.",
+    impact: "5,000+ People",
+    loc: "Rural Uttar Pradesh",
+    tag: "Medical Camp",
+    started: "2021",
+    about: [
+      "RK Ministries works to make essential healthcare and free medicines accessible to families in rural and underserved communities.",
+      "Through regular health camps and practical health guidance, we help people receive timely medical diagnosis and care.",
+      "Our volunteers assist elderly and sick villagers in reaching hospitals for advanced treatment when needed."
+    ],
+    objectives: [
+      "Organize free medical checkup camps in rural villages",
+      "Distribute essential basic medicines free of charge",
+      "Improve preventive health and hygiene awareness",
+      "Assist needy patients with hospital referrals"
+    ],
+    activities: [
+      { title: "Free Medical Camps", desc: "Regular doctor consultations and basic screenings in villages." },
+      { title: "Free Medicine Distribution", desc: "Providing prescribed vitamins, fever medicines, and ointments." },
+      { title: "Hygiene & Health Awareness", desc: "Practical hygiene education for rural mothers and children." },
+      { title: "Hospital Referrals", desc: "Guiding emergency patients to district hospitals." }
+    ],
+    stats: [
+      { label: "Patients Treated", value: "5,000+" },
+      { label: "Medical Camps", value: "35+" }
+    ],
+    locations: ["Azamgarh", "Mau", "Uttar Pradesh"]
+  },
+  {
+    slug: "disaster-relief",
+    img: disasterReliefImg,
+    title: "Emergency Flood & Disaster Relief Outreach",
+    desc: "Providing timely emergency food rations, safe drinking water, and recovery aid to families affected by seasonal floods and emergencies.",
+    impact: "3,000+ Families",
+    loc: "Eastern Uttar Pradesh",
+    tag: "Disaster Relief",
+    started: "2020",
+    about: [
+      "When rural communities face severe flooding or emergencies, families need immediate humanitarian assistance.",
+      "RK Ministries team responds swiftly with cooked meals, dry food packets, tarpaulins, and clean drinking water.",
+      "We stand with affected families until normalcy is restored, demonstrating the living compassion of Christ."
+    ],
+    objectives: [
+      "Provide immediate food and drinking water in flood-affected villages",
+      "Distribute emergency tarpaulin shelters and clothing",
+      "Coordinate local relief volunteers and rescue efforts",
+      "Help families rebuild their lives with hope and dignity"
+    ],
+    activities: [
+      { title: "Emergency Food Packets", desc: "Supplying dry rations and cooked food to stranded families." },
+      { title: "Clean Water Supply", desc: "Distributing water bottles and purification tablets." },
+      { title: "Tarpaulin & Clothing", desc: "Shelter assistance for displaced families." },
+      { title: "Community Rebuilding", desc: "Helping rural homes restore clean living conditions." }
+    ],
+    stats: [
+      { label: "Families Supported", value: "3,000+" },
+      { label: "Relief Outreaches", value: "25+" }
+    ],
+    locations: ["Eastern Uttar Pradesh", "Azamgarh"]
+  },
 ];
 
 function safeTransform(raw: any): Project | null {
@@ -44,20 +262,32 @@ function safeTransform(raw: any): Project | null {
     }
     const stats = raw.stats?.map((s: any) => ({ label: s.label || "", value: s.number || s.value || "" })) || raw.highlights?.map((h: any) => ({ label: h.title || "", value: h.description || "" })) || [];
     const highlights = raw.highlights?.map((h: any) => h.title || h.description || "") || [];
+    const about = Array.isArray(raw.description)
+      ? raw.description
+      : (typeof raw.description === "string"
+          ? raw.description.split(/\n\n+/).filter(Boolean)
+          : (raw.description ? [raw.description] : []));
+    const activities = (Array.isArray(raw.highlights) && raw.highlights.length > 0 && typeof raw.highlights[0] === 'object')
+      ? raw.highlights.map((h: any) => ({ title: h.title || '', desc: h.description || '' })).filter((a: any) => a.title)
+      : (raw.activities || highlights.slice(0, 4).map((h: string) => ({ title: h, desc: "" })));
+    const objectives = (raw.keypoints?.items && raw.keypoints.items.length > 0)
+      ? raw.keypoints.items
+      : (raw.objectives || []);
+
     return {
       slug: raw.slug || "",
       img: getFullUrl(raw.image) || raw.img || "",
       title: raw.title || raw.heading || "",
-      desc: raw.description || (Array.isArray(raw.description) ? raw.description[0] : "") || "",
+      desc: typeof raw.description === "string" ? raw.description.split(/\n\n+/)[0] : (Array.isArray(raw.description) ? raw.description[0] : "") || "",
       impact: raw.impact || stats[0]?.value || "",
-      loc: raw.loc || raw.location || "",
-      tag: raw.category || raw.sectionTag || raw.tag || "",
-      started: year,
-      about: Array.isArray(raw.description) ? raw.description : (raw.description ? [raw.description] : []),
-      objectives: raw.keypoints?.items || raw.objectives || [],
-      activities: raw.activities || highlights.slice(0, 4).map((h: string) => ({ title: h, desc: "" })),
+      loc: raw.loc || raw.location || "Azamgarh & Eastern UP",
+      tag: raw.category || raw.sectionTag || raw.tag || "Ministry",
+      started: year || "2018",
+      about: about.length > 0 ? about : (raw.desc ? [raw.desc] : []),
+      objectives,
+      activities,
       stats: stats.slice(0, 4),
-      locations: raw.locations || (raw.location ? [raw.location] : []),
+      locations: raw.locations || (raw.location ? [raw.location] : ["Azamgarh"]),
     };
   } catch {
     return null;
@@ -78,6 +308,18 @@ export async function fetchProjects(): Promise<Project[]> {
     }
   } catch { /* fallback */ }
   return fallbackProjects;
+}
+
+export async function fetchProjectBySlug(slug: string): Promise<Project | null> {
+  try {
+    const { data } = await api.get(`/projects/${slug}`);
+    const item = data?.data || data;
+    if (item) {
+      const p = safeTransform(item);
+      if (p) return p;
+    }
+  } catch { /* fallback */ }
+  return fallbackProjects.find((p) => p.slug === slug) || null;
 }
 
 export function getProject(slug: string, projectsList: Project[]): Project | undefined {

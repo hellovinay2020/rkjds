@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import PageHero from "@/components/PageHero";
 import { MinistryStorage, MemberRecord } from "@/lib/ministryStorage";
 import { MINISTRY_CONFIG } from "@/data/ministryConfig";
 
@@ -29,12 +30,12 @@ export default function MemberRegistrationPage() {
     motherName: "",
     gender: "Male" as MemberRecord["gender"],
     dob: "",
-    village: "Mustafabad",
-    post: "Gujarpar",
-    policeStation: "Mubarakpur",
-    district: "Azamgarh",
-    state: "Uttar Pradesh",
-    pincode: "276404",
+    village: "",
+    post: "",
+    policeStation: "",
+    district: "",
+    state: "",
+    pincode: "",
     role: "Believer / विश्वासी" as MemberRecord["role"],
     isBaptized: true,
     baptismDate: "",
@@ -79,24 +80,13 @@ export default function MemberRegistrationPage() {
     <div className="bg-slate-50 text-slate-900 font-sans min-h-screen">
       <SiteHeader />
 
-      {/* Hero */}
-      <div className="relative bg-gradient-to-br from-[#07172C] via-[#0A2540] to-[#143D69] text-white py-16 px-4 border-b border-amber-500/20">
-        <div className="max-w-4xl mx-auto text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-            <span className="flex items-center gap-1.5"><UserPlus className="w-3.5 h-3.5 text-amber-400" /> सदस्य पंजीकरण (Member Registration)</span>
-            <span>•</span>
-            <span>RK MINISTRIES</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight font-display">
-            सदस्यता पंजीकरण फार्म — <span className="text-amber-400">RK MINISTRIES</span>
-          </h1>
-          <p className="text-slate-200 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            आरके मिनिस्ट्रीज परिवार का हिस्सा बनें। ऑनलाइन पंजीकरण कर तुरंत अपना डिजिटल पहचान पत्र (Membership ID Card) प्राप्त करें।
-          </p>
-        </div>
-      </div>
+      <PageHero
+        title="Member Registration"
+        accent="सदस्य पंजीकरण"
+        description="आरके मिनिस्ट्रीज परिवार का हिस्सा बनें। ऑनलाइन पंजीकरण कर तुरंत अपना डिजिटल पहचान पत्र (Membership ID Card) प्राप्त करें।"
+      />
 
-      <main className="max-w-4xl mx-auto px-4 py-10 -mt-6">
+      <main className="max-w-4xl mx-auto px-4 py-12">
         {registeredMember ? (
           /* Success Receipt Card with ID Card Action */
           <div className="bg-white rounded-3xl p-8 shadow-2xl border border-amber-200 space-y-6">
@@ -149,13 +139,14 @@ export default function MemberRegistrationPage() {
                 <CreditCard className="w-5 h-5" />
                 <span>पहचान पत्र (ID Card) देखें व प्रिंट करें</span>
               </Link>
-              <Link
-                to="/member-portal"
+              <button
+                type="button"
+                onClick={() => setRegisteredMember(null)}
                 className="py-3.5 px-6 rounded-2xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-sm transition flex items-center justify-center gap-2"
               >
-                <User className="w-4 h-4 text-amber-600" />
-                <span>मेम्बर पोर्टल खोलें</span>
-              </Link>
+                <UserPlus className="w-4 h-4 text-amber-600" />
+                <span>+ नया सदस्य जोड़ें</span>
+              </button>
             </div>
           </div>
         ) : (
@@ -206,7 +197,7 @@ export default function MemberRegistrationPage() {
                     required
                     value={formData.mobile}
                     onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
-                    placeholder="9598059289"
+                    placeholder="9415314486"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -297,6 +288,7 @@ export default function MemberRegistrationPage() {
                     required
                     value={formData.village}
                     onChange={(e) => setFormData({ ...formData, village: e.target.value })}
+                    placeholder="उदा. मुस्तफाबाद"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -310,6 +302,7 @@ export default function MemberRegistrationPage() {
                     required
                     value={formData.post}
                     onChange={(e) => setFormData({ ...formData, post: e.target.value })}
+                    placeholder="उदा. गुजरपार"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -323,6 +316,7 @@ export default function MemberRegistrationPage() {
                     required
                     value={formData.policeStation}
                     onChange={(e) => setFormData({ ...formData, policeStation: e.target.value })}
+                    placeholder="उदा. मुबारकपुर"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -336,6 +330,7 @@ export default function MemberRegistrationPage() {
                     required
                     value={formData.district}
                     onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+                    placeholder="उदा. आज़मगढ़"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -348,6 +343,7 @@ export default function MemberRegistrationPage() {
                     type="text"
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                    placeholder="उदा. उत्तर प्रदेश"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>
@@ -360,6 +356,7 @@ export default function MemberRegistrationPage() {
                     type="text"
                     value={formData.pincode}
                     onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
+                    placeholder="उदा. 276404"
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm"
                   />
                 </div>

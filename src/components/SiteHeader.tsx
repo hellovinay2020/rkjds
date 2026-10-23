@@ -17,15 +17,14 @@ import {
   CreditCard,
   User,
   UserPlus,
-  Briefcase,
   Users,
-  BarChart3,
-  HardDrive,
-  Smartphone,
   Award,
   FileText,
+  LogIn,
+  Image as ImageIcon,
+  Video,
 } from "lucide-react";
-import { FaFacebookF, FaInstagram, FaYoutube, FaCross, FaDove, FaHandsPraying } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaYoutube, FaDove, FaHandsPraying, FaLinkedinIn, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { useSiteSettings, getFullUrl } from "@/lib/useSiteSettings";
 import MinistryLogo from "./MinistryLogo";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -46,11 +45,11 @@ const navItems: NavItem[] = [
     to: "/about",
     hasMenu: true,
     children: [
-      { label: "About RK Ministries", to: "/about" },
-      { label: "Pastor Ramesh (Chairman)", to: "/founder" },
-      { label: "Leadership Team", to: "/team" },
-      { label: "Mission & Vision", to: "/mission-vision" },
-      { label: "Ministry Documents", to: "/documents" },
+      { label: "About RK Ministries", to: "/about", Icon: ShieldCheck },
+      { label: "Pastor Ramesh (Chairman)", to: "/founder", Icon: User },
+      { label: "Leadership Team", to: "/team", Icon: Users },
+      { label: "Mission & Vision", to: "/mission-vision", Icon: Sparkles },
+      { label: "Ministry Documents", to: "/documents", Icon: FileText },
     ],
   },
   {
@@ -59,9 +58,8 @@ const navItems: NavItem[] = [
     hasMenu: true,
     Icon: FaDove,
     children: [
-      { label: "Baptism Application", to: "/baptism-application", badge: "Form", Icon: FaDove },
-      { label: "Baptism Verification", to: "/baptism-verify", badge: "Verify", Icon: FileText },
-      { label: "Baptism Certificate", to: "/baptism-certificate", badge: "Print", Icon: Award },
+      { label: "Baptism Application", to: "/baptism-application", Icon: FaDove },
+      { label: "Baptism Verification", to: "/baptism-verify", Icon: FileText },
     ],
   },
   {
@@ -70,35 +68,30 @@ const navItems: NavItem[] = [
     hasMenu: true,
     Icon: FaHandsPraying,
     children: [
-      { label: "Online Prayer Request", to: "/prayer-request", badge: "Live", Icon: FaHandsPraying },
+      { label: "Online Prayer Request", to: "/prayer-request", Icon: FaHandsPraying },
       { label: "Online Testimony", to: "/testimony", Icon: Sparkles },
-      { label: "Holy Bible (Hindi / English)", to: "/bible", badge: "Bible", Icon: BookOpen },
+      { label: "Holy Bible (Hindi / English)", to: "/bible", Icon: BookOpen },
       { label: "Service & Worship Timings", to: "/events", Icon: Calendar },
     ],
   },
   {
     label: "Membership",
-    to: "/member-portal",
+    to: "/member-registration",
     hasMenu: true,
     Icon: CreditCard,
     children: [
-      { label: "Member Portal Login", to: "/member-portal", badge: "Login", Icon: User },
-      { label: "Member Registration", to: "/member-registration", badge: "Join", Icon: UserPlus },
-      { label: "Membership ID Card & Cert", to: "/id-card", badge: "Card", Icon: CreditCard },
+      { label: "Member Registration", to: "/member-registration", Icon: UserPlus },
+      { label: "Membership ID Card & Cert", to: "/id-card", Icon: CreditCard },
     ],
   },
   {
-    label: "Dashboards",
-    to: "/chairman",
+    label: "Gallery",
+    to: "/gallery",
     hasMenu: true,
-    Icon: FaCross,
+    Icon: ImageIcon,
     children: [
-      { label: "Chairman Dashboard", to: "/chairman", badge: "Executive", Icon: FaCross },
-      { label: "Manager Dashboard", to: "/manager", badge: "Ops", Icon: Briefcase },
-      { label: "Retailer / Field Worker", to: "/field-worker", badge: "Field", Icon: Users },
-      { label: "Reports & Analytics", to: "/reports", Icon: BarChart3 },
-      { label: "Local Data Backup", to: "/local-backup", badge: "Backup", Icon: HardDrive },
-      { label: "Mobile Software / App", to: "/mobile-app", badge: "PWA", Icon: Smartphone },
+      { label: "Photo Gallery", to: "/gallery", Icon: ImageIcon },
+      { label: "Video Gallery", to: "/video-gallery", Icon: Video },
     ],
   },
   { label: "Contact", to: "/contact" },
@@ -140,6 +133,9 @@ export default function SiteHeader() {
     socials.youtube ? { I: FaYoutube, href: socials.youtube, label: "YouTube", color: "hover:bg-red-600 hover:text-white" } : null,
     socials.facebook ? { I: FaFacebookF, href: socials.facebook, label: "Facebook", color: "hover:bg-blue-600 hover:text-white" } : null,
     socials.instagram ? { I: FaInstagram, href: socials.instagram, label: "Instagram", color: "hover:bg-pink-600 hover:text-white" } : null,
+    socials.whatsapp ? { I: FaWhatsapp, href: socials.whatsapp.startsWith("http") ? socials.whatsapp : `https://wa.me/${socials.whatsapp.replace(/\D/g, "")}`, label: "WhatsApp", color: "hover:bg-green-600 hover:text-white" } : null,
+    socials.linkedin ? { I: FaLinkedinIn, href: socials.linkedin, label: "LinkedIn", color: "hover:bg-[#0077b5] hover:text-white" } : null,
+    socials.twitter ? { I: FaXTwitter, href: socials.twitter, label: "Twitter", color: "hover:bg-black hover:text-white" } : null,
   ].filter(Boolean);
 
   function toggleDropdown(key: string) {
@@ -188,7 +184,27 @@ export default function SiteHeader() {
           </div>
 
           {/* Social Links, Language Switcher & Quick Portal */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* Topbar Prayer Request */}
+            <Link
+              to="/prayer-request"
+              className="hidden sm:inline-flex items-center gap-1.5 text-[11px] sm:text-[11.5px] font-bold text-amber-300 hover:text-white bg-amber-500/10 hover:bg-amber-500/25 px-2.5 py-0.5 rounded-full border border-amber-400/30 transition shadow-sm"
+            >
+              <FaHandsPraying className="w-2.5 h-2.5 text-amber-400" />
+              <span>Prayer Request</span>
+            </Link>
+
+            {/* Topbar Baptism Form */}
+            <Link
+              to="/baptism-application"
+              className="hidden sm:inline-flex items-center gap-1.5 text-[11px] sm:text-[11.5px] font-bold text-amber-300 hover:text-white bg-amber-500/10 hover:bg-amber-500/25 px-2.5 py-0.5 rounded-full border border-amber-400/30 transition shadow-sm"
+            >
+              <FaDove className="w-2.5 h-2.5 text-amber-400" />
+              <span>Baptism Form</span>
+            </Link>
+
+            <span className="hidden sm:block w-px h-3.5 bg-white/20" />
+
             {socialItems.length > 0 && (
               <div className="flex items-center gap-1.5">
                 {socialItems.map((item: any) => {
@@ -213,17 +229,6 @@ export default function SiteHeader() {
 
             {/* Language Switcher */}
             <LanguageSwitcher />
-
-            <span className="hidden sm:block w-px h-3.5 bg-white/20" />
-
-            {/* Chairman Quick Link */}
-            <Link
-              to="/chairman"
-              className="hidden sm:flex items-center gap-1.5 text-[11.5px] font-bold text-amber-300 hover:text-white bg-amber-500/10 hover:bg-amber-500/20 px-2.5 py-0.5 rounded-full border border-amber-400/30 transition"
-            >
-              <FaCross className="w-2.5 h-2.5" />
-              <span>Chairman View</span>
-            </Link>
           </div>
         </div>
       </div>
@@ -236,12 +241,17 @@ export default function SiteHeader() {
           {/* Logo & Brand Identity */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <MinistryLogo variant="light" size="md" />
-            <Link to="/" className="hidden min-[480px]:block text-left select-none group">
-              <span className="block font-display font-extrabold tracking-wider text-white text-base sm:text-lg lg:text-xl leading-none group-hover:text-amber-300 transition-colors">
-                RK MINISTRIES
-              </span>
-              <span className="block text-[10px] sm:text-[11px] text-amber-300/80 font-medium tracking-wide mt-1 leading-none">
-                Azamgarh, U.P. • विश्वास व प्रार्थना
+            <Link to="/" className="hidden min-[480px]:flex flex-col justify-center text-left select-none group">
+              <div className="flex items-center gap-1.5 leading-none font-display font-extrabold tracking-wider text-base sm:text-lg lg:text-xl">
+                <span className="text-white group-hover:text-amber-300 transition-colors">
+                  {s.siteNameLine1 || "RKV"}
+                </span>
+                <span className="text-amber-400 group-hover:text-white transition-colors">
+                  {s.siteNameLine2 || "MINISTRIES"}
+                </span>
+              </div>
+              <span className="block text-[10px] sm:text-[11px] text-amber-300/85 font-medium tracking-wide mt-1 leading-tight">
+                {s.siteNameLine3 || s.tagline || "Church & Evangelical Fellowship"}
               </span>
             </Link>
           </div>
@@ -274,27 +284,28 @@ export default function SiteHeader() {
 
                   {/* Dropdown Menu */}
                   {n.children && (
-                    <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                      <div className="min-w-[250px] bg-white rounded-2xl shadow-2xl border border-slate-200/80 p-2 overflow-hidden">
+                    <div
+                      className={`absolute ${
+                        n.label === "Dashboards" ? "right-0" : "left-0"
+                      } top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50`}
+                    >
+                      <div className="w-max min-w-[280px] bg-white rounded-2xl shadow-[0_16px_45px_rgba(2,24,64,0.18)] border border-slate-200/90 p-2 overflow-hidden">
                         {n.children.map((c) => (
                           <Link
                             key={c.to}
                             to={c.to}
-                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13.5px] font-medium transition ${
+                            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[13.5px] whitespace-nowrap transition-all duration-150 ${
                               pathname === c.to
-                                ? "bg-amber-500/15 text-amber-700 font-bold"
-                                : "text-slate-800 hover:bg-slate-50 hover:text-amber-600"
+                                ? "bg-amber-500/15 text-amber-800 font-bold"
+                                : "text-slate-800 hover:bg-amber-50/80 hover:text-amber-800 font-medium"
                             }`}
                           >
-                            <span className="flex items-center gap-2">
-                              {c.Icon && <c.Icon className="w-3.5 h-3.5 text-amber-600 shrink-0" />}
-                              <span>{c.label}</span>
-                            </span>
-                            {c.badge && (
-                              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 border border-amber-200">
-                                {c.badge}
+                            {c.Icon && (
+                              <span className="w-6 h-6 rounded-lg bg-amber-500/10 flex items-center justify-center shrink-0">
+                                <c.Icon className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                               </span>
                             )}
+                            <span className="whitespace-nowrap">{c.label}</span>
                           </Link>
                         ))}
                       </div>
@@ -306,23 +317,14 @@ export default function SiteHeader() {
           </nav>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-            {/* Quick Online Prayer Button */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Login Button */}
             <Link
-              to="/prayer-request"
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-[13px] font-semibold transition"
+              to="/member-portal"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold px-3.5 sm:px-4 py-2 text-xs sm:text-[13px] shadow-md shadow-amber-500/20 transition-all hover:scale-102"
             >
-              <FaHandsPraying className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden lg:inline">Prayer Request</span>
-            </Link>
-
-            {/* Baptism Application Button */}
-            <Link
-              to="/baptism-application"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold px-2.5 sm:px-4 py-2 text-xs sm:text-[13px] shadow-md shadow-amber-500/20 transition-all hover:scale-102"
-            >
-              <FaDove className="w-3.5 h-3.5 shrink-0" />
-              <span className="whitespace-nowrap">Baptism Form</span>
+              <LogIn className="w-3.5 h-3.5 shrink-0 stroke-[2.5]" />
+              <span className="whitespace-nowrap">Login</span>
             </Link>
 
             {/* Mobile Menu Button */}
@@ -349,10 +351,10 @@ export default function SiteHeader() {
                   <MinistryLogo size="sm" />
                   <div>
                     <span className="block text-white font-bold text-sm tracking-wide">
-                      RK MINISTRIES
+                      {s.siteNameLine1 && s.siteNameLine2 ? `${s.siteNameLine1} ${s.siteNameLine2}` : (s.siteName || "RKV MINISTRIES")}
                     </span>
                     <span className="block text-amber-400 text-xs font-medium">
-                      Azamgarh, Uttar Pradesh
+                      {s.siteNameLine3 || s.tagline || "Church & Evangelical Fellowship"}
                     </span>
                   </div>
                 </div>
@@ -395,21 +397,14 @@ export default function SiteHeader() {
                                 key={c.to}
                                 to={c.to}
                                 onClick={() => setMenuOpen(false)}
-                                className={`flex items-center justify-between py-2 px-3 rounded-lg text-[13px] ${
+                                className={`flex items-center gap-2.5 py-2 px-3 rounded-lg text-[13px] ${
                                   pathname === c.to
                                     ? "bg-amber-500/20 text-amber-400 font-bold"
                                     : "text-slate-300 hover:bg-white/5 hover:text-amber-300"
                                 }`}
                               >
-                                <span className="flex items-center gap-2">
-                                  {c.Icon && <c.Icon className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
-                                  <span>{c.label}</span>
-                                </span>
-                                {c.badge && (
-                                  <span className="text-[10px] bg-amber-500/30 text-amber-300 px-1.5 py-0.5 rounded">
-                                    {c.badge}
-                                  </span>
-                                )}
+                                {c.Icon && <c.Icon className="w-3.5 h-3.5 text-amber-400 shrink-0" />}
+                                <span>{c.label}</span>
                               </Link>
                             ))}
                           </div>
@@ -434,8 +429,8 @@ export default function SiteHeader() {
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-2.5 rounded-xl text-center text-sm"
                 >
-                  <User className="w-4 h-4 text-amber-400" />
-                  <span>Member Login</span>
+                  <LogIn className="w-4 h-4 text-amber-400" />
+                  <span>Login</span>
                 </Link>
                 <Link
                   to="/donate"

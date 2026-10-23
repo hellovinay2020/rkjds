@@ -39,7 +39,6 @@ import MemberRegistrationPage from "./routes/member-registration";
 import MembershipIdCardPage from "./routes/id-card";
 import BaptismApplicationPage from "./routes/baptism-application";
 import BaptismVerifyPage from "./routes/baptism-verify";
-import BaptismCertificatePage from "./routes/baptism-certificate";
 import PrayerRequestPage from "./routes/prayer-request";
 import TestimonyPage from "./routes/testimony";
 import HolyBiblePage from "./routes/bible";
@@ -117,7 +116,6 @@ export default function App() {
         <Route path="/membership-card" element={<Navigate to="/id-card" replace />} />
         <Route path="/baptism-application" element={<BaptismApplicationPage />} />
         <Route path="/baptism-verify" element={<BaptismVerifyPage />} />
-        <Route path="/baptism-certificate" element={<BaptismCertificatePage />} />
         <Route path="/prayer-request" element={<PrayerRequestPage />} />
         <Route path="/prayer" element={<Navigate to="/prayer-request" replace />} />
         <Route path="/testimony" element={<TestimonyPage />} />

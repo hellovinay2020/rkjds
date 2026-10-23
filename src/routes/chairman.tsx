@@ -199,7 +199,18 @@ export default function ChairmanDashboardPage() {
                   {baptisms.map((b) => (
                     <tr key={b.id} className="hover:bg-slate-50/80 transition">
                       <td className="p-3 font-mono font-bold text-amber-800">{b.id}</td>
-                      <td className="p-3 font-semibold text-slate-900">{b.name}</td>
+                      <td className="p-3 font-semibold text-slate-900">
+                        <div className="flex items-center gap-2">
+                          {b.photoUrl ? (
+                            <img src={b.photoUrl} alt={b.name} className="w-8 h-8 rounded-full object-cover border border-amber-400 shrink-0 shadow-xs" />
+                          ) : (
+                            <div className="w-8 h-8 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-bold shrink-0">
+                              {b.name?.[0] || "B"}
+                            </div>
+                          )}
+                          <span>{b.name}</span>
+                        </div>
+                      </td>
                       <td className="p-3 text-slate-600">{b.mobile}</td>
                       <td className="p-3 text-slate-600">{b.village || b.address}</td>
                       <td className="p-3 text-slate-600">
@@ -230,7 +241,7 @@ export default function ChairmanDashboardPage() {
                           </button>
                         )}
                         <Link
-                          to={`/baptism-certificate?id=${b.id}`}
+                          to={`/baptism-verify?tab=certificate&id=${b.id}`}
                           className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-[11px] transition inline-flex items-center gap-1"
                         >
                           <Award className="w-3 h-3 text-amber-700" />

@@ -11,7 +11,7 @@ export type ContactSettings = {
 };
 
 const fallbackContact: ContactSettings = {
-  contactPhone: "+91 95980 59289",
+  contactPhone: "+91 94153 14486",
   contactEmail: "azaramesh@gmail.com",
   contactAddress: "Village - Mustafabad, Post- Gujarpar, Police station- Mubarakpur, District - Azamgarh, U.P. 276404",
   mapEmbedUrl: "https://maps.google.com/maps?q=Mustafabad,+Mubarakpur,+Azamgarh,+Uttar+Pradesh+276404&hl=en&z=15&output=embed",

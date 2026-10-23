@@ -5,8 +5,49 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageHero from "@/components/PageHero";
 import breadcrumbImg from "@/assets/breadcrume/breadcrume-logo.png";
+import { useSiteSettings } from "@/lib/useSiteSettings";
+import { MINISTRY_CONFIG } from "@/data/ministryConfig";
 
-export type LegalSection = { title: string; body: ReactNode };
+export type LegalSection = { title: string; body: ReactNode | string };
+
+function renderSectionBody(body: ReactNode | string) {
+  if (typeof body !== "string") return body;
+
+  const paragraphs = body.split(/\r?\n\s*\r?\n/);
+  return (
+    <>
+      {paragraphs.map((para, pIdx) => {
+        const rawLines = para.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+        const isBulletList = rawLines.length > 0 && rawLines.every((l) => l.startsWith("- ") || l.startsWith("* "));
+
+        if (isBulletList) {
+          return (
+            <ul key={pIdx} className="list-disc pl-5 space-y-1.5 my-2">
+              {rawLines.map((line, lIdx) => (
+                <li key={lIdx}>{line.replace(/^[-*]\s+/, "")}</li>
+              ))}
+            </ul>
+          );
+        }
+
+        return (
+          <p key={pIdx} className="leading-relaxed">
+            {rawLines.join(" ")}
+          </p>
+        );
+      })}
+    </>
+  );
+}
+
+function formatDate(val: string) {
+  if (!val) return "01 January 2026";
+  const d = new Date(val);
+  if (!isNaN(d.getTime())) {
+    return d.toLocaleDateString("en-IN", { day: "2-digit", month: "long", year: "numeric" });
+  }
+  return val;
+}
 
 export default function LegalPage({
   title,
@@ -21,6 +62,15 @@ export default function LegalPage({
   sections: LegalSection[];
   crumbLabel: string;
 }) {
+  const { settings } = useSiteSettings();
+  const s = settings || ({} as any);
+
+  const email = s.contactEmail || MINISTRY_CONFIG.email;
+  const phones = s.contactPhone
+    ? s.contactPhone.split("|").map((p: string) => p.trim()).filter(Boolean)
+    : [MINISTRY_CONFIG.phone];
+  const primaryPhone = phones[0] || MINISTRY_CONFIG.phone;
+
   return (
     <div className="bg-background text-text font-sans">
       <SiteHeader />
@@ -50,18 +100,18 @@ export default function LegalPage({
                 ))}
               </ul>
               <div className="mt-5 pt-5 border-t border-border text-[12px] text-text-2 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" /> Last updated: <span className="text-navy font-semibold">{updated}</span>
+                <ShieldCheck className="w-4 h-4 text-emerald-500" /> Last updated: <span className="text-navy font-semibold">{formatDate(updated)}</span>
               </div>
             </div>
 
             <div className="mt-5 bg-gradient-to-br from-navy to-navy-2 text-white rounded-[20px] p-6 shadow-soft">
               <h4 className="font-display font-bold text-[16px]">Need help?</h4>
               <p className="mt-1 text-[13px] text-white/75">Reach out to our team for any clarification.</p>
-              <a href="mailto:azaramesh@gmail.com" className="mt-4 flex items-center gap-2 text-[13px] text-white hover:text-orange transition">
-                <Mail className="w-4 h-4 text-orange" /> azaramesh@gmail.com
+              <a href={`mailto:${email}`} className="mt-4 flex items-center gap-2 text-[13px] text-white hover:text-orange transition">
+                <Mail className="w-4 h-4 text-orange" /> {email}
               </a>
-              <a href="tel:+919598059289" className="mt-2 flex items-center gap-2 text-[13px] text-white hover:text-orange transition">
-                <Phone className="w-4 h-4 text-orange" /> +91 95980 59289
+              <a href={`tel:${primaryPhone.replace(/\s+/g, '')}`} className="mt-2 flex items-center gap-2 text-[13px] text-white hover:text-orange transition">
+                <Phone className="w-4 h-4 text-orange" /> {primaryPhone}
               </a>
               <Link to="/contact" className="mt-5 inline-flex items-center gap-2 bg-orange text-white font-semibold rounded-full px-4 py-2.5 text-[13px] hover:bg-orange-2 transition">
                 Contact Us <ArrowRight className="w-3.5 h-3.5" />
@@ -79,7 +129,7 @@ export default function LegalPage({
                     <h2 className="text-navy font-display font-extrabold text-[22px] sm:text-[24px]">{s.title}</h2>
                   </div>
                   <div className="text-text-2 text-[15px] leading-[1.85] space-y-3 pl-12">
-                    {s.body}
+                    {renderSectionBody(s.body)}
                   </div>
                 </section>
               ))}
